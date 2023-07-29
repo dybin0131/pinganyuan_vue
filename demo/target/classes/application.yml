@@ -1,0 +1,10 @@
+spring:
+  datasourse:
+    url: jdbc:mysql://127.0.0.1:3306/pinganyuan
+    username: root
+    password: 123456
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  servlet:
+    multipart:
+      max-file-size: 100MB
+

@@ -1,0 +1,36 @@
+{
+  "name": "vue-manage-system",
+  "version": "4.2.0",
+  "private": true,
+  "scripts": {
+    "dev": "npm run serve",
+    "serve": "set NODE_OPTIONS=--openssl-legacy-provider && vue-cli-service serve",
+    "build": "vue-cli-service build",
+    "start": "react-scripts --openssl-legacy-provider start"
+  },
+  "dependencies": {
+    "axios": "^0.18.1",
+    "babel-polyfill": "^6.26.0",
+    "downloadjs": "^1.4.7",
+    "element-ui": "^2.11.0",
+    "ipfs-api": "^26.1.2",
+    "mavon-editor": "^2.6.17",
+    "particles.js": "^2.0.0",
+    "typedarray-to-buffer": "^4.0.0",
+    "vue": "^2.6.10",
+    "vue-cropperjs": "^3.0.0",
+    "vue-i18n": "^8.10.0",
+    "vue-quill-editor": "^3.0.6",
+    "vue-router": "^3.0.3",
+    "vue-schart": "^2.0.0",
+    "vuedraggable": "^2.17.0",
+    "web3": "^1.10.0"
+  },
+  "devDependencies": {
+    "@vue/cli-plugin-babel": "^3.9.0",
+    "@vue/cli-service": "^3.9.0",
+    "node-sass": "^8.0.0",
+    "sass-loader": "^10.4.1",
+    "vue-template-compiler": "^2.6.10"
+  }
+}
