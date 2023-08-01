@@ -18,6 +18,8 @@ Vue.use(VueI18n);
 Vue.use(ElementUI, {
     size: 'small'
 });
+import less from 'less'
+Vue.use(less)
 const i18n = new VueI18n({
     locale: 'zh',
     messages

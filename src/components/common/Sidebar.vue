@@ -4,11 +4,10 @@
             class="sidebar-el-menu"
             :default-active="onRoutes"
             :collapse="collapse"
-            background-color="#324157"
-            text-color="#bfcbd9"
-            active-text-color="#20a0ff"
             unique-opened
             router
+            text-color="#fff"
+            active-text-color="#fff"
         >
             <template v-for="item in items">
                 <template v-if="item.subs">
@@ -18,28 +17,30 @@
                             <span slot="title">{{ item.title }}</span>
                         </template>
                         <template v-for="subItem in item.subs">
-                            <el-submenu
-                                v-if="subItem.subs"
-                                :index="subItem.index"
-                                :key="subItem.index"
-                            >
-                                <template slot="title">{{ subItem.title }}</template>
+                            <el-menu-item-group :key="subItem.index" class="itemBox">
+                                <el-submenu
+                                    v-if="subItem.subs"
+                                    :index="subItem.index"
+                                    :key="subItem.index"
+                                >
+                                    <template slot="title">{{ subItem.title }}</template>
+                                    <el-menu-item
+                                        v-for="(threeItem,i) in subItem.subs"
+                                        :key="i"
+                                        :index="threeItem.index"
+                                    >{{ threeItem.title }}</el-menu-item>
+                                </el-submenu>
                                 <el-menu-item
-                                    v-for="(threeItem,i) in subItem.subs"
-                                    :key="i"
-                                    :index="threeItem.index"
-                                >{{ threeItem.title }}</el-menu-item>
-                            </el-submenu>
-                            <el-menu-item
-                                v-else
-                                :index="subItem.index"
-                                :key="subItem.index"
-                            >{{ subItem.title }}</el-menu-item>
+                                    v-else
+                                    :index="subItem.index"
+                                    :key="subItem.index"
+                                ><i :class="subItem.icon"></i>{{ subItem.title }}</el-menu-item>
+                            </el-menu-item-group>
                         </template>
                     </el-submenu>
                 </template>
                 <template v-else>
-                    <el-menu-item :index="item.index" :key="item.index">
+                    <el-menu-item class="menuBox" :index="item.index" :key="item.index">
                         <i :class="item.icon"></i>
                         <span slot="title">{{ item.title }}</span>
                     </el-menu-item>
@@ -59,59 +60,61 @@ export default {
                 {
                     icon: 'el-icon-s-home',
                     index: 'homePage',
-                    title: '首页'
+                    title: '首页',
                 },
                 {
-                    icon: 'el-icon-s-shop',
+                    icon: 'el-icon-data-line',
                     index: 'depot',
                     title: '工作台',
                     subs: [
                         {
-                            icon: 'el-icon-menu',
+                            icon: 'el-icon-school',
                             index: 'workbenchDep',
-                            title: '仓库'
+                            title: '仓库',
                         },
                         {
-                            icon: 'el-icon-reading',
+                            icon: 'el-icon-thumb',
                             index: 'workbenchIssue',
-                            title: 'Issue'
+                            title: 'Issue',
                         },
                         {
-                            icon: 'el-icon-folder-checked',
+                            icon: 'el-icon-question',
                             index: 'workbenchPr',
-                            title: 'Pull Requests'
+                            title: 'Pull Requests',
                         },
                     ]
                 },
                 {
-                    icon: 'el-icon-timer',
+                    icon: 'el-icon-wallet',
                     index: 'code_view',
                     title: '我活跃的仓库',
                     subs: [
                         {
-                            icon: 'el-icon-house',
+                            icon: 'el-icon-wallet',
                             index: 'codedetails',
-                            title: '我活跃的仓库1'
+                            title: '我活跃的仓库1',
                         },
                         {
-                            icon: 'el-icon-house',
+                            icon: 'el-icon-wallet',
                             index: 'code',
-                            title: '我活跃的仓库2'
+                            title: '我活跃的仓库2',
                         },
                     ]
                 },
                 {
-                    icon: 'el-icon-notebook-1',
+                    icon: 'el-icon-office-building',
                     index: 'tag',//未设置，待修改
-                    title: '动态'
+                    title: '动态',
                 },
                 {
-                    icon: 'el-icon-question',
+                    icon: 'el-icon-edit-outline',
                     index: 'feedback',//未设置，待修改
                     title: '问题反馈',
                 },
             ]
         };
+    },
+    methods:{
     },
     computed: {
         onRoutes() {
@@ -137,6 +140,33 @@ export default {
     top: 70px;
     bottom: 0;
     overflow-y: scroll;
+}
+.sidebar .sidebar-el-menu{
+    color: #fff;
+    background: url('../../assets/img/leftNav.png') no-repeat;
+    background-size: 100% 100%;
+}
+.sidebar .sidebar-el-menu i{
+    color: #fff;
+}
+.sidebar-el-menu >>> .el-menu{
+    background-color: rgba(255, 255, 255, 0);
+}
+.sidebar >>> .el-submenu__title i{
+    color: #fff;
+}
+.itemBox >>> .is-active{
+    width: 90%;
+    margin: auto;
+    background: url('../../assets/img/leftButton.png') no-repeat;
+    background-size: 100% 100%;
+}
+.menuBox.is-active{
+    width: 96%;
+    margin: auto;
+    background: url('../../assets/img/leftButton.png') no-repeat;
+    background-size: 100% 100%;
+
 }
 .sidebar::-webkit-scrollbar {
     width:0;

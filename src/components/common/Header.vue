@@ -1,23 +1,25 @@
 <template>
     <div class="header">
-        <!-- 折叠按钮 -->
-        <div class="collapse-btn" @click="collapseChage">
-            <i v-if="!collapse" class="el-icon-s-fold"></i>
-            <i v-else class="el-icon-s-unfold"></i>
+        <div class="leftBox">
+            <!-- 折叠按钮 -->
+            <img @click="collapseChage" src="../../assets/img/logNav.png" class="leftLogo" alt="" srcset="">
+            <div class="leftText">平安源</div>
         </div>
-        <div class="logo">平安源</div>
-        <div class="header-right">
-            <div class="header-user-con">
+        <!---“通信开销”+“吞吐量”+“延迟”--->
+        <div class="headerRight">
+            <div class="information">
+                <div class="inText"><i class="el-icon-s-opportunity"></i> 通信开销=23.6</div>   
+                <div class="inText"><i class="el-icon-set-up"></i> 吞吐量=233.1</div>  
+                <div class="inText"><i class="el-icon-time"></i> 延迟=2-100</div>
+            </div>
+            <div class="headerUserCon">
                 <!--搜索框-->
-                <!--
-                <el-input
-                    style='width: 300px'
-                    placeholder="搜开源"
-                    v-model="search">
-                    <i slot="prefix" class="el-input__icon el-icon-search"></i>
-                </el-input>
-                -->
                 <el-select v-model="searchProject" filterable placeholder="搜开源" style='width: 300px'>
+                    <template #prefix>
+                        <span class="selectIcon">
+                            <i class="el-icon-search"></i>
+                        </span>
+                    </template>
                     <el-option
                         v-for="item in options"
                         :key="item.value"
@@ -25,10 +27,6 @@
                         :value="item.value">
                     </el-option>
                 </el-select>
-                <!---“通信开销”+“吞吐量”+“延迟”--->
-                <div style='font-size: 10px;display: grid;margin-left: 15px;'>
-                    <div>通信开销=23.6</div>   <div>吞吐量=233.1</div>  <div>延迟=2-100</div>
-                </div>
                 <!-- 全屏显示 -->
                 <!---
                 <div class="btn-fullscreen" @click="handleFullScreen" style='margin-left: 23px;padding-top: 5px'>
@@ -37,6 +35,21 @@
                     </el-tooltip>
                 </div>
                 --->
+                <!-- 用户操作 -->
+                <el-dropdown class="userDropdown">
+                    <span class="el-dropdown-link">
+                        <i class="el-icon-circle-plus-outline"></i>
+                    </span>
+                    <el-dropdown-menu slot="dropdown">
+                        <el-dropdown-item divided >
+                            <router-link to="/newdepot">新建仓库</router-link>
+                        </el-dropdown-item>
+                        <el-dropdown-item divided>发布代码片段</el-dropdown-item>
+                        <el-dropdown-item divided>创建组织</el-dropdown-item>
+                        <el-dropdown-item divided>开通企业版</el-dropdown-item>
+                        <el-dropdown-item divided>---</el-dropdown-item>
+                    </el-dropdown-menu>
+                </el-dropdown>
                 <!-- 消息中心 -->
                 <div class="btn-bell"  style='padding-top: 5px;padding-left: 7px'>
                     <el-tooltip
@@ -50,27 +63,8 @@
                     </el-tooltip>
                     <span class="btn-bell-badge" v-if="message"></span>
                 </div>
-                <!-- 用户操作 -->
-                <el-dropdown  style='margin-left:6px'  >
-                      <span class="el-dropdown-link">
-                        <!--<i class="el-icon-arrow-down el-icon--right"></i>-->
-                          <i class="el-icon-plus" style='margin-left: 10px;color: white;font-weight: bolder;font-size: large'></i>
-                      </span>
-                    <el-dropdown-menu slot="dropdown">
-                        <el-dropdown-item divided >
-                            <router-link to="/newdepot">新建仓库</router-link>
-                        </el-dropdown-item>
-                        <el-dropdown-item divided>发布代码片段</el-dropdown-item>
-                        <el-dropdown-item divided>创建组织</el-dropdown-item>
-                        <el-dropdown-item divided>开通企业版</el-dropdown-item>
-                        <el-dropdown-item divided>---</el-dropdown-item>
-                    </el-dropdown-menu>
-                </el-dropdown>
                 <!-- 用户头像 -->
                 <div class="user-avator">
-                <!--
-                    <img src="../../assets/img/img.jpg" />
-                -->
                     <img src="../../assets/img/img.jpg" />
                 </div>
                 <!-- 用户名下拉菜单 -->
@@ -183,61 +177,96 @@ export default {
     }
 };
 </script>
-<style scoped>
+<style lang="less" scoped>
 .header {
     position: relative;
     box-sizing: border-box;
     width: 100%;
+    display: flex;
     height: 70px;
     font-size: 22px;
     color: #fff;
-}
-.collapse-btn {
-    float: left;
-    padding: 0 21px;
-    cursor: pointer;
-    line-height: 70px;
-}
-.header .logo {
-    float: left;
-    width: 250px;
-    line-height: 70px;
-}
-.header-right {
-    float: right;
-    padding-right: 50px;
-}
-.header-user-con {
-    display: flex;
-    height: 70px;
-    align-items: center;
-}
-.btn-fullscreen {
-    transform: rotate(45deg);
-    margin-right: 5px;
-    font-size: 24px;
-}
-.btn-bell,
-.btn-fullscreen {
-    position: relative;
-    width: 30px;
-    height: 30px;
-    text-align: center;
-    border-radius: 15px;
-    cursor: pointer;
-}
-.btn-bell-badge {
-    position: absolute;
-    right: 0;
-    top: -2px;
-    width: 8px;
-    height: 8px;
-    border-radius: 4px;
-    background: #f56c6c;
-    color: #fff;
-}
-.btn-bell .el-icon-bell {
-    color: #fff;
+    .leftBox{
+        width: 250px;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: url('../../assets/img/topNav.png') no-repeat;
+        background-size: 100% 100%;
+        .leftText{
+            font-size: 30px;
+            font-weight: bold;
+        }
+        .leftLogo{
+            width: 30%;
+        }
+    }
+    .headerRight {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding-right: 50px;
+        background: url('../../assets/img/imgNav.png') no-repeat;
+        background-size: 100% 100%;
+        .information{
+            display: flex;
+            align-items: center;
+            font-size: 16px;
+            .inText{
+                margin-left: 20px;
+            }
+        }
+        .headerUserCon {
+            display: flex;
+            height: 70px;
+            align-items: center;
+            .selectIcon i{
+                font-size: 18px;
+                margin-top: 6px;
+                color: #4092ED;
+                font-weight: bold;
+            }
+            .userDropdown{
+                margin-left: 6px;
+                .el-dropdown-link i {
+                    font-size: 30px;
+                    margin-left: 10px;
+                    color: white;
+                }
+            }
+            ::v-deep {
+                .el-select__caret{
+                    color: #4092ED;
+                    font-size: 18px;
+                    font-weight: bold;
+                }
+            }
+            .btn-bell{
+                position: relative;
+                width: 30px;
+                height: 30px;
+                text-align: center;
+                border-radius: 15px;
+                cursor: pointer;
+                .el-icon-bell {
+                    color: #fff;
+                    font-size: 26px;
+                }
+                .btn-bell-badge {
+                    position: absolute;
+                    right: 0;
+                    top: -2px;
+                    width: 8px;
+                    height: 8px;
+                    border-radius: 4px;
+                    background: #f56c6c;
+                    color: #fff;
+                }
+            }
+        }
+    }
 }
 .user-name {
     margin-left: 10px;
@@ -260,7 +289,7 @@ export default {
 }
 .el-dropdown-link {
     cursor: pointer;
-    color: #409EFF;
+    color: #fff;
 }
 .el-icon-arrow-down {
     font-size: 12px;
