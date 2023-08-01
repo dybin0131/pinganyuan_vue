@@ -85,7 +85,7 @@ export default {
         align-items: center;
         margin-bottom: 20px;
         .topNavText{
-            width: 120px;
+            width: 100%;
             height: 60px;
             color: #353D61;
             text-align: center;
@@ -94,7 +94,7 @@ export default {
             font-size: 18px;
         }
         .topNavSelect{
-            width: 120px;
+            width: 100%;
             height: 60px;
             color: #4092ED;
             text-align: center;
