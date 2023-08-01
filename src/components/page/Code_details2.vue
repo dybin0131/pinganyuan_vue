@@ -6,16 +6,25 @@
         <div style='display: block'>
             <!--标题路径-->
             <div style='display: flex;position: relative'>
-
-
                 <div style='display: flex;margin-top: 15px;margin-left: 10px'>
-                    <el-tag  v-if="isCredible>=60" type='success'>可信</el-tag>
-                    <el-tag  v-else-if='isCredible<60' type='danger'>不可信</el-tag>
+                    <el-tag  v-if="isCredible>=60" type='success'
+                             style='
+                             width: 55px;
+                             height: 24px;
+                             background: rgba(0,171,164,0.1);
+                             border: 1px solid #00ABA4;
+                             border-radius: 4px;'
+                             >可信</el-tag>
+                    <el-tag  v-else-if='isCredible<60' type='danger'
+                             style='width: 55px;height: 24px;background: rgba(237,64,64,0.1);border: 1px solid #ED4040;border-radius: 4px;'
+                    >不可信</el-tag>
 
-                    <el-breadcrumb separator="/" style='margin-top:5px;margin-left: 10px;font-size: 23px'>
-                        <el-breadcrumb-item :to="{ path: '/' }">{{this.$route.query.username}}</el-breadcrumb-item>
-                        <el-breadcrumb-item><a href="/"> {{this.$route.query.warehouseName}} </a></el-breadcrumb-item>
-                    </el-breadcrumb>
+                    <div style='margin-left: 20px;font-size: 23px;display: flex'>
+                        <div style='width: 63px;height: 19px;font-size: 24px;font-family: Source Han Sans CN;
+                        font-weight: bold;color: #353D61;line-height: 28px;margin-top: 0;'>{{this.$route.query.username}}</div>
+                        <div style='width: 32px;height: 14px;font-size: 18px;font-family: Source Han Sans CN;font-weight: 400;
+                        color: #353D61;line-height: 28px;opacity: 0.8;margin-left: 12px'> / {{this.$route.query.warehouseName}} </div>
+                    </div>
                 </div>
 
                 <!--审核是否为可信依赖库-->
@@ -27,10 +36,30 @@
                     不颁发可信依赖库证明</el-button>
 
                 <!--未申请时/申请失败-->
-                <el-button type="warning" style='width: auto;height: 40px;margin-top: 10px;margin-left: 10px'
-                           @click="application" :disabled='isDisabled' v-if='this.owner===this.visitor '>
-                    {{ applicationStatus }}</el-button>
+                <el-button  style=' width: 130px;height: 30px;margin-top: 17px;background: #4092ED;border: 1px solid #4092ED;border-radius: 4px;margin-left: 20px'
+                @click="application" :disabled='isDisabled' v-if='this.owner===this.visitor '>
+                    <div style='font-size: 14px;font-family: Source Han Sans CN;font-weight: 400;color: #FFFFFF;'>
+                        {{ applicationStatus }}
+                    </div>
+                </el-button>
 
+                <!--右侧辅助工具栏-->
+                <div style='position: absolute;right: 0;display: flex;margin-top: 15px'>
+                    <el-dropdown size="small" split-button type="plain" style='font-family: San Francisco Display;font-weight: 400;color: #353D61;'>
+                        <i class='el-icon-view'></i>
+                        Watching   {{watching_count}}
+                        <el-dropdown-menu slot="dropdown">
+                            <el-dropdown-item>不关注</el-dropdown-item>
+                            <el-dropdown-item>关注所有动态</el-dropdown-item>
+                            <el-dropdown-item>仅关注版本发行动态</el-dropdown-item>
+                            <el-dropdown-item>关注但不提醒动态</el-dropdown-item>
+                        </el-dropdown-menu>
+                    </el-dropdown>
+                    <el-button type="plain" icon="el-icon-star-off" style='margin-left: 12px;font-family: San Francisco Display;font-weight: 400;color: #353D61;'>
+                        Star  {{star_count}} </el-button>
+                    <el-button type="plain" icon="el-icon-share" style='font-family: San Francisco Display;font-weight: 400;color: #353D61;'>
+                        Fork  {{fork_count}}</el-button>
+                </div>
 
                 <!---申请成功--->
                 <!---
@@ -45,27 +74,14 @@
                 <el-button type="info" style='width: auto;height: 40px;margin-top: 10px;margin-left: 10px' @click="application">申请可信依赖库</el-button>
                --->
 
-                <!--右侧辅助工具栏-->
-                <div style='position: absolute;right: 0;display: flex;margin-top: 60px'>
-                    <el-dropdown size="small" split-button type="plain">
-                        <i class='el-icon-view'></i>
-                        Watching   {{watching_count}}
-                        <el-dropdown-menu slot="dropdown">
-                            <el-dropdown-item>不关注</el-dropdown-item>
-                            <el-dropdown-item>关注所有动态</el-dropdown-item>
-                            <el-dropdown-item>仅关注版本发行动态</el-dropdown-item>
-                            <el-dropdown-item>关注但不提醒动态</el-dropdown-item>
-                        </el-dropdown-menu>
-                    </el-dropdown>
-                    <el-button type="plain" icon="el-icon-star-on" style='margin-left: 12px'>Star  {{star_count}} </el-button>
-                    <el-button type="plain" icon="el-icon-share">Fork  {{fork_count}}</el-button>
-                </div>
             </div>
         </div>
         <!--主体-->
-        <div style='display: flex;background-color: white;margin-top: 10px;margin-left: 2px'>
+        <div style='display: flex;margin-top: 10px;margin-left: 2px'>
             <!--左侧主体部分-->
-            <div style='width: 70%;position: relative'>
+            <div style='width: 70%;position: relative;background: rgba(255,255,255,0.8);border: 1px solid;border-image: linear-gradient(0deg, #FFFFFF, #FFFFFF) 1 1;
+                box-shadow: 0 5px 20px 0 rgba(183,183,195,0.07);border-radius: 10px;'>
+                <div style='margin-left: 2%;margin-right: 2%'>
                 <!--标签行-->
                 <div style='display: flex;'>
                     <!--标签行 左侧栏目内容-->
@@ -80,170 +96,116 @@
                         </el-dropdown-menu>
                     </el-dropdown>
                     -->
-
                     <!-- 选择用户要进行操作的分支 -->
-
-                    <el-select v-model="branchName" placeholder="选择分支"  @change='choiceBranch(branchName)' style='width: 90px'>
-                        <el-option
-                            v-for="item in branchOptions"
-                            :key="item.value"
-                            :label="item.label"
-                            :value="item.value"
-                        >
-                        </el-option>
-                    </el-select>
-
-                    <i class="el-icon-share" style='margin-top: 7px;margin-left: 15px'></i>
-                    <div style='font-size: 14px;margin-top: 5px;margin-left: 6px'>分支 {{this.branchOptions.length}} 个</div>
-
-                    <!--标签行 右侧栏目内容-->
-                    <div style='position: absolute;right:0'>
-                        <div >
-                            <el-button>
-                                <router-link :to="{path:'/manage',query:{username:username,warehouseName:this.warehouse,starCount:this.star_count,watchCount:this.watching_count,forkCount:this.watching_count}}">
-                                    管理</router-link>
-                            </el-button>
-                            <el-button>
-                                <router-link :to="{path:'/statistics',query:{username:username,warehouseName:this.$route.query.warehouseName,isCredible:this.isCredible }}" >
-                                    统计</router-link>
-                            </el-button>
-                            <el-button><i class="el-icon-plus" style='font-weight: bolder'></i>
-                                <router-link :to="{path:'/pullrequests',query:{username:username,warehouseName:this.$route.query.warehouseName,isCredible:this.isCredible }}" >
-                                    Pull Request</router-link>
-                            </el-button>
-                            <el-button><i class="el-icon-plus" style='font-weight: bolder'></i>
-                                <router-link :to="{path:'/issue',query:{username:username,warehouseName:this.$route.query.warehouseName ,isCredible:this.isCredible}}" >
-                                    Issue</router-link>
-                            </el-button>
-                            <el-dropdown>
-                                <el-button type="plain" style='margin-left: 10px'>上传文件<i class="el-icon-arrow-down el-icon--right"></i></el-button>
-                                <el-dropdown-menu slot="dropdown">
-                                    <el-dropdown-item>
-                                        <router-link :to="{path:'/newFile',query:{username:username,warehouseName:this.$route.query.warehouseName }}" >
-                                            新建文件</router-link>
-                                    </el-dropdown-item>
-                                    <el-dropdown-item>新建Diagram文件</el-dropdown-item>
-                                    <el-dropdown-item>新建文件夹</el-dropdown-item>
-                                    <el-dropdown-item>新建子模块</el-dropdown-item>
-                                    <el-dropdown-item>
-                                        <router-link to="/code">上传文件</router-link>
-                                    </el-dropdown-item>
-                                    <el-dropdown-item>搜索文件</el-dropdown-item>
-                                </el-dropdown-menu>
-                            </el-dropdown>
-                            <el-dropdown>
-                                <el-button type="warning" style='margin-left: 10px'>克隆/下载<i class="el-icon-arrow-down el-icon--right"></i></el-button>
-                                <el-dropdown-menu slot="dropdown">
-                                    <el-dropdown-item style='display: block'>HTTP
-                                        <div style='display: flex'>
-                                            <el-input type="text" readonly :value="http_text" ref="textInput"></el-input>
-                                            <el-button @click="handleCopyClick">复制</el-button>
-                                        </div>
-                                    </el-dropdown-item>
-                                    <el-dropdown-item>SSH</el-dropdown-item>
-                                    <el-dropdown-item>SVN</el-dropdown-item>
-                                    <el-dropdown-item>SSH+SVN</el-dropdown-item>
-                                    <el-dropdown-item> <i class='el-icon-download'></i> 下载ZIP</el-dropdown-item>
-                                </el-dropdown-menu>
-                            </el-dropdown>
-                        </div>
-                    </div>
+                    <div style='display: flex;margin-top:5px;margin-bottom: 15px'>
+                            <div style='display: flex;margin-top: 14px'>
+                                <div>
+                                    <el-select v-model="branchName" placeholder="选择分支"  @change='choiceBranch(branchName)'>
+                                    <el-option
+                                        v-for="item in branchOptions"
+                                        :key="item.value"
+                                        :label="item.label"
+                                        :value="item.value"
+                                    >
+                                    </el-option>
+                                    </el-select>
+                                </div>
+                                <img src='../../assets/img/branch.png' style='margin-top: 9px;width: 13px;height: 13px;margin-left: 16px'>
+                                <div style='font-size: 14px;margin-top: 7px;margin-left: 6px;font-family: Source Han Sans CN;font-weight: bold;color: #353D61;'>
+                                    分支 {{this.branchOptions.length}} </div>
+                                <div style='font-size: 12px;margin-top: 10px;margin-left: 16px;font-family: Source Han Sans CN;font-weight: 500;color: #353D61;'>
+                                    标签 1</div>
+                            </div>
+                            <!--标签行 右侧栏目内容-->
+                          <div style='display: flex;position: absolute;right: 18px;'>
+                                <el-button type='text'><i class="el-icon-more-outline" style='font-family: Source Han Sans CN;font-weight: bolder;color: #4092ED;margin-left: 10px;font-size: 14px'></i>
+                                    <router-link :to="{path:'/manage',query:{username:username,warehouseName:this.warehouse,starCount:this.star_count,watchCount:this.watching_count,forkCount:this.watching_count}}"
+                                                 style='font-family: Source Han Sans CN;font-weight: 400;color: #4092ED;font-size: 14px'>
+                                        管理</router-link>
+                                </el-button>
+                                <el-button type='text'><i class="el-icon-top" style='font-family: Source Han Sans CN;font-weight: bolder;color: #4092ED;margin-left: 10px;font-size: 14px'></i>
+                                    <router-link :to="{path:'/statistics',query:{username:username,warehouseName:this.$route.query.warehouseName,isCredible:this.isCredible }}"
+                                                 style='font-family: Source Han Sans CN;font-weight: 400;color: #4092ED;font-size: 14px'>
+                                        统计</router-link>
+                                </el-button>
+                                <el-button type='text'><i class="el-icon-plus" style='font-family: Source Han Sans CN;font-weight: bolder;color: #4092ED;margin-left: 10px;font-size: 14px'></i>
+                                    <router-link :to="{path:'/pullrequests',query:{username:username,warehouseName:this.$route.query.warehouseName,isCredible:this.isCredible }}"
+                                                 style='font-family: Source Han Sans CN;font-weight: 400;color: #4092ED;font-size: 14px'>
+                                        Pull Request</router-link>
+                                </el-button>
+                                <el-button type='text' style='font-size: 16px;font-family: Source Han Sans CN;font-weight: 400;color: #4092ED;margin-left: 10px;font-size: 14px;
+                                line-height: 46px;'><i class="el-icon-plus" style='font-weight: bolder;color: #4092ED'></i>
+                                    <router-link :to="{path:'/issue',query:{username:username,warehouseName:this.$route.query.warehouseName ,isCredible:this.isCredible}}"
+                                                 style='font-family: Source Han Sans CN;font-weight: 400;color: #4092ED;font-size: 14px'>
+                                        Issue</router-link>
+                                </el-button>
+                                <div style='margin-left: 10px'>
+                                    <el-dropdown>
+                                        <el-button type="text" style='margin-left: 6px;font-size: 14px;font-family: Source Han Sans CN;font-weight: 400;
+                                        color: #00ABA4;line-height: 46px;'>文件</el-button>
+                                        <img src='../../assets/img/arrow-down-green.png' style='width: 10px;height: 5px;margin-left: 5px'>
+                                        <el-dropdown-menu slot="dropdown">
+                                            <el-dropdown-item>
+                                                <router-link :to="{path:'/newFile',query:{username:username,warehouseName:this.$route.query.warehouseName }}" >
+                                                    新建文件</router-link>
+                                            </el-dropdown-item>
+                                            <el-dropdown-item>新建Diagram文件</el-dropdown-item>
+                                            <el-dropdown-item>新建文件夹</el-dropdown-item>
+                                            <el-dropdown-item>新建子模块</el-dropdown-item>
+                                            <el-dropdown-item>
+                                                <router-link to="/code">上传文件</router-link>
+                                            </el-dropdown-item>
+                                            <el-dropdown-item>搜索文件</el-dropdown-item>
+                                        </el-dropdown-menu>
+                                    </el-dropdown>
+                                </div>
+                                <div style='margin-left: 10px' >
+                                    <el-dropdown>
+                                        <el-button type="text" style='margin-left: 6px;font-size: 14px;font-family: Source Han Sans CN;font-weight: 400;
+                                        color: #F6833B;line-height: 46px;'>克隆/下载</el-button>
+                                        <img src='../../assets/img/arrow-down-orange.png' style='width: 10px;height: 5px;margin-left: 5px'>
+                                        <el-dropdown-menu slot="dropdown">
+                                            <el-dropdown-item style='display: block'>HTTP
+                                                <div style='display: flex'>
+                                                    <el-input type="text" readonly :value="http_text" ref="textInput"></el-input>
+                                                    <el-button @click="handleCopyClick">复制</el-button>
+                                                </div>
+                                            </el-dropdown-item>
+                                            <el-dropdown-item>SSH</el-dropdown-item>
+                                            <el-dropdown-item>SVN</el-dropdown-item>
+                                            <el-dropdown-item>SSH+SVN</el-dropdown-item>
+                                            <el-dropdown-item> <i class='el-icon-download'></i> 下载ZIP</el-dropdown-item>
+                                        </el-dropdown-menu>
+                                    </el-dropdown>
+                                </div>
+                            </div>
+                      </div>
                 </div>
-                <!--左侧标签行下面内容-->
+                <!--左侧标签行下面内容  表格数据-->
                 <div>
-                    <!--表格信息暂时去掉，直接用 文件上传预览的文件列表-->
-                    <!--文件信息预览部分,暂时删除，如果后续有时间，尝试一下md文件的树形图结构-->
-                    <!----文件预览功能测试 2--->
-
-                    <!--
-                    <div>
-                        <el-upload
-                            class="upload-demo"
-                            action="/codedetails"
-                            :on-preview="handlePreview"
-                            :before-upload="handleBeforeUpload"
-                            multiple
-                            :limit="10"
-                            :on-exceed="handleExceed"
-                            :on-remove="handleRemove"
-                            :before-remove="beforeRemove"
-                            accept="accept"
-                            :file-list="fileList"
-                        >
-                            <el-button size="small" type="primary" style='margin-top: 20px'>点击上传</el-button>
-                            <div slot="tip" class="el-upload__tip">请上传文件</div>
-                        </el-upload>
-                    </div>
-                    --->
                 <!--表格信息_===表格数据根据用户从 选择器 里面的选择 来确定，一个分支对应一个表格-->
-                    <el-table :data = "displayData"  style="width: 100%;margin-top:8px">
-                        <el-table-column width='25px'>
-                            <template slot-scope="scope"> <i class='el-icon-document'></i> </template>
-                        </el-table-column>
-                        <el-table-column prop="file" width="200px "  label='File name'> </el-table-column>
-                        <el-table-column prop="prop" label="Submit information"></el-table-column>
-                        <el-table-column prop="time" align='right' width='100px' label="Creation time"></el-table-column>
-                        <el-table-column prop="operation" align='right' width='100px' label="Operation">
-                            <template slot-scope="scope" style='display: flex'>
-                                <el-button
-                                    type="text"
-                                    icon="el-icon-view"
-                                    @click="handleView(scope.$index, scope.row)"
-                                >查看</el-button>
-                            </template>
-                        </el-table-column>
+                    <el-table :data = "displayData"  style="width: 100%;margin-top:8px;font-size: 16px;font-family: Source Han Sans CN;
+                    font-weight: 500;color: #353D61;">
+                        <el-table-column prop="file" width="260px "  label='File name' align="center"> </el-table-column>
+                        <el-table-column prop="prop"  width="260px " label="Submit information" align="center"></el-table-column>
+                        <el-table-column prop="time"  width='260px' label="Creation time" align="center"></el-table-column>
+<!--                        <el-table-column prop="operation" align='right' width='100px' label="Operation">-->
+<!--                            <template slot-scope="scope" style='display: flex'>-->
+<!--                                <el-button-->
+<!--                                    type="text"-->
+<!--                                    icon="el-icon-view"-->
+<!--                                    @click="handleView(scope.$index, scope.row)"-->
+<!--                                >查看</el-button>-->
+<!--                            </template>-->
+<!--                        </el-table-column>-->
                     </el-table>
-
-                <!---
-                <el-table :data="tableData"  style="width: 100%;margin-top:8px">
-                    <el-table-column width='25px'>
-                        <template slot-scope="scope"> <i class='el-icon-document'></i> </template>
-                    </el-table-column>
-                    <el-table-column prop="file" width="200px "  label='File name'> </el-table-column>
-                    <el-table-column prop="prop" label="Submit information"></el-table-column>
-                    <el-table-column prop="time" align='right' width='100px' label="Creation time"></el-table-column>
-                    <el-table-column prop="operation" align='right' width='100px' label="Operation">
-                        <template slot-scope="scope" style='display: flex'>
-                            <el-button
-                                type="text"
-                                icon="el-icon-view"
-                                @click="handleView(scope.$index, scope.row)"
-                            >查看</el-button>
-                        </template>
-                    </el-table-column>
-                </el-table>
-                -->
-                    <!--点赞打赏区域-->
-                    <div style='display: flex;width: 50%;margin-left: 25%;margin-top: 18px'>
-                        <!--star数量-->
-                        <div style='display: flex;flex-grow: 1'>
-                            <el-button round v-on:click="star_count++" icon="el-icon-star-on" style='background-color:transparent;font-size: 30px;color: #cf9236' ></el-button>
-                            <div style='display: block;margin-top: 7px;margin-left: 10px;'>
-                                <div style='font-size: 14px;text-align: center'>Star</div>
-                                <div style='font-size: 14px;text-align: center'>{{star_count}}</div>
-                            </div>
-                        </div>
-                        <!--fork数量-->
-                        <div style='display: flex;flex-grow: 1'>
-                            <el-button round v-on:click="fork_count++" icon="el-icon-share" style='background-color:transparent;font-size: 30px;color:cadetblue'></el-button>
-                            <div style='display: block;margin-top: 7px;margin-left: 10px;'>
-                                <div style='font-size: 14px;text-align: center'>Fork</div>
-                                <div style='font-size: 14px;text-align: center'>{{fork_count}}</div>
-                            </div>
-                        </div>
-                        <!--捐赠数量-->
-                        <div style='display: flex;flex-grow: 1'>
-                            <el-button round v-on:click="donate_count++" icon="el-icon-lollipop" style='background-color:transparent;font-size: 30px;color: #dd6161'></el-button>
-                            <div style='display: block;margin-top: 7px;margin-left: 10px;'>
-                                <div style='font-size: 14px;text-align: center'>捐赠</div>
-                                <div style='font-size: 14px;text-align: center'>{{donate_count}}</div>
-                            </div>
-                        </div>
-                    </div>
+                    <!--点赞打赏区域   已删除-->
+                </div>
                 </div>
             </div>
             <!--右侧主体部分-->
-            <div style='text-align: left;margin-left: 40px;margin-right: 30px;width: 30%;margin-top: 10px'>
+            <div style='text-align: left;margin-left: 10px;width: 28%;background: rgba(255,255,255,0.8);border: 1px solid;
+            border-image: linear-gradient(0deg, #FFFFFF, #FFFFFF) 1 1;box-shadow: 0 5px 20px 0 rgba(183,183,195,0.07);border-radius: 10px;'>
                 <!--简介-->
                 <h4 style='margin-top: 10px'>简介</h4>
                 <div style='margin-top: 15px;font-size: 15px;color: #72767b' >{{this.$route.query.introduce}}</div>
@@ -662,6 +624,34 @@ export default {
 
 .but02 {
     background-color: gray;
+}
+.select {
+    &::v-deep {
+        .el-select {
+            margin-left: 9px;
+            .el-input.el-input--suffix {
+                .el-input__inner {
+                    background: #4092ED;
+                    opacity: 0.1;
+                    border-radius: 4px;
+                    font-size: 18px;
+                    font-family: Source Han Sans CN;
+                    font-weight: 400;
+                    color: #4092ED;
+                    height: 25px;
+                    width: 65px;
+
+                }
+                .el-input__suffix-inner {
+                    position: absolute;
+                    left: -65px;
+                }
+            }
+            .el-select__caret.el-input__icon.el-icon-arrow-up {
+                line-height: 30px;
+            }
+        }
+    }
 }
 
 </style>

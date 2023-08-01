@@ -1,8 +1,34 @@
 <template>
-    <!--组件引入失败了，这个页面只能做静态截图用-->
     <el-container  style='margin-left: 50px;margin-right: 50px'>
                 <!--统计  页面 内部导航-->
-
+        <el-table
+            :data="tableData"
+            style="width: 100%">
+            <el-table-column
+                prop="user"
+                label="成员"
+                width="150">
+            </el-table-column>
+            <el-table-column
+                prop="fileName"
+                label="文件名称"
+                width="120">
+            </el-table-column>
+            <el-table-column
+                prop="address"
+                label="时间"
+                width="100">
+            </el-table-column>
+            <el-table-column
+                prop="hashCode"
+                label="hash"
+                width="100">
+            </el-table-column>
+            <el-table-column
+                label="option"
+              >
+            </el-table-column>
+        </el-table>
         <el-main style='position:relative;' >
                 <!--标签行-->
                 <div style='display: flex;'>
@@ -162,13 +188,13 @@ import bus from '../common/bus';
 export default {
     data() {
         return {
-            hash1:'1ecc563',
-            hash2:'2a3b7b6',
-            hash3:'032a495',
-            hash4:'71564ae',
-            value1:'',
-            value2:'',
-            collapse:false,
+            hash1: '1ecc563',
+            hash2: '2a3b7b6',
+            hash3: '032a495',
+            hash4: '71564ae',
+            value1: '',
+            value2: '',
+            collapse: false,
             options: [{
                 value: '选项1',
                 label: '全部贡献者'
@@ -214,8 +240,33 @@ export default {
                     index: 'statisticssubmit',
                     title: '附件',
                 },
-            ]
-        };
+            ],
+            tableData: [{
+                date: '2016-05-02',
+                fileName: 'add admin',
+                user: 'admin',
+                hashCode: '1ecc563',
+                time: '10天前',
+            }, {
+                date: '2016-05-04',
+                fileName: 'add user1',
+                user: 'user1',
+                hashCode: '2a3b7b6',
+                time: '10天前',
+            }, {
+                date: '2016-05-01',
+                fileName: 'add user2',
+                user: 'user2',
+                hashCode: '032a495',
+                time: '10天前',
+            }, {
+                date: '2016-05-03',
+                fileName: 'add user3',
+                user: 'user3',
+                hashCode: '71564ae',
+                time: '10天前',
+            }]
+        }
     },
     computed: {
         onRoutes() {

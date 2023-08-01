@@ -1,44 +1,19 @@
-<template>
-    <div style='font-size: 24px;margin-top: 30px;margin-left: 5%;margin-right: 5%'>
-        <el-breadcrumb separator="/" style='font-size: 25px'>
-            <el-breadcrumb-item :to="{ path: '/' }">工作台</el-breadcrumb-item>
-            <el-breadcrumb-item><a href="/">仓库</a></el-breadcrumb-item>
+<template >
+    <div>
+    <div style='font-size: 24px;margin-top: 30px;margin-left: 1.25%;margin-right: 1.25%'>
+        <el-breadcrumb separator="/" >
+            <el-breadcrumb-item :to="{ path: '/' }" style='font-size: 18px'>工作台</el-breadcrumb-item>
+            <el-breadcrumb-item style='font-size: 15px;margin-top:1px'><a href="/">仓库</a></el-breadcrumb-item>
         </el-breadcrumb>
-        <el-tabs v-model="activeName"  @tab-click="handleClick"  style='margin-top: 20px'>
-                    <el-tab-pane label="全部" name="first">
+        <div style='background: rgba(255,255,255,0.8);border: 1px solid;border-image: linear-gradient(0deg, #FFFFFF, #FFFFFF) 1 1;
+        box-shadow: 0 5px 20px 0 rgba(183,183,195,0.07);border-radius: 10px;margin-top: 26px'>
+        <el-tabs v-model="activeName"  @tab-click="handleClick"  style='margin-top: 10px;margin-left: 18px' type="card">
+                    <el-tab-pane label="全部" name="first" >
                         <el-table
                             :data="tableData_All"
-                            style="width: 100%">
-                            <el-table-column type="expand">
-                                <template slot-scope="props">
-                                    <el-form label-position="left" inline class="demo-table-expand">
-                                        <el-form-item label="项目名称">
-                                            <span>{{ props.row.name }}</span>
-                                        </el-form-item>
-                                        <el-form-item label="项目标签">
-                                            <span>{{ props.row.tags }}</span>
-                                        </el-form-item>
-                                        <el-form-item label="项目语言">
-                                            <span>{{ props.row.language }}</span>
-                                        </el-form-item>
-                                        <el-form-item label="浏览数">
-                                            <span>{{ props.row.viewnum }}</span>
-                                        </el-form-item>
-                                        <el-form-item label="贡献量">
-                                            <span>{{ props.row.collectnum }}</span>
-                                        </el-form-item>
-                                        <el-form-item label="分支数">
-                                            <span>{{ props.row.branchnum }}</span>
-                                        </el-form-item>
-                                        <el-form-item label="更新时间">
-                                            <span>{{ props.row.date }}</span>
-                                        </el-form-item>
-                                        <el-form-item label="项目简介">
-                                            <span>{{ props.row.info }}</span>
-                                        </el-form-item>
-                                    </el-form>
-                                </template>
-                            </el-table-column>
+                            :header-cell-style="{'text-align':'center'}"
+                            :cell-style="{'text-align':'center'}"
+                            style="width: 100%;font-size:13px;margin-top: 10px">
                             <el-table-column
                                 label="项目名称"
                                 prop="name">
@@ -50,53 +25,15 @@
                             <el-table-column
                                 label="项目语言"
                                 prop="language">
-                            </el-table-column>
-                            <el-table-column prop="operation" align='right' width='100px' label="Operation">
-                                <template slot-scope="scope" style='display: flex'>
-                                    <el-button
-                                        type="text"
-                                        icon="el-icon-view"
-                                        @click="handleView(scope.row.url)"
-                                    >查看</el-button>
-                                </template>
                             </el-table-column>
                         </el-table>
                     </el-tab-pane>
                     <el-tab-pane label="我拥有的" name="second">
                         <el-table
                             :data="tableData_Own"
-                            style="width: 100%">
-                            <el-table-column type="expand">
-                                <template slot-scope="props">
-                                    <el-form label-position="left" inline class="demo-table-expand">
-                                        <el-form-item label="项目名称">
-                                            <span>{{ props.row.name }}</span>
-                                        </el-form-item>
-                                        <el-form-item label="项目标签">
-                                            <span>{{ props.row.tags }}</span>
-                                        </el-form-item>
-                                        <el-form-item label="项目语言">
-                                            <span>{{ props.row.language }}</span>
-                                        </el-form-item>
-                                        <el-form-item label="浏览数">
-                                            <span>{{ props.row.viewnum }}</span>
-                                        </el-form-item>
-                                        <el-form-item label="贡献量">
-                                            <span>{{ props.row.collectnum }}</span>
-                                        </el-form-item>
-                                        <el-form-item label="分支数">
-                                            <span>{{ props.row.branchnum }}</span>
-                                        </el-form-item>
-                                        <el-form-item label="更新时间">
-                                            <span>{{ props.row.date }}</span>
-                                        </el-form-item>
-                                        <el-form-item label="项目简介">
-                                            <span>{{ props.row.info }}</span>
-                                        </el-form-item>
-
-                                    </el-form>
-                                </template>
-                            </el-table-column>
+                            :header-cell-style="{'text-align':'center'}"
+                            :cell-style="{'text-align':'center'}"
+                            style="width: 100%;font-size:13px;margin-top: 10px">
                             <el-table-column
                                 label="项目名称"
                                 prop="name">
@@ -108,53 +45,15 @@
                             <el-table-column
                                 label="项目语言"
                                 prop="language">
-                            </el-table-column>
-                            <el-table-column prop="operation" align='right' width='100px' label="Operation">
-                                <template slot-scope="scope" style='display: flex'>
-                                    <el-button
-                                        type="text"
-                                        icon="el-icon-view"
-                                        @click="handleView(scope.row.url)"
-                                    >查看</el-button>
-                                </template>
                             </el-table-column>
                         </el-table>
                     </el-tab-pane>
                     <el-tab-pane label="我参与的" name="third">
                         <el-table
                             :data="tableData_Involved"
-                            style="width: 100%">
-                            <el-table-column type="expand">
-                                <template slot-scope="props">
-                                    <el-form label-position="left" inline class="demo-table-expand">
-                                        <el-form-item label="项目名称">
-                                            <span>{{ props.row.name }}</span>
-                                        </el-form-item>
-                                        <el-form-item label="项目标签">
-                                            <span>{{ props.row.tags }}</span>
-                                        </el-form-item>
-                                        <el-form-item label="项目语言">
-                                            <span>{{ props.row.language }}</span>
-                                        </el-form-item>
-                                        <el-form-item label="浏览数">
-                                            <span>{{ props.row.viewnum }}</span>
-                                        </el-form-item>
-                                        <el-form-item label="贡献量">
-                                            <span>{{ props.row.collectnum }}</span>
-                                        </el-form-item>
-                                        <el-form-item label="分支数">
-                                            <span>{{ props.row.branchnum }}</span>
-                                        </el-form-item>
-                                        <el-form-item label="更新时间">
-                                            <span>{{ props.row.date }}</span>
-                                        </el-form-item>
-                                        <el-form-item label="项目简介">
-                                            <span>{{ props.row.info }}</span>
-                                        </el-form-item>
-
-                                    </el-form>
-                                </template>
-                            </el-table-column>
+                            :header-cell-style="{'text-align':'center'}"
+                            :cell-style="{'text-align':'center'}"
+                            style="width: 100%;font-size:13px;margin-top: 10px">
                             <el-table-column
                                 label="项目名称"
                                 prop="name">
@@ -167,19 +66,11 @@
                                 label="项目语言"
                                 prop="language">
                             </el-table-column>
-                            <el-table-column prop="operation" align='right' width='100px' label="Operation">
-                                <template slot-scope="scope" style='display: flex'>
-                                    <el-button
-                                        type="text"
-                                        icon="el-icon-view"
-                                        @click="handleView(scope.row.url)"
-                                    >查看</el-button>
-                                </template>
-                            </el-table-column>
                         </el-table>
                     </el-tab-pane>
        </el-tabs>
-
+      </div>
+    </div>
     </div>
 </template>
 
@@ -233,16 +124,16 @@ export default {
                 owener:'user2',
                 url:'http://localhost:8080/codedetails?warehouseName=test&introduce=11&warehouseKeywords=11',
                 }, {
-                name: 'EdurtIO/datacap',
-                tags: '数据库管理、监控',
-                info:  'DataCap是数据转换、集成和可视化的集成软件。支持多种数据源，文件类型，大数据相关数据库，关系型数据库，NoSQL数据库等。通过软件可以实现管理多种数据源，对该源下的数据进行各种操作转换，制作数据图表，监控数据源等各种功能。',
-                language:  'Java',
-                date: '2023-05-26',
-                collectnum: '328',
-                branchnum: '89',
-                viewnum: '43',
-                owener:'user3',
-                url:'http://localhost:8080/codedetails?warehouseName=test&introduce=11&warehouseKeywords=11',
+                    name: 'EdurtIO/datacap',
+                    tags: '数据库管理、监控',
+                    info:  'DataCap是数据转换、集成和可视化的集成软件。支持多种数据源，文件类型，大数据相关数据库，关系型数据库，NoSQL数据库等。通过软件可以实现管理多种数据源，对该源下的数据进行各种操作转换，制作数据图表，监控数据源等各种功能。',
+                    language:  'Java',
+                    date: '2023-05-26',
+                    collectnum: '328',
+                    branchnum: '89',
+                    viewnum: '43',
+                    owener:'user3',
+                    url:'http://localhost:8080/codedetails?warehouseName=test&introduce=11&warehouseKeywords=11',
                 }],
             tableData_Own: [{
                 name: 'admin/test',
@@ -291,16 +182,16 @@ export default {
                     owener:'user2',
                     url:'http://localhost:8080/codedetails?warehouseName=test&introduce=11&warehouseKeywords=11',
                 }, {
-                    name: 'EdurtIO/datacap',
-                    tags: '数据库管理、监控',
-                    info:  'DataCap是数据转换、集成和可视化的集成软件。支持多种数据源，文件类型，大数据相关数据库，关系型数据库，NoSQL数据库等。通过软件可以实现管理多种数据源，对该源下的数据进行各种操作转换，制作数据图表，监控数据源等各种功能。',
-                    language:  'Java',
-                    date: '2023-05-26',
-                    collectnum: '328',
-                    branchnum: '89',
-                    viewnum: '43',
-                    owener:'user3',
-                    url:'http://localhost:8080/codedetails?warehouseName=test&introduce=11&warehouseKeywords=11',
+                name: 'EdurtIO/datacap',
+                tags: '数据库管理、监控',
+                info:  'DataCap是数据转换、集成和可视化的集成软件。支持多种数据源，文件类型，大数据相关数据库，关系型数据库，NoSQL数据库等。通过软件可以实现管理多种数据源，对该源下的数据进行各种操作转换，制作数据图表，监控数据源等各种功能。',
+                language:  'Java',
+                date: '2023-05-26',
+                collectnum: '328',
+                branchnum: '89',
+                viewnum: '43',
+                owener:'user3',
+                url:'http://localhost:8080/codedetails?warehouseName=test&introduce=11&warehouseKeywords=11',
             }],
             activeName: 'first',
         }
@@ -309,7 +200,38 @@ export default {
         handleClick(tab, event) {
             console.log(tab, event);
         },
+        handleView(url) {
+            //window.open('url', '_blank');
+            window.location.href = 'url';
+            console.log(url);
+        },
     }
 }
 </script>
 
+<style>
+.multiline span {
+    white-space:pre-wrap ; /* 或者可以使用 pre-wrap / normal*/
+}
+.demo-table-expand {
+    font-size: 0;
+}
+.demo-table-expand label {
+    width: 90px;
+    color: #99a9bf;
+}
+.demo-table-expand .el-form-item {
+    margin-right: 0;
+    margin-bottom: 0;
+    width: 50%;
+}
+.el-tabs__item:hover {
+    color: black;
+    background-color: white ;
+}
+.el-tabs__item.is-active {
+    color: #559EEF;
+    background-color: #E9F1FD;
+}
+
+</style>
