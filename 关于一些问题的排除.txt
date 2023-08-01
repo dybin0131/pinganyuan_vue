@@ -1,0 +1,39 @@
+1.关于Springboot连接mysql并启动：
+springboot项目启动出错 Failed to configure a DataSource: 'url' attribute is not specified and no embedde
+【问题原因】: Mybatis没有找到合适的加载类,其实是大部分spring - datasource - url没有加载成功,分析原因如下所示.
+    DataSourceAutoConfiguration会自动加载.
+    没有配置spring - datasource - url 属性.
+    spring - datasource - url 配置的地址格式有问题.
+    配置 spring - datasource - url的文件没有加载.
+【采用方案一】 (解决原因1)
+排除此类的autoconfig。启动以后就可以正常运行。
+@SpringBootApplication(exclude= {DataSourceAutoConfiguration.class})
+https://blog.csdn.net/menglonghuanying/article/details/104171148
+
+
+2.路由
+query传参
+          在script中：this.$router.push({path: '/newFile'},{query:{warehouseName: form.warehouseName,introduce:form.introduce,warehouseKeywords:form.warehouseKeywords}})
+          在template中： <router-link :to="{path:'/codedetails',query:{warehouseName: form.warehouseName,introduce:form.introduce,warehouseKeywords:form.warehouseKeywords}}">
+
+          引用：{{this.$route.query.warehouseName}}
+
+          <button @click=‘hChange’>点击按钮跳转页面</button>
+          function hChange () {
+              this.$router.push({ path: '/home', query: { id: '001' } })
+              // 根据路由路径 + query 的方式跳转传参
+              this.$router.push({ name: 'home', query: { id: '001' } })
+              // 根据路由名称 + query 的方式跳转传参
+              this.$router.push({ name: 'home', params: { id: '001' } })
+              // 根据路由名称 + params 的方式跳转传参
+          }
+
+          // 在html中接收参数
+          $route.query.id
+          $route.params.id
+          // 在script中接收参数
+          this.$route.query.id
+          this.$route.params.id
+
+3.设置属性
+使用函数设置属性  :style="`background:${extractColorByName(item.name)}`"
