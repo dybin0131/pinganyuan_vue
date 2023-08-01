@@ -90,17 +90,19 @@ export default {
             color: #353D61;
             text-align: center;
             line-height: 60px;
+            cursor: pointer;
             font-weight: bold;
-            font-size: 18px;
+            font-size: 14px;
         }
         .topNavSelect{
             width: 100%;
             height: 60px;
             color: #4092ED;
+            cursor: pointer;
             text-align: center;
             line-height: 60px;
             font-weight: bold;
-            font-size: 18px;
+            font-size: 14px;
             .topNavXian{
                 width: 30px;
                 margin: auto;
