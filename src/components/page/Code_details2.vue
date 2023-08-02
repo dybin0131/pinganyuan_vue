@@ -1,5 +1,4 @@
 <template>
-
     <div>
         <CounterCom  :warehouse="this.warehouse"></CounterCom>
         <!--顶部-->
@@ -8,13 +7,8 @@
             <div style='display: flex;position: relative'>
                 <div style='display: flex;margin-top: 15px;margin-left: 10px'>
                     <el-tag  v-if="isCredible>=60" type='success'
-                             style='
-                             width: 55px;
-                             height: 24px;
-                             background: rgba(0,171,164,0.1);
-                             border: 1px solid #00ABA4;
-                             border-radius: 4px;'
-                             >可信</el-tag>
+                             style='width: 55px;height: 24px;background: rgba(0,171,164,0.1);border: 1px solid #00ABA4;
+                             border-radius: 4px;'>可信</el-tag>
                     <el-tag  v-else-if='isCredible<60' type='danger'
                              style='width: 55px;height: 24px;background: rgba(237,64,64,0.1);border: 1px solid #ED4040;border-radius: 4px;'
                     >不可信</el-tag>
@@ -28,12 +22,18 @@
                 </div>
 
                 <!--审核是否为可信依赖库-->
-                <el-button type="primary" style='width: auto;height: 40px;margin-top: 10px;margin-left: 10px'
+                <el-button type="primary" style=' width: 130px;height: 30px;margin-top: 17px;background: #4092ED;border: 1px solid #4092ED;border-radius: 4px;margin-left: 20px'
                            @click="acknowledge" v-if='this.visitor!==this.owner' :disabled='isAuditCompleted'>
-                    颁发可信依赖库证明</el-button>
-                <el-button type="primary" style='width: auto;height: 40px;margin-top: 10px;margin-left: 10px'
+                    <div style='font-size: 14px;font-family: Source Han Sans CN;font-weight: 400;color: #FFFFFF;'>
+                        颁发可信依赖库证明
+                    </div>
+                </el-button>
+                <el-button type="primary" style=' width: 130px;height: 30px;margin-top: 17px;background: #4092ED;border: 1px solid #4092ED;border-radius: 4px;margin-left: 20px'
                            @click="deny" v-if='this.visitor!==this.owner' :disabled='isAuditCompleted'>
-                    不颁发可信依赖库证明</el-button>
+                    <div style='font-size: 14px;font-family: Source Han Sans CN;font-weight: 400;color: #FFFFFF;'>
+                        不颁发可信依赖库证明
+                    </div>
+                </el-button>
 
                 <!--未申请时/申请失败-->
                 <el-button  style=' width: 130px;height: 30px;margin-top: 17px;background: #4092ED;border: 1px solid #4092ED;border-radius: 4px;margin-left: 20px'
@@ -44,7 +44,7 @@
                 </el-button>
 
                 <!--右侧辅助工具栏-->
-                <div style='position: absolute;right: 0;display: flex;margin-top: 15px'>
+                <div style='position: absolute;right: 12px;display: flex;margin-top: 15px'>
                     <el-dropdown size="small" split-button type="plain" style='font-family: San Francisco Display;font-weight: 400;color: #353D61;'>
                         <i class='el-icon-view'></i>
                         Watching   {{watching_count}}
@@ -73,13 +73,12 @@
                 </div>
                 <el-button type="info" style='width: auto;height: 40px;margin-top: 10px;margin-left: 10px' @click="application">申请可信依赖库</el-button>
                --->
-
             </div>
         </div>
         <!--主体-->
         <div style='display: flex;margin-top: 10px;margin-left: 2px'>
             <!--左侧主体部分-->
-            <div style='width: 70%;position: relative;background: rgba(255,255,255,0.8);border: 1px solid;border-image: linear-gradient(0deg, #FFFFFF, #FFFFFF) 1 1;
+            <div style='width: 68%;position: relative;background: rgba(255,255,255,0.8);border: 1px solid;border-image: linear-gradient(0deg, #FFFFFF, #FFFFFF) 1 1;
                 box-shadow: 0 5px 20px 0 rgba(183,183,195,0.07);border-radius: 10px;'>
                 <div style='margin-left: 2%;margin-right: 2%'>
                 <!--标签行-->
@@ -100,14 +99,20 @@
                     <div style='display: flex;margin-top:5px;margin-bottom: 15px'>
                             <div style='display: flex;margin-top: 14px'>
                                 <div>
-                                    <el-select v-model="branchName" placeholder="选择分支"  @change='choiceBranch(branchName)'>
-                                    <el-option
-                                        v-for="item in branchOptions"
-                                        :key="item.value"
-                                        :label="item.label"
-                                        :value="item.value"
-                                    >
-                                    </el-option>
+<!--                                    <el-select v-model="branchName" placeholder="选择分支"  @change='choiceBranch(branchName)'-->
+<!--                                    style='background-color: #4092ED;opacity: 0.1;border-radius: 4px;-->
+<!--                                   font-size: 18px;font-family: Source Han Sans CN;font-weight: 400;color: #4092ED;'>-->
+                                        <el-select v-model="branchName" placeholder="选择分支"  @change='choiceBranch(branchName)'
+                                                   style='background-color: #4092ED;opacity: 0.8;border-radius: 4px;
+                                   font-size: 18px;font-family: Source Han Sans CN;font-weight: 400;color: #4092ED;'>
+
+                                        <el-option
+                                            v-for="item in branchOptions"
+                                            :key="item.value"
+                                            :label="item.label"
+                                            :value="item.value"
+                                        >
+                                        </el-option>
                                     </el-select>
                                 </div>
                                 <img src='../../assets/img/branch.png' style='margin-top: 9px;width: 13px;height: 13px;margin-left: 16px'>
@@ -204,31 +209,50 @@
                 </div>
             </div>
             <!--右侧主体部分-->
-            <div style='text-align: left;margin-left: 10px;width: 28%;background: rgba(255,255,255,0.8);border: 1px solid;
+            <div style='text-align: left;margin-left: 10px;width: 30%;background: rgba(255,255,255,0.8);border: 1px solid;
             border-image: linear-gradient(0deg, #FFFFFF, #FFFFFF) 1 1;box-shadow: 0 5px 20px 0 rgba(183,183,195,0.07);border-radius: 10px;'>
+                <div style='margin-right: 10px;margin-left: 10px;'>
                 <!--简介-->
-                <h4 style='margin-top: 10px'>简介</h4>
-                <div style='margin-top: 15px;font-size: 15px;color: #72767b' >{{this.$route.query.introduce}}</div>
-                <div style='margin-top: 15px;font-size: 15px;color: #72767b' >{{this.$route.query.warehouseKeywords}}</div>
+                <h4 style='margin-top: 27px;margin-left: 10px'>简介</h4>
+                <div style='margin-top: 15px;font-size: 15px;color: #72767b;margin-left: 10px' >{{this.$route.query.introduce}}</div>
+                <div style='margin-top: 15px;font-size: 15px;color: #72767b;margin-left: 10px' >{{this.$route.query.warehouseKeywords}}</div>
 
                 <!--近期动态-->
-                <h4 style='margin-top: 40px'>近期动态</h4>
+                <h4 style='margin-top: 40px;margin-left: 10px'>近期动态</h4>
                 <div style='display: block'>
-                    <div style='display: grid;margin-top:25px'>
+                    <div style='display: grid;margin-top:25px;margin-left: 10px'>
                         <div v-for="(item) in recentTrends"  style='display: flex;margin-bottom: 20px'>
-                            <div style='width: 30px; height: 30px;'>
-                                <el-avatar :style="`background:${extractColorByName(item.name)}`" > {{item.name}} </el-avatar>
+                            <div >
+                                <img src='@/assets/img/user-woman.png' style='width: 50px;height: 50px' />
                             </div>
-                            <div style='margin-top: 1px;margin-left:20px;font-size: 15px;color: #72767b'>{{item.trends}}</div>
+                            <div style='display: grid'>
+                                <div style='margin-left:20px;font-size: 16px;font-family: Source Han Sans CN;font-weight: bold;color: #353D61;'> {{item.name}} </div>
+                                <div style='display: flex'>
+                                    <div style='margin-top: 1px;margin-left:20px;font-size: 14px;font-family: Source Han Sans CN;font-weight: 500;
+                                    color: #353D61;'>{{item.trends}}</div>
+                                    <div style='margin-left: 10px;font-size: 14px;font-family: Source Han Sans CN;font-weight: 500;
+                                    color: #353D61;'> {{item.time}} </div>
+
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
                 <!--贡献者-->
                 <div style='display: block;position: relative;'>
-                    <div style='display: flex'>
-                        <h4 style='margin-top: 40px'>管理者</h4>
-                        <el-button type="text" style='margin-top: 34px;font-size: 15px;color: #72767b'>({{this.manager.length}})</el-button>
-                        <el-button type="text" style='margin-top: 30px;font-size: 15px;color: #72767b;position:absolute;right: 0'>全部</el-button>
+                    <div style='display: flex;margin-left: 10px'>
+                        <div style='display: flex'>
+                            <h4 style='margin-top: 40px;'>管理者</h4>
+                            <div style='margin-top: 30px;width: 24px;height: 17px;background: #E13131;border-radius: 5px 5px 5px 0;'>
+                                <div style='margin-left: 8px;font-family: Source Han Sans CN;font-weight: bold;color: #FFFFFF;'>{{this.manager.length}} </div>
+                            </div>
+                        </div>
+<!--                        <el-button type="text" style='margin-top: 34px;margin-left:10px;font-size: 15px;color: #72767b'>({{this.manager.length}})</el-button>-->
+                        <div style='position:absolute;right: 0;'>
+                            <img src='../../assets/img/user-woman.jpg'  >
+                            <el-button type="text" style='margin-top: 30px;font-size: 15px;font-family: Source Han Sans CN;
+                        font-weight: 400;color: #4192ED;'>全部</el-button>
+                        </div>
                     </div>
 
                     <div style='display: flex;margin-top: 20px'>
@@ -236,23 +260,34 @@
                             <!--
                             <img :src="item.src" style='width: 38px;height: 38px;margin-left: 10px'>
                             -->
-                            <div style='margin-right: 10px'>
-                                <el-avatar :style="`background:${extractColorByName(item.name)}`"> {{item.name}} </el-avatar>
+                            <div style='margin-right: 10px;width: 50px;height: 50px'>
+<!--                                <img src='../../assets/img/user-woman.jpg' >-->
+                                <img src='@/assets/img/user-woman.jpg' style='width: 50px;height: 50px'>
+<!--                                <el-avatar :style="`background:${extractColorByName(item.name)}`"> {{item.name}} </el-avatar>-->
                             </div>
                         </div>
                     </div>
                     <div style='display: flex'>
-                        <h4 style='margin-top: 40px'>贡献者</h4>
-                        <el-button type="text" style='margin-top: 34px;font-size: 15px;color: #72767b'>({{this.contributor.length}})</el-button>
-                        <el-button type="text" style='margin-top: 30px;font-size: 15px;color: #72767b;position:absolute;right: 0'>全部</el-button>
+                        <h4 style='margin-top: 40px;margin-left: 10px'>贡献者</h4>
+                        <div style='margin-top: 30px;width: 24px;height: 17px;background: #E13131;border-radius: 5px 5px 5px 0;'>
+                            <div style='margin-left: 8px;font-family: Source Han Sans CN;font-weight: bold;color: #FFFFFF;'>{{this.contributor.length}} </div>
+                        </div>
+
+                        <div style='position:absolute;right: 0;margin-left: 10px'>
+                            <img src='src/assets/img/all-icon.png'>
+                            <el-button type="text" style='margin-top: 30px;font-size: 15px;font-family: Source Han Sans CN;
+                            font-weight: 400;color: #4192ED;'>全部</el-button>
+                        </div>
                     </div>
                     <div style='display: flex;margin-top: 20px'>
                         <div v-for="(item) in contributor"  style='display: grid'>
                             <div style='margin-right: 10px'>
-                                <el-avatar :style="`background:${extractColorByName(item.name)}`"> {{item.name}} </el-avatar>
+                                <img :src="'../../assets/img/user-woman.jpg'" style='height: 50px;width: 50px'/>
+<!--                                <el-avatar :style="`background:${extractColorByName(item.name)}`"> {{item.name}} </el-avatar>-->
                             </div>
                         </div>
                     </div>
+                  </div>
                 </div>
             </div>
         </div>
@@ -265,6 +300,9 @@ import axios from 'axios';
 import ManageComponent from '@/components/page/Manage.vue';
 import CounterCom from '@/components/page/CounterCom.vue'
 import { messages } from '../common/i18n';
+
+
+
 export default {
     name: "FilePreview",
     components: { CounterCom },
@@ -284,6 +322,7 @@ export default {
     // },
     data() {
         return {
+
             visitor:this.$route.params.visitor,
             owner:this.$route.params.owner,
             warehouse: this.$route.query.warehouseName,
@@ -318,9 +357,9 @@ export default {
             manager: [{ name: 'admin', src: require('../../assets/img/img.jpg') }],
             //此仓库的【近期动态】——后端监测动态，传入前端？maybe，暂时写死数据
             recentTrends: [
-                { name: 'user1', trends: '3分钟前创建了新的 Pull Request', },
-                { name: 'user2', trends: '16小时前推送了新的提交到 master 分支，032a495...1ecc563', },
-                { name: 'user3', trends: '16小时前合并了 PR !3 12', },
+                { name: 'user1', trends: '创建了新的 Pull Request',time:'3分钟前' },
+                { name: 'user2', trends: '推送了新的提交到 master 分支',time:'16小时前' },
+                { name: 'user3', trends: '合并了 PR !3 12',time:'16小时前' },
             ],
 
             //文件列表的展示——假数据_____从后端请求一个名字为“对应用户选择分支的分支名称”的表，将数据展示在前端
@@ -441,6 +480,7 @@ export default {
                 .then(() => {
                     this.$message({
                         type: 'info',
+                        iconClass:'../../assets/img/payAttention.png',
                         message: '申请已提交，请等待审核！'
                     });
                     this.isDisabled= !this.isDisabled;
@@ -625,6 +665,7 @@ export default {
 .but02 {
     background-color: gray;
 }
+
 .select {
     &::v-deep {
         .el-select {
