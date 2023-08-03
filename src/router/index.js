@@ -45,7 +45,7 @@ export default new Router({
                 },
                 {
                     path: '/codeview',
-                    component: () => import(/* webpackChunkName: "dashboard" */ '../components/page/Code_view_a.vue'),
+                    component: () => import(/* webpackChunkName: "dashboard" */ '../components/page/Code_view.vue'),
                     meta: {
                         title: '查看文件',
                         roles: ['user', 'admin','user1','user2','user3'], //当前菜单哪些角色可以看到

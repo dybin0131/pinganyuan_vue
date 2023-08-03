@@ -10,10 +10,13 @@ import './assets/css/icon.css';
 import './components/common/directives';
 import 'babel-polyfill';
 import store from './store/store.js'
+import CodeEditor from 'bin-code-editor';
+
 //import axios from 'axios';
 
 //axios.defaults.baseURL = '/api'
 Vue.config.productionTip = false;
+Vue.use(CodeEditor);
 Vue.use(VueI18n);
 Vue.use(ElementUI, {
     size: 'small'
