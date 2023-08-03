@@ -11,6 +11,8 @@ import './components/common/directives';
 import 'babel-polyfill';
 import store from './store/store.js'
 import CodeEditor from 'bin-code-editor';
+import scroll from 'vue-seamless-scroll'
+Vue.use(scroll)
 
 //import axios from 'axios';
 

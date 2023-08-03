@@ -201,10 +201,10 @@ export default new Router({
                     meta: { title: '申请Pull Requests' ,roles: ['user', 'admin','user1','user2','user3'],}
                 },
                 {
-                    // 合并Pull Requests
+                    // 区块链滚动
                     path: '/pullMerge',
                     component: () => import(/* webpackChunkName: "404" */ '../components/page/pullRequests/pullMerge.vue'),
-                    meta: { title: '合并Pull Requests' ,roles: ['user', 'admin','user1','user2','user3'],}
+                    meta: { title: '区块链滚动' ,roles: ['user', 'admin','user1','user2','user3'],}
                 },
                 {
                     // 审核Pull Requests
