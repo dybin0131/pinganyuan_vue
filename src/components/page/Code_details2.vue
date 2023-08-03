@@ -36,8 +36,7 @@
                 </el-button>
 
                 <!--未申请时/申请失败-->
-                <el-button  style=' width: 130px;height: 30px;margin-top: 17px;background: #4092ED;border: 1px solid #4092ED;border-radius: 4px;margin-left: 20px'
-                @click="application" :disabled='isDisabled' v-if='this.owner===this.visitor '>
+                <el-button  style=' width: 130px;height: 30px;margin-top: 17px;background: #4092ED;border: 1px solid #4092ED;border-radius: 4px;margin-left: 20px'@click="dialogVisible = true" :disabled='isDisabled' v-if='this.owner===this.visitor '>
                     <div style='font-size: 14px;font-family: Source Han Sans CN;font-weight: 400;color: #FFFFFF;'>
                         {{ applicationStatus }}
                     </div>
@@ -291,6 +290,21 @@
                 </div>
             </div>
         </div>
+        <el-dialog
+            title="申请可信依赖库"
+            :visible.sync="dialogVisible"
+            width="40%"
+            center>
+            <div class="textBtn">
+                <div>1. 你的可信依赖库申请将由平安源nber审核。</div>
+                <div>2. 凡是经过安全检验确保安全的依赖库，平台会为其颁发可信依赖库证明。</div>
+                <div>3.申请提交后，如一个工作日内未得到推荐，则默认表示被拒。</div>
+            </div>
+            <span slot="footer" class="dialog-footer">
+                <el-button  @click="applicationNO">取 消</el-button>
+                <el-button type="primary" @click="applicationYes">确 定</el-button>
+            </span>
+        </el-dialog>
     </div>
 </template>
 
@@ -322,7 +336,7 @@ export default {
     // },
     data() {
         return {
-
+            dialogVisible: false,
             visitor:this.$route.params.visitor,
             owner:this.$route.params.owner,
             warehouse: this.$route.query.warehouseName,
@@ -469,32 +483,51 @@ export default {
             this.$router.push({path: '/newFile'});
         },
         //申请可信依赖库证明
-        application() {
-            this.$confirm('1. 你的可信依赖库申请将由平安源nber审核。\n' +
-                '2. 凡是经过安全检验确保安全的依赖库，平台会为其颁发可信依赖库证明。\n' +
-                '3.申请提交后，如一个工作日内未得到推荐，则默认表示被拒。', '申请可信依赖库', {
-                distinguishCancelAndClose: true,
-                confirmButtonText: '确定',
-                cancelButtonText: '取消',
-            })
-                .then(() => {
-                    this.$message({
-                        type: 'info',
-                        iconClass:'../../assets/img/payAttention.png',
-                        message: '申请已提交，请等待审核！'
-                    });
-                    this.isDisabled= !this.isDisabled;
-                    this.applicationStatus="可信依赖库申请中";
-                })
-                .catch(action => {
-                    this.$message({
-                        type: 'info',
-                        message: action === 'cancel'
-                            ? '取消申请'
-                            : '停留在当前页面'
-                    })
-                });
+        applicationYes(){
+            this.dialogVisible=false
+            this.$message({
+                type: 'info',
+                iconClass:'../../assets/img/payAttention.png',
+                message: '申请已提交，请等待审核！'
+            });
+            this.isDisabled= !this.isDisabled;
+            this.applicationStatus="可信依赖库申请中";
         },
+        applicationNO(){
+            this.dialogVisible=false
+            this.$message({
+                type: 'info',
+                message: action === 'cancel'
+                    ? '取消申请'
+                    : '停留在当前页面'
+            })
+        },
+        // application() {
+        //     const confirmText = ['1. 你的可信依赖库申请将由平安源nber审核。','2. 凡是经过安全检验确保安全的依赖库，平台会为其颁发可信依赖库证明。','3.申请提交后，如一个工作日内未得到推荐，则默认表示被拒。'];
+        //     const newDatas = [];
+        //     const h = this.$createElemnet;
+        //     for (const i in confirmText) { 
+        //         newDatas.push(h('p', null, confirmText[i]));
+        //     }
+        //     this.$confirm({
+        //         message: h('div', null, newDatas),
+        //         title: '申请可信依赖库',
+        //         distinguishCancelAndClose: true,
+        //         confirmButtonText: '确定',
+        //         cancelButtonText: '取消',
+        //     })
+        //         .then(() => {
+                    
+        //         })
+        //         .catch(action => {
+        //             this.$message({
+        //                 type: 'info',
+        //                 message: action === 'cancel'
+        //                     ? '取消申请'
+        //                     : '停留在当前页面'
+        //             })
+        //         });
+        // },
         acknowledge() {
             console.log(this.owner);
             console.log(this.visitor);
@@ -610,7 +643,13 @@ export default {
             return username ? username : this.name;
         }
     },
-
+    handleClose(done) {
+        this.$confirm('确认关闭？')
+          .then(_ => {
+            done();
+          })
+          .catch(_ => {});
+    },
     //created()：在创造之前就执行的东西，拿到跨域json数据格式
     // created() {
     //     let that=this;
@@ -623,7 +662,7 @@ export default {
 </script>
 
 
-<style>
+<style lang='less'>
 .text {
     font-size: 14px;
 }
@@ -657,7 +696,11 @@ export default {
     margin-top: 10px;
     margin-left: 10px
 }
-
+.textBtn{
+    div{
+        margin-top: 10px;
+    }
+}
 .but01 {
     background-color: orange;
 }
@@ -665,34 +708,30 @@ export default {
 .but02 {
     background-color: gray;
 }
+::v-deep {
+    .el-select {
+        margin-left: 9px;
+        .el-input.el-input--suffix {
+            .el-input__inner {
+                background: #4092ED;
+                opacity: 0.1;
+                border-radius: 4px;
+                font-size: 18px;
+                font-family: Source Han Sans CN;
+                font-weight: 400;
+                color: #4092ED;
+                height: 25px;
+                width: 65px;
 
-.select {
-    &::v-deep {
-        .el-select {
-            margin-left: 9px;
-            .el-input.el-input--suffix {
-                .el-input__inner {
-                    background: #4092ED;
-                    opacity: 0.1;
-                    border-radius: 4px;
-                    font-size: 18px;
-                    font-family: Source Han Sans CN;
-                    font-weight: 400;
-                    color: #4092ED;
-                    height: 25px;
-                    width: 65px;
-
-                }
-                .el-input__suffix-inner {
-                    position: absolute;
-                    left: -65px;
-                }
             }
-            .el-select__caret.el-input__icon.el-icon-arrow-up {
-                line-height: 30px;
+            .el-input__suffix-inner {
+                position: absolute;
+                left: -65px;
             }
+        }
+        .el-select__caret.el-input__icon.el-icon-arrow-up {
+            line-height: 30px;
         }
     }
 }
-
 </style>
