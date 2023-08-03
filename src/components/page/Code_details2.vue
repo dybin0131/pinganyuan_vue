@@ -55,7 +55,7 @@
                         </el-dropdown-menu>
                     </el-dropdown>
                     <el-button type="plain" icon="el-icon-star-off" style='margin-left: 12px;font-family: San Francisco Display;font-weight: 400;color: #353D61;'>
-                        Star  {{star_count}} </el-button>
+                       Star  {{star_count}} </el-button>
                     <el-button type="plain" icon="el-icon-share" style='font-family: San Francisco Display;font-weight: 400;color: #353D61;'>
                         Fork  {{fork_count}}</el-button>
                 </div>
@@ -80,31 +80,30 @@
             <div style='width: 68%;position: relative;background: rgba(255,255,255,0.8);border: 1px solid;border-image: linear-gradient(0deg, #FFFFFF, #FFFFFF) 1 1;
                 box-shadow: 0 5px 20px 0 rgba(183,183,195,0.07);border-radius: 10px;'>
                 <div style='margin-left: 2%;margin-right: 2%'>
-                <!--标签行-->
-                <div style='display: flex;'>
-                    <!--标签行 左侧栏目内容-->
-                    <!--
-                    <el-dropdown>
-                        <el-button type="plain">
-                            master<i class="el-icon-arrow-down el-icon--right"></i>
-                        </el-button>
-                        <el-dropdown-menu slot="dropdown">
-                            <el-dropdown-item>master</el-dropdown-item>
-                            <el-dropdown-item>branch</el-dropdown-item>
-                        </el-dropdown-menu>
-                    </el-dropdown>
-                    -->
-                    <!-- 选择用户要进行操作的分支 -->
-                    <div style='display: flex;margin-top:5px;margin-bottom: 15px'>
+                    <!--标签行-->
+                    <div style='display: flex;'>
+                        <!--标签行 左侧栏目内容-->
+                        <!--
+                        <el-dropdown>
+                            <el-button type="plain">
+                                master<i class="el-icon-arrow-down el-icon--right"></i>
+                            </el-button>
+                            <el-dropdown-menu slot="dropdown">
+                                <el-dropdown-item>master</el-dropdown-item>
+                                <el-dropdown-item>branch</el-dropdown-item>
+                            </el-dropdown-menu>
+                        </el-dropdown>
+                        -->
+                        <!-- 选择用户要进行操作的分支 -->
+                        <div style='display: flex;margin-top:5px;margin-bottom: 15px'>
                             <div style='display: flex;margin-top: 14px'>
                                 <div>
-<!--                                    <el-select v-model="branchName" placeholder="选择分支"  @change='choiceBranch(branchName)'-->
-<!--                                    style='background-color: #4092ED;opacity: 0.1;border-radius: 4px;-->
-<!--                                   font-size: 18px;font-family: Source Han Sans CN;font-weight: 400;color: #4092ED;'>-->
-                                        <el-select v-model="branchName" placeholder="选择分支"  @change='choiceBranch(branchName)'
-                                                   style='background-color: #4092ED;opacity: 0.8;border-radius: 4px;
+                                    <!--                                    <el-select v-model="branchName" placeholder="选择分支"  @change='choiceBranch(branchName)'-->
+                                    <!--                                    style='background-color: #4092ED;opacity: 0.1;border-radius: 4px;-->
+                                    <!--                                   font-size: 18px;font-family: Source Han Sans CN;font-weight: 400;color: #4092ED;'>-->
+                                    <el-select v-model="branchName" placeholder="选择分支"  @change='choiceBranch(branchName)'
+                                               style='background-color: #4092ED;opacity: 0.8;border-radius: 4px;
                                    font-size: 18px;font-family: Source Han Sans CN;font-weight: 400;color: #4092ED;'>
-
                                         <el-option
                                             v-for="item in branchOptions"
                                             :key="item.value"
@@ -121,7 +120,7 @@
                                     标签 1</div>
                             </div>
                             <!--标签行 右侧栏目内容-->
-                          <div style='display: flex;position: absolute;right: 18px;'>
+                            <div style='display: flex;position: absolute;right: 18px;'>
                                 <el-button type='text'><i class="el-icon-more-outline" style='font-family: Source Han Sans CN;font-weight: bolder;color: #4092ED;margin-left: 10px;font-size: 14px'></i>
                                     <router-link :to="{path:'/manage',query:{username:username,warehouseName:this.warehouse,starCount:this.star_count,watchCount:this.watching_count,forkCount:this.watching_count}}"
                                                  style='font-family: Source Han Sans CN;font-weight: 400;color: #4092ED;font-size: 14px'>
@@ -147,7 +146,7 @@
                                     <el-dropdown>
                                         <el-button type="text" style='margin-left: 6px;font-size: 14px;font-family: Source Han Sans CN;font-weight: 400;
                                         color: #00ABA4;line-height: 46px;'>文件</el-button>
-                                        <img src='../../assets/img/arrow-down-green.png' style='width: 10px;height: 5px;margin-left: 5px'>
+                                        <img src='../../assets/img/arrow-down-green.png' style='width: 10px;height: 5px;margin-left: 5px' />
                                         <el-dropdown-menu slot="dropdown">
                                             <el-dropdown-item>
                                                 <router-link :to="{path:'/newFile',query:{username:username,warehouseName:this.$route.query.warehouseName }}" >
@@ -183,110 +182,110 @@
                                     </el-dropdown>
                                 </div>
                             </div>
-                      </div>
-                </div>
-                <!--左侧标签行下面内容  表格数据-->
-                <div>
-                <!--表格信息_===表格数据根据用户从 选择器 里面的选择 来确定，一个分支对应一个表格-->
-                    <el-table :data = "displayData"  style="width: 100%;margin-top:8px;font-size: 16px;font-family: Source Han Sans CN;
+                        </div>
+                    </div>
+                    <!--左侧标签行下面内容  表格数据-->
+                    <div>
+                        <!--表格信息_===表格数据根据用户从 选择器 里面的选择 来确定，一个分支对应一个表格-->
+                        <el-table :data = "displayData"  style="width: 100%;margin-top:8px;font-size: 16px;font-family: Source Han Sans CN;
                     font-weight: 500;color: #353D61;">
-                        <el-table-column prop="file" width="260px "  label='File name' align="center"> </el-table-column>
-                        <el-table-column prop="prop"  width="260px " label="Submit information" align="center"></el-table-column>
-                        <el-table-column prop="time"  width='260px' label="Creation time" align="center"></el-table-column>
-<!--                        <el-table-column prop="operation" align='right' width='100px' label="Operation">-->
-<!--                            <template slot-scope="scope" style='display: flex'>-->
-<!--                                <el-button-->
-<!--                                    type="text"-->
-<!--                                    icon="el-icon-view"-->
-<!--                                    @click="handleView(scope.$index, scope.row)"-->
-<!--                                >查看</el-button>-->
-<!--                            </template>-->
-<!--                        </el-table-column>-->
-                    </el-table>
-                    <!--点赞打赏区域   已删除-->
-                </div>
+                            <el-table-column prop="file" width="260px "  label='File name' align="center"> </el-table-column>
+                            <el-table-column prop="prop"  width="260px " label="Submit information" align="center"></el-table-column>
+                            <el-table-column prop="time"  width='260px' label="Creation time" align="center"></el-table-column>
+                            <!--                        <el-table-column prop="operation" align='right' width='100px' label="Operation">-->
+                            <!--                            <template slot-scope="scope" style='display: flex'>-->
+                            <!--                                <el-button-->
+                            <!--                                    type="text"-->
+                            <!--                                    icon="el-icon-view"-->
+                            <!--                                    @click="handleView(scope.$index, scope.row)"-->
+                            <!--                                >查看</el-button>-->
+                            <!--                            </template>-->
+                            <!--                        </el-table-column>-->
+                        </el-table>
+                        <!--点赞打赏区域   已删除-->
+                    </div>
                 </div>
             </div>
             <!--右侧主体部分-->
             <div style='text-align: left;margin-left: 10px;width: 30%;background: rgba(255,255,255,0.8);border: 1px solid;
             border-image: linear-gradient(0deg, #FFFFFF, #FFFFFF) 1 1;box-shadow: 0 5px 20px 0 rgba(183,183,195,0.07);border-radius: 10px;'>
                 <div style='margin-right: 10px;margin-left: 10px;'>
-                <!--简介-->
-                <h4 style='margin-top: 27px;margin-left: 10px'>简介</h4>
-                <div style='margin-top: 15px;font-size: 15px;color: #72767b;margin-left: 10px' >{{this.$route.query.introduce}}</div>
-                <div style='margin-top: 15px;font-size: 15px;color: #72767b;margin-left: 10px' >{{this.$route.query.warehouseKeywords}}</div>
+                    <!--简介-->
+                    <h4 style='margin-top: 27px;margin-left: 10px'>简介</h4>
+                    <div style='margin-top: 15px;font-size: 15px;color: #72767b;margin-left: 10px' >{{this.$route.query.introduce}}</div>
+                    <div style='margin-top: 15px;font-size: 15px;color: #72767b;margin-left: 10px' >{{this.$route.query.warehouseKeywords}}</div>
 
-                <!--近期动态-->
-                <h4 style='margin-top: 40px;margin-left: 10px'>近期动态</h4>
-                <div style='display: block'>
-                    <div style='display: grid;margin-top:25px;margin-left: 10px'>
-                        <div v-for="(item) in recentTrends"  style='display: flex;margin-bottom: 20px'>
-                            <div >
-                                <img src='@/assets/img/user-woman.png' style='width: 50px;height: 50px' />
-                            </div>
-                            <div style='display: grid'>
-                                <div style='margin-left:20px;font-size: 16px;font-family: Source Han Sans CN;font-weight: bold;color: #353D61;'> {{item.name}} </div>
-                                <div style='display: flex'>
-                                    <div style='margin-top: 1px;margin-left:20px;font-size: 14px;font-family: Source Han Sans CN;font-weight: 500;
+                    <!--近期动态-->
+                    <h4 style='margin-top: 40px;margin-left: 10px'>近期动态</h4>
+                    <div style='display: block'>
+                        <div style='display: grid;margin-top:25px;margin-left: 10px'>
+                            <div v-for="(item) in recentTrends"  style='display: flex;margin-bottom: 20px'>
+                                <div >
+                                    <img src='@/assets/img/user-woman.png' style='width: 50px;height: 50px' />
+                                </div>
+                                <div style='display: grid'>
+                                    <div style='margin-left:20px;font-size: 16px;font-family: Source Han Sans CN;font-weight: bold;color: #353D61;'> {{item.name}} </div>
+                                    <div style='display: flex'>
+                                        <div style='margin-top: 1px;margin-left:20px;font-size: 14px;font-family: Source Han Sans CN;font-weight: 500;
                                     color: #353D61;'>{{item.trends}}</div>
-                                    <div style='margin-left: 10px;font-size: 14px;font-family: Source Han Sans CN;font-weight: 500;
+                                        <div style='margin-left: 10px;font-size: 14px;font-family: Source Han Sans CN;font-weight: 500;
                                     color: #353D61;'> {{item.time}} </div>
 
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <!--贡献者-->
-                <div style='display: block;position: relative;'>
-                    <div style='display: flex;margin-left: 10px'>
-                        <div style='display: flex'>
-                            <h4 style='margin-top: 40px;'>管理者</h4>
-                            <div style='margin-top: 30px;width: 24px;height: 17px;background: #E13131;border-radius: 5px 5px 5px 0;'>
-                                <div style='margin-left: 8px;font-family: Source Han Sans CN;font-weight: bold;color: #FFFFFF;'>{{this.manager.length}} </div>
+                    <!--贡献者-->
+                    <div style='display: block;position: relative;'>
+                        <div style='display: flex;margin-left: 10px'>
+                            <div style='display: flex'>
+                                <h4 style='margin-top: 40px;'>管理者</h4>
+                                <div style='margin-top: 30px;width: 24px;height: 17px;background: #E13131;border-radius: 5px 5px 5px 0;'>
+                                    <div style='margin-left: 8px;font-family: Source Han Sans CN;font-weight: bold;color: #FFFFFF;'>{{this.manager.length}} </div>
+                                </div>
                             </div>
-                        </div>
-<!--                        <el-button type="text" style='margin-top: 34px;margin-left:10px;font-size: 15px;color: #72767b'>({{this.manager.length}})</el-button>-->
-                        <div style='position:absolute;right: 0;'>
-                            <img src='../../assets/img/user-woman.jpg'  >
-                            <el-button type="text" style='margin-top: 30px;font-size: 15px;font-family: Source Han Sans CN;
+                            <!--el-button type="text" style='margin-top: 34px;margin-left:10px;font-size: 15px;color: #72767b'>({{this.manager.length}})</el-button>-->
+                            <div style='position:absolute;right: 0;'>
+                                <img src='../../assets/img/user-man.png'  />
+                                <el-button type="text" style='margin-top: 30px;font-size: 15px;font-family: Source Han Sans CN;
                         font-weight: 400;color: #4192ED;'>全部</el-button>
-                        </div>
-                    </div>
-
-                    <div style='display: flex;margin-top: 20px'>
-                        <div v-for="(item) in manager"  style='display: grid'>
-                            <!--
-                            <img :src="item.src" style='width: 38px;height: 38px;margin-left: 10px'>
-                            -->
-                            <div style='margin-right: 10px;width: 50px;height: 50px'>
-<!--                                <img src='../../assets/img/user-woman.jpg' >-->
-                                <img src='@/assets/img/user-woman.jpg' style='width: 50px;height: 50px'>
-<!--                                <el-avatar :style="`background:${extractColorByName(item.name)}`"> {{item.name}} </el-avatar>-->
                             </div>
                         </div>
-                    </div>
-                    <div style='display: flex'>
-                        <h4 style='margin-top: 40px;margin-left: 10px'>贡献者</h4>
-                        <div style='margin-top: 30px;width: 24px;height: 17px;background: #E13131;border-radius: 5px 5px 5px 0;'>
-                            <div style='margin-left: 8px;font-family: Source Han Sans CN;font-weight: bold;color: #FFFFFF;'>{{this.contributor.length}} </div>
-                        </div>
 
-                        <div style='position:absolute;right: 0;margin-left: 10px'>
-                            <img src='src/assets/img/all-icon.png'>
-                            <el-button type="text" style='margin-top: 30px;font-size: 15px;font-family: Source Han Sans CN;
+                        <div style='display: flex;margin-top: 20px'>
+                            <div v-for="(item) in manager"  style='display: grid'>
+                                <!--
+                                <img :src="item.src" style='width: 38px;height: 38px;margin-left: 10px'>
+                                -->
+                                <div style='margin-right: 10px;width: 50px;height: 50px'>
+                                    <!--                                <img src='../../assets/img/user-woman.jpg' >-->
+                                    <img src='@/assets/img/user-woman.png' style='width: 50px;height: 50px'/>
+                                    <!--                                <el-avatar :style="`background:${extractColorByName(item.name)}`"> {{item.name}} </el-avatar>-->
+                                </div>
+                            </div>
+                        </div>
+                        <div style='display: flex'>
+                            <h4 style='margin-top: 40px;margin-left: 10px'>贡献者</h4>
+                            <div style='margin-top: 30px;width: 24px;height: 17px;background: #E13131;border-radius: 5px 5px 5px 0;'>
+                                <div style='margin-left: 8px;font-family: Source Han Sans CN;font-weight: bold;color: #FFFFFF;'>{{this.contributor.length}} </div>
+                            </div>
+
+                            <div style='position:absolute;right: 0;margin-left: 10px'>
+                                <img src='src/assets/img/all-icon.png'/>
+                                <el-button type="text" style='margin-top: 30px;font-size: 15px;font-family: Source Han Sans CN;
                             font-weight: 400;color: #4192ED;'>全部</el-button>
+                            </div>
                         </div>
-                    </div>
-                    <div style='display: flex;margin-top: 20px'>
-                        <div v-for="(item) in contributor"  style='display: grid'>
-                            <div style='margin-right: 10px'>
-                                <img :src="'../../assets/img/user-woman.jpg'" style='height: 50px;width: 50px'/>
-<!--                                <el-avatar :style="`background:${extractColorByName(item.name)}`"> {{item.name}} </el-avatar>-->
+                        <div style='display: flex;margin-top: 20px'>
+                            <div v-for="(item) in contributor"  style='display: grid'>
+                                <div style='margin-right: 10px'>
+                                    <img src="../../assets/img/user-woman.png" style='height: 50px;width: 50px'/>
+                                    <!--                                <el-avatar :style="`background:${extractColorByName(item.name)}`"> {{item.name}} </el-avatar>-->
+                                </div>
                             </div>
                         </div>
                     </div>
-                  </div>
                 </div>
             </div>
         </div>
@@ -386,36 +385,36 @@ export default {
             }],
 
             master: [{
-                        file: 'test_user1',
-                        prop: 'add test_user1',
-                        time: '10小时前',
-                    }, {
-                        file: 'test_user2',
-                        prop: 'add test_user2',
-                        time: '1个月前',
-                    },  {
-                        file: 'README.md',
-                        prop: 'Initial commit',
-                        time: '2个月前',
-                }],
+                file: 'test_user1',
+                prop: 'add test_user1',
+                time: '10小时前',
+            }, {
+                file: 'test_user2',
+                prop: 'add test_user2',
+                time: '1个月前',
+            },  {
+                file: 'README.md',
+                prop: 'Initial commit',
+                time: '2个月前',
+            }],
 
             test: [{
-                    file: 'test_user1',
-                    prop: 'add test_user1',
-                    time: '10小时前',
-                }, {
-                    file: 'test_user2',
-                    prop: 'add test_user2',
-                    time: '1个月前',
-                }, {
-                    file: 'test_user3',
-                    prop: 'add test_user3',
-                    time: '1小时前',
-                }, {
-                    file: 'README.md',
-                    prop: 'Initial commit',
-                    time: '2个月前',
-                }],
+                file: 'test_user1',
+                prop: 'add test_user1',
+                time: '10小时前',
+            }, {
+                file: 'test_user2',
+                prop: 'add test_user2',
+                time: '1个月前',
+            }, {
+                file: 'test_user3',
+                prop: 'add test_user3',
+                time: '1小时前',
+            }, {
+                file: 'README.md',
+                prop: 'Initial commit',
+                time: '2个月前',
+            }],
             branchName: "master",      //下拉框绑定的model
             particularsDAta: {}, //展示的数据
             displayData:[{
@@ -458,11 +457,11 @@ export default {
             //      temp.push(parseInt(name[index].charCodeAt(0), 10).toString(16));
             //  }
             // return temp.slice(0, 5).join('').slice(0, 4);
-             let str = '';
-             for (let i = 0; i < name.length; i++) {
-                 str += parseInt(name[i].charCodeAt(0), 10).toString(16)
-             }
-             return '#0c' + str.slice(1, 2)
+            let str = '';
+            for (let i = 0; i < name.length; i++) {
+                str += parseInt(name[i].charCodeAt(0), 10).toString(16)
+            }
+            return '#0c' + str.slice(1, 2)
         },
 
         handleNodeClick(data) {
@@ -506,7 +505,7 @@ export default {
         //     const confirmText = ['1. 你的可信依赖库申请将由平安源nber审核。','2. 凡是经过安全检验确保安全的依赖库，平台会为其颁发可信依赖库证明。','3.申请提交后，如一个工作日内未得到推荐，则默认表示被拒。'];
         //     const newDatas = [];
         //     const h = this.$createElemnet;
-        //     for (const i in confirmText) { 
+        //     for (const i in confirmText) {
         //         newDatas.push(h('p', null, confirmText[i]));
         //     }
         //     this.$confirm({
@@ -517,7 +516,7 @@ export default {
         //         cancelButtonText: '取消',
         //     })
         //         .then(() => {
-                    
+
         //         })
         //         .catch(action => {
         //             this.$message({
@@ -620,13 +619,13 @@ export default {
         //////文件列表 对应分支 渲染
         // change事件匹配对应数据
         choiceBranch(branch) {
-                // let idx = "";
-                // branch.map((item, index) => {
-                //     if (item.name === value) {
-                //         idx = index;
-                //     }
-                // });
-                // this.particularsDAta = this.fileData.name[idx];
+            // let idx = "";
+            // branch.map((item, index) => {
+            //     if (item.name === value) {
+            //         idx = index;
+            //     }
+            // });
+            // this.particularsDAta = this.fileData.name[idx];
             console.log(branch);
             if(branch === "master"){
                 this.displayData = this.master;}
@@ -645,10 +644,10 @@ export default {
     },
     handleClose(done) {
         this.$confirm('确认关闭？')
-          .then(_ => {
-            done();
-          })
-          .catch(_ => {});
+            .then(_ => {
+                done();
+            })
+            .catch(_ => {});
     },
     //created()：在创造之前就执行的东西，拿到跨域json数据格式
     // created() {
