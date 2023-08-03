@@ -122,32 +122,15 @@ export default {
             background-color: #fff;
             .conTitle{
                 color: #353D61;
-                font-size: 20px;
+                font-size: 16px;
                 font-weight: bold;
             }
             .conText{
                 color: #353D61;
-                font-size: 16px;
+                font-size: 12px;
                 margin-top: 10px;
             }
         }
     }
 }
-.text {
-    font-size: 14px;
-}
-
-.item {
-    margin-bottom: 18px;
-}
-
-.clearfix:before,
-.clearfix:after {
-    display: table;
-    content: "";
-}
-.clearfix:after {
-    clear: both
-}
-
 </style>

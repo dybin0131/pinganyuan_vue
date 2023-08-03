@@ -1,18 +1,22 @@
 <template>
-    <div class="container" style='width: 84%;margin-left: 6%;'>
-
+    <div class="container">
         <!--表单-->
-        <el-form :label-position='labelPosition' :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm" style='font-size: 22px;font-family: "KaiTi";font-weight: bold;margin-top: 10px'>
-            <el-form-item label="文件名称" prop="name">
+        <el-form :label-position='labelPosition' :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
+            <el-form-item label="" prop="name">
                 <div style='display: flex'>
-                    <i class="el-icon-document-add" style='margin-top: 10px'></i>
-                    <el-button type="text" style='font-size: 14px;margin-left: 10px'> {{this.$route.query.username}} /
-                        {{ this.$route.query.warehouseName }}</el-button>
-                    <div style='margin-top: 2px;margin-left: 5px;margin-right: 10px'> /   </div>
-                    <el-input v-model="ruleForm.name" placeholder='填写文件名称/路径' ></el-input>
+                    <el-input v-model="ruleForm.name" placeholder='填写文件名称/路径' >
+                        <template slot="prepend">
+                            <div class="httpBox">
+                                <el-button type="text" style='font-size: 14px;margin-left: 10px'> {{this.$route.query.username}} /
+                                {{ this.$route.query.warehouseName }}</el-button>
+                                <div style='margin-top: 2px;margin-left: 5px;margin-right: 10px'> /   </div>
+                            </div>
+                        </template>
+                        <el-button slot="append" icon="el-icon-document-add"></el-button>
+                    </el-input>
                 </div>
             </el-form-item>
-            <el-form-item label="文件内容" prop="content">
+            <el-form-item label="" prop="content">
                 <el-input type='textarea' :rows='12' v-model="ruleForm.content" placeholder="请输入文件内容">
                 </el-input>
             </el-form-item>
@@ -21,17 +25,17 @@
                 </el-input>
             </el-form-item>
             <el-form-item label="扩展信息" prop="extendInfo">
-                <el-input type='textarea' v-model="ruleForm.extendInfo" placeholder="此处可填写为什么修改，做了什么修改，以及开发的思路等更加详细的提交信息，（相当于Git Commit message的body）">
+                <el-input type='textarea' :rows="5" v-model="ruleForm.extendInfo" placeholder="此处可填写为什么修改，做了什么修改，以及开发的思路等更加详细的提交信息，（相当于Git Commit message的body）">
                 </el-input>
             </el-form-item>
             <el-form-item label="目标分支" prop="targetBrunch">
                 <el-input v-model="ruleForm.targetBrunch" placeholder='填写目标分支'></el-input>
             </el-form-item>
-            <el-form-item>
-                <el-button type="warning" @click="submitForm('ruleForm')">
+            <el-form-item class="btnBox">
+                <el-button type="primary" @click="submitForm('ruleForm')">
                     <router-link to="/codedetails">提交</router-link>
                 </el-button>
-                <el-button @click="resetForm('ruleForm')">重置</el-button>
+                <el-button type="primary" plain @click="resetForm('ruleForm')">重置</el-button>
             </el-form-item>
         </el-form>
 
@@ -137,7 +141,36 @@ export default {
 };
 </script>
 
-<style scoped>
-
-
+<style lang="less" scoped>
+.container{
+    background: rgba(255, 255, 255, 0.342);
+    .demo-ruleForm{
+        font-size: 22px;
+        font-weight: bold;
+        margin-top: 10px;
+        .httpBox{
+            display: flex;
+        }
+    }
+    ::v-deep{
+        .el-input-group__append, .el-input-group__prepend{
+            background: #fff;
+        }
+        .el-button--small{
+            color: #4092ED;
+            font-size: 18px;
+        }
+        .btnBox .el-button{
+            width: 100px;
+        }
+        .el-button--primary a{
+            color: #fff;
+            font-size: 14px;
+        }
+        .is-plain span{
+            color: #4092ED;
+            font-size: 14px;
+        }
+    }
+}
 </style>

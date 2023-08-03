@@ -1,22 +1,26 @@
 <template>
-<div style='margin-top: 60px;margin-left:20%; width:60%;position: center'>
-    <h2>直接邀请用户</h2>
-    <div style='display: grid;margin-top: 30px' >
-        权限
-        <el-select v-model="userRight" placeholder="请选择">
-            <el-option
-                v-for="item in options"
-                :key="item.value"
-                :label="item.label"
-                :value="item.value">
-            </el-option>
-        </el-select>
+    <div class="addMember">
+        <div class="title">直接邀请用户</div>
+        <div class="formBox">
+            <div class="formTitle">权限</div>
+            <el-select v-model="userRight" placeholder="请选择">
+                <el-option
+                    v-for="item in options"
+                    :key="item.value"
+                    :label="item.label"
+                    :value="item.value">
+                </el-option>
+            </el-select>
+            <div class="formTitle">  平安源用户</div>
+            <div class="mailbox">
+                <el-input v-model="input" placeholder="请输入完整的邮箱地址"></el-input>
+                <div class="mailColor"><i class="el-icon-circle-check"></i> 已发送邀请</div>
+            </div>
+        </div>
+        <div class="btnBox">
+            <el-button type="primary" @click="invite">邀请</el-button>
+        </div>
     </div>
-
-    <div style='margin-top: 30px'>  平安源用户</div>
-    <el-input v-model="input" placeholder="请输入完整的邮箱地址" style='margin-top: 10px'></el-input>
-    <el-button type='warning' style='margin-top: 20px'  @click="invite">邀请</el-button>
-</div>
 </template>
 
 <script>
@@ -62,6 +66,43 @@ export default {
 </script>
 
 
+<style lang="less">
+.addMember{
+    width:96%;
+    padding: 20px;
+    margin-top: 10px;
+    border-radius: 10px;
+    background: #ffffffe2;
+    .title{
+        font-size: 18px;
+        color: #353D61;
+        font-weight: bold;
+    }
+    .formBox{
+        margin-top: 30px;
+        .formTitle{
+            font-size: 14px;
+            font-weight: bold;
+            margin: 10px 0;
+            color: #353D61;
+        }
+        .mailbox{
+            display: flex;
+            align-items: center;
+            .mailColor{
+                font-size: 14px;
+                color: #00ABA4;
+                margin-left: 20px;
+            }
+        }
+    }
+    .btnBox{
+        margin-top: 20px;
+    }
+}
+</style>
 <style scoped>
-
+.formBox >>> .el-color-picker__icon, .el-input, .el-textarea{
+    width: 30%;
+}
 </style>

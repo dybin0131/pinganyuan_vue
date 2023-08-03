@@ -195,6 +195,24 @@ export default new Router({
                     meta: { title: '没有权限' ,roles: ['user', 'admin','user1','user2','user3'],}
                 },
                 {
+                    // 申请Pull Requests
+                    path: '/pullWarehouse',
+                    component: () => import(/* webpackChunkName: "404" */ '../components/page/pullRequests/pullWarehouse.vue'),
+                    meta: { title: '申请Pull Requests' ,roles: ['user', 'admin','user1','user2','user3'],}
+                },
+                {
+                    // 合并Pull Requests
+                    path: '/pullMerge',
+                    component: () => import(/* webpackChunkName: "404" */ '../components/page/pullRequests/pullMerge.vue'),
+                    meta: { title: '合并Pull Requests' ,roles: ['user', 'admin','user1','user2','user3'],}
+                },
+                {
+                    // 审核Pull Requests
+                    path: '/pullProcess',
+                    component: () => import(/* webpackChunkName: "404" */ '../components/page/pullRequests/pullProcess.vue'),
+                    meta: { title: '审核Pull Requests' ,roles: ['user', 'admin','user1','user2','user3'],}
+                },
+                {
                     path: '/search',
                     component: () => import(/* webpackChunkName: "donate" */ '../components/page/search.vue'),
                     meta: { title: 'search' ,roles: ['user', 'admin','user1','user2','user3'],}
