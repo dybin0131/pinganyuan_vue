@@ -96,14 +96,15 @@ export default {
                         },
                         {
                             icon: 'el-icon-wallet',
-                            index: 'code',
+                            index: 'editor',
                             title: '我活跃的仓库2',
                         },
                     ]
                 },
                 {
                     icon: 'el-icon-office-building',
-                    index: 'tag',//未设置，待修改
+                    //index: 'tag',//未设置，待修改
+                    index: 'codeview',//未设置，待修改
                     title: '动态',
                 },
                 {
