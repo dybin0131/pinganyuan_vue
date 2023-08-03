@@ -39,6 +39,7 @@
 </template>
 
 <script>
+import { login } from '@/api/index';
 export default {
     name:"login",
     data: function() {
@@ -57,9 +58,16 @@ export default {
         submitForm() {
             this.$refs.login.validate(valid => {
                 if (valid) {
-                    this.$message.success('登录成功');
-                    localStorage.setItem('ms_username', this.param.username);
-                    this.$router.push('/');
+                    login(this.param).then(res=>{
+                        if (res==1) {
+                            this.$message.success('登录成功');
+                            localStorage.setItem('ms_username', this.param.username);
+                            this.$router.push('/');
+                        }else{
+                            this.$message.error('登录失败');
+                        }
+                    })
+                    
                 } else {
                     this.$message.error('请输入账号和密码');
                     console.log('error submit!!');

@@ -9,18 +9,21 @@
                         <el-input v-model="form.username" placeholder="用户名" autocomplete="off"></el-input>
                     </el-form-item>
                     <el-form-item>
+                        <el-input v-model="form.phone" placeholder="手机号" autocomplete="off"></el-input>
+                    </el-form-item>
+                    <el-form-item>
                         <el-input v-model="form.email" placeholder="邮箱" autocomplete="off"></el-input>
                     </el-form-item>
                     <el-form-item>
                         <el-input v-model="form.password" placeholder="请输入密码" autocomplete="off" show-password ></el-input>
                     </el-form-item>
                     <el-form-item>
-                        <el-input v-model="form.password2" placeholder="请再次输入密码" autocomplete="off" show-password ></el-input>
+                        <el-input v-model="password2" placeholder="请再次输入密码" autocomplete="off" show-password ></el-input>
                     </el-form-item>
                     <el-form-item>
-                        <el-input v-model="form.address" placeholder="请输入钱包地址（选填）" autocomplete="off"></el-input>
+                        <el-input v-model="address" placeholder="请输入钱包地址（选填）" autocomplete="off"></el-input>
                     </el-form-item>
-                    <el-checkbox v-model="form.checked">我已阅读并同意使用条款</el-checkbox>
+                    <el-checkbox v-model="checked">我已阅读并同意使用条款</el-checkbox>
                     <el-form-item style="margin: 10px 0; text-align: right">
                         <div style='display: flex'>
                             <el-button type="text"  @click="toLogin">已有账号？点此登陆</el-button>
@@ -36,6 +39,7 @@
 </template>
 
 <script>
+import { registers } from '@/api/index';
 export default {
     name:"register",
     data: function() {
@@ -44,23 +48,32 @@ export default {
                 username: '',
                 email: '',
                 password: '',
-                password2: '',
-                address: '',
-                form: ''
+                phone: '',
             },
+            checked: false,
+            address: '',
+            password2: '',
             rules: {
                 username: [{ required: true, message: '请输入用户名', trigger: 'blur' }],
                 password: [{ required: true, message: '请输入密码', trigger: 'blur' }],
             },
         };
     },
+    mounted() {
+    },
     methods: {
         register() {
             this.$refs.register.validate(valid => {
                 if (valid) {
-                    this.$message.success('注册成功');
-                    localStorage.setItem('ms_username', this.form.username);
-                    this.$router.push('/login');
+                    registers(this.form).then(res=>{
+                        if (res==1) {
+                            this.$message.success('注册成功');
+                            localStorage.setItem('ms_username', this.form.username);
+                            this.$router.push('/login');
+                        }else{
+                            this.$message.error('注册失败');
+                        }
+                    })
                 } else {
                     this.$message.error('请重新输入用户名和密码');
                     console.log('error submit!!');
