@@ -1,45 +1,45 @@
 <template>
     <div class="login-wrap">
         <div class="ms-login">
-            <div class="ms-title">DecentHub</div>
-            <el-form :model="param" :rules="rules" ref="login" label-width="0px" class="ms-content">
-                <!--用户名-->
-                <el-form-item prop="username">
-                    <el-input v-model="param.username" placeholder="username">
-                        <el-button slot="prepend" icon="el-icon-lx-people"></el-button>
-                    </el-input>
-                </el-form-item>
-                <!--密码-->
-                <el-form-item prop="password">
-                    <el-input
-                        type="password"
-                        placeholder="password"
-                        v-model="param.password"
-                        @keyup.enter.native="submitForm()"
-                    >
-                        <el-button slot="prepend" icon="el-icon-lx-lock"></el-button>
-                    </el-input>
-                </el-form-item>
-                <!--按钮-->
-                <div>
-                    <div class="login-btn">
-                    <el-button type="primary" @click="submitForm()">登录</el-button>
+            <img class="logLeft" src="../../assets/img/logLeft.png" alt="">
+            <div class="logRight">
+                <div class="ms-title">账号登陆</div>
+                <el-form :model="param" :rules="rules" ref="login" label-width="0px" class="ms-content">
+                    <!--用户名-->
+                    <el-form-item prop="username">
+                        <el-input v-model="param.username" placeholder="username">
+                            <el-button slot="prepend" icon="el-icon-lx-people"></el-button>
+                        </el-input>
+                    </el-form-item>
+                    <!--密码-->
+                    <el-form-item prop="password">
+                        <el-input
+                            type="password"
+                            placeholder="password"
+                            v-model="param.password"
+                            @keyup.enter.native="submitForm()"
+                        >
+                            <el-button slot="prepend" icon="el-icon-lx-lock"></el-button>
+                        </el-input>
+                    </el-form-item>
+                    <div class="btnBox">
+                        <el-button type="text" @click="resetPsd">忘记密码 ?</el-button>
                     </div>
+                    <!--按钮-->
                     <div class="login-btn">
-                        <el-button type="warning" @click="goToRegister()">注册</el-button>
+                        <el-button type="primary" @click="submitForm()">登录</el-button>
                     </div>
-                </div>
-                <div style='display: flex'>
-                    <p class="login-tips">还没有账号？注册一个吧</p>
-                    <el-button type="text" @click="resetPsd" style='margin-left: 30px;color: darkcyan'>已有账号，忘记密码？</el-button>
-                </div>
-
-            </el-form>
+                    <div class="registerBtn">
+                        没有账号？<span @click="goToRegister()">去注册！</span>
+                    </div>
+                </el-form>
+            </div>
         </div>
     </div>
 </template>
 
 <script>
+import { login } from '@/api/index';
 export default {
     name:"login",
     data: function() {
@@ -58,9 +58,16 @@ export default {
         submitForm() {
             this.$refs.login.validate(valid => {
                 if (valid) {
-                    this.$message.success('登录成功');
-                    localStorage.setItem('ms_username', this.param.username);
-                    this.$router.push('/');
+                    login(this.param).then(res=>{
+                        if (res===1) {
+                            this.$message.success('登录成功');
+                            localStorage.setItem('ms_username', this.param.username);
+                            this.$router.push('/');
+                        }else{
+                            this.$message.error('登录失败');
+                        }
+                    })
+
                 } else {
                     this.$message.error('请输入账号和密码');
                     console.log('error submit!!');
@@ -78,46 +85,61 @@ export default {
 };
 </script>
 
-<style scoped>
+<style lang="less" scoped>
 .login-wrap {
     position: relative;
     width: 100%;
     height: 100%;
-    background-image: url(../../assets/img/login-bg.jpg);
+    background: url('../../assets/img/logImg.png') no-repeat;
     background-size: 100%;
-}
-.ms-title {
-    width: 100%;
-    line-height: 50px;
-    text-align: center;
-    font-size: 20px;
-    color: #fff;
-    border-bottom: 1px solid #ddd;
-}
-.ms-login {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    width: 350px;
-    margin: -190px 0 0 -175px;
-    border-radius: 5px;
-    background: rgba(255, 255, 255, 0.3);
-    overflow: hidden;
-}
-.ms-content {
-    padding: 30px 30px;
-}
-.login-btn {
-    text-align: center;
-}
-.login-btn button {
-    width: 100%;
-    height: 36px;
-    margin-bottom: 10px;
-}
-.login-tips {
-    font-size: 12px;
-    line-height: 30px;
-    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .ms-login {
+        width: 60%;
+        border-radius: 10px;
+        background: #fff;
+        overflow: hidden;
+        display: flex;
+        padding: 20px;
+        .logLeft{
+            width: 60%;
+        }
+        .logRight{
+            flex: 1;
+            .ms-title {
+                width: 100%;
+                line-height: 50px;
+                text-align: center;
+                color: #353D61;
+                font-weight: bold;
+                font-size: 28px;
+            }
+            .ms-content {
+                padding: 30px 30px;
+            }
+            .btnBox{
+                text-align: right;
+            }
+            .login-btn {
+                text-align: center;
+                button {
+                    width: 100%;
+                    height: 40px;
+                    margin: 6px 0;
+                    font-size: 16px;
+                }
+            }
+            .registerBtn{
+                text-align: center;
+                font-size: 14px;
+                margin-top: 10px;
+                span{
+                    color: #4092ED;
+                    cursor: pointer;
+                }
+            }
+        }
+    }
 }
 </style>

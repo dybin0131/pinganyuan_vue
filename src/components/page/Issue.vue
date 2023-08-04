@@ -1,20 +1,23 @@
 <template>
-    <div style='width: 84%;margin-left: 8%;'>
+    <div style='margin-left: 20px;'>
         <!--顶部-->
         <div style='display: block'>
             <!--标题路径-->
             <div style='display: flex;position: relative'>
-                <div style='display: flex;margin-top: 60px'>
-                    <el-tag  v-if="this.$route.query.isCredible>=60" type='success'>可信</el-tag>
-                    <el-tag  v-else-if='this.$route.query.isCredible<60' type='danger'>不可信</el-tag>
-
+                <div style='display: flex;margin-top: 20px'>
+                    <el-tag v-if="this.$route.query.isCredible>=60" type='success'
+                            style='width: 55px;height: 24px;background: rgba(0,171,164,0.1);border: 1px solid #00ABA4;
+                             border-radius: 4px;margin-top: 4px'>可信</el-tag>
+                    <el-tag  v-else-if='this.$route.query.isCredible<60' type='danger'
+                             style='width: 55px;height: 24px;background: rgba(237,64,64,0.1);border: 1px solid #ED4040;
+                         border-radius: 4px;margin-top: 4px'>不可信</el-tag>
                     <el-breadcrumb separator="/" style='margin-top:5px;margin-left: 10px;font-size: 23px'>
                         <el-breadcrumb-item :to="{ path: '/' }">{{this.$route.query.username}}</el-breadcrumb-item>
                         <el-breadcrumb-item><a href="/">{{this.$route.query.warehouseName}}</a></el-breadcrumb-item>
                     </el-breadcrumb>
                 </div>
                 <!--右侧辅助工具栏-->
-                <div style='position: absolute;right: 0;display: flex;margin-top: 60px'>
+                <div style='position: absolute;right: 0;display: flex;margin-top: 20px'>
                     <el-dropdown size="small" split-button type="plain">
                         <i class='el-icon-view'></i>
                         Watching   {{watching_count}}
@@ -32,52 +35,127 @@
         </div>
 
     <!--分页-->
-    <el-tabs v-model="activeName" @tab-click="handleClick" >
+    <el-tabs v-model="activeName"   style='margin-top: 10px;'>
         <!--Issue-->
-        <el-tab-pane label="Issue" name="first">
+        <el-tab-pane label="Issue" name="first" style='margin-top: 10px'>
             <el-container>
-                <el-main   style='position: relative'>
-                    <el-form ref="form" :model="form" label-width="80px" >
-                        <h3 style='margin-top: 10px'>新建Issue</h3>
-                        <el-form-item label="Issue"  style='margin-top: 10px'>
+                <div style='width: 67%;background: rgba(255,255,255,0.6);border: 1px solid;border-image: linear-gradient(0deg, #FFFFFF, #FFFFFF) 1 1;
+                    box-shadow: 0 5px 20px 0 rgba(183,183,195,0.07);border-radius: 10px;'>
+                    <el-form ref="form" :model="form" style='margin-left: 15px;margin-right: 20px'>
+                        <div style='margin-top: 18px;font-size: 17px;font-family: Source Han Sans CN;font-weight: bold;color: #353D61;'>
+                            新建Issue</div>
+                        <el-form-item   style='margin-top: 10px;width: 760px;'>
                             <el-input v-model="form.name"></el-input>
                         </el-form-item>
-                        <el-form-item label="">
-                            <el-input type="textarea" :rows='10' v-model="form.desc"></el-input>
-                        </el-form-item>
-                        <el-form-item>
-                            <el-button type="warning" @click="onSubmit">立即创建</el-button>
-                            <el-button>取消</el-button>
-                        </el-form-item>
-                    </el-form>
-                </el-main>
-                    <el-aside width="30%" style='position: relative;'>
-                        <el-form ref="form" :model="form" label-width="80px" style='margin-top: 60px'>
-                        <el-form-item label="负责人">
-                            <el-select v-model="form.manager" placeholder="请选择活动区域">
-                                <el-option label="1" value="shanghai"></el-option>
-                                <el-option label="2" value="beijing"></el-option>
-                            </el-select>
-                        </el-form-item>
-                        <el-form-item label="标签">
-                            <el-input v-model="form.label"></el-input>
-                        </el-form-item>
-                        <el-form-item label="时间">
-                            <el-col :span="11">
-                                <el-date-picker type="date" placeholder="选择日期" v-model="form.date1" style="width: 100%;"></el-date-picker>
-                            </el-col>
-                            <el-col class="line" :span="2">-</el-col>
-                            <el-col :span="11">
-                                <el-date-picker type="date" placeholder="选择日期" v-model="form.date2" style="width: 100%;"></el-date-picker>
-                            </el-col>
-                        </el-form-item>
+                        <div style='width: 760px;background: #FFFFFF;border: 1px solid;border-image: linear-gradient(0deg, #FFFFFF, #FFFFFF) 1 1;
+                    box-shadow: 0 5px 20px 0 rgba(183,183,195,0.07);border-radius: 10px;padding-right: 15px;padding-top: 10px'>
+                            <el-form-item >
+                                <div  style='grid-row: 1;font-size: 18px;background-color: #e9e9eb;border-radius: 8px;height: 30px;
+                                        margin-left: 15px;margin-top: 5px'>
+                                    <div style='display: flex;color: black;padding-top: 5px;padding-left: 5px'>
+                                        <i class='el-icon-setting' style='margin-right: 13px'></i>
+                                        <i class='el-icon-picture-outline-round' style='margin-right: 13px'></i>
+                                        <img src='../../assets/img/help.png' style='margin-right: 13px;width: 18px;height: 18px'/>
+                                        <img src='../../assets/img/share.png' style='margin-right: 13px;width: 18px;height: 18px'/>
+                                        <i class='el-icon-view' style='margin-right: 13px'></i>
+                                        <i class='el-icon-link' style='margin-right: 13px'></i>
+                                        <i class='el-icon-user' style='margin-right: 13px'></i>
+                                        <i class='el-icon-full-screen' style='margin-right: 13px'></i>
+                                    </div>
+                                </div>
+                            </el-form-item >
+                            <el-form-item style='padding-right: 15px'>
+                                <el-input type="textarea" :rows='10' v-model="form.desc" style='margin-left: 15px;margin-top: 5px;margin-right: 5px'></el-input>
+                            </el-form-item>
+                        </div>
+                            <el-form-item>
+                                <el-button type="primary" @click="onSubmit" style='margin-left: 5px;margin-top: 10px;'>创建</el-button>
+                            </el-form-item>
 
+                    </el-form>
+                    </div>
+
+                    <el-aside width="31%" style='margin-left:10px;margin-right:10px;background: rgba(255,255,255,0.8);border: 1px solid;border-image: linear-gradient(0deg, #FFFFFF, #FFFFFF) 1 1;
+                    box-shadow: 0 5px 20px 0 rgba(183,183,195,0.07);border-radius: 10px;'>
+                        <el-form ref="form" :model="form"  style='margin-top: 20px;margin-left: 16px'>
+                            <!--负责人-->
+                            <el-form-item style='display: block;'>
+                                <div style='display: flex;margin-top: 5px;position: relative;width: 100%'>
+                                    <div style='font-size: 17px;font-family: Source Han Sans CN;font-weight: bold;color: #353D61;' >
+                                        负责人</div>
+                                    <el-button type='text' style='font-size: 14px;color: #4092ED;position: absolute;right:14px'
+                                               @click='changeDisable1'>
+                                        <i class='el-icon-edit-outline' ></i>编辑
+                                    </el-button>
+                                </div>
+                                <div style='display: flex;margin-top: 10px'>
+                                    <el-input placeholder="未设置" v-model="form.manager" :disabled="isDisabled1" style='width: 350px'>
+                                    </el-input>
+                                </div>
+                            </el-form-item>
+
+                            <!--标签-->
+                            <el-form-item style='display: block;'>
+                                <div style='display: flex;margin-top: 20px;position: relative;width: 100%'>
+                                    <div style='font-size: 17px;font-family: Source Han Sans CN;font-weight: bold;color: #353D61;' >
+                                        标签</div>
+                                    <el-button type='text' style='font-size: 14px;color: #4092ED;position: absolute;right:14px'
+                                               @click='changeDisable2'>
+                                        <i class='el-icon-edit-outline' ></i>编辑
+                                    </el-button>
+                                </div>
+                                <div style='display: flex;margin-top: 10px'>
+                                    <el-input placeholder="未设置" v-model="form.label" :disabled="isDisabled2" style='width: 350px'>
+                                    </el-input>
+                                </div>
+                            </el-form-item>
+
+                            <!--开始日期-截止日期-->
+                            <el-form-item style='display: block;'>
+                                <div style='display: flex;margin-top: 20px;position: relative;width: 100%'>
+                                    <div style='font-size: 17px;font-family: Source Han Sans CN;font-weight: bold;color: #353D61;' >
+                                        开始日期-截止日期</div>
+                                </div>
+                                <div style='display: flex;margin-top: 10px'>
+                                    <div class="block">
+                                        <el-date-picker
+                                            v-model="form.StartEndDate"
+                                            type="daterange"
+                                            range-separator="至"
+                                            start-placeholder="开始日期"
+                                            end-placeholder="结束日期">
+                                        </el-date-picker>
+                                    </div>
+                                </div>
+                            </el-form-item>
                         </el-form>
                     </el-aside>
 
-            </el-container>
+<!--                        <el-form-item label="负责人">-->
+<!--                            <el-select v-model="form.manager" placeholder="请选择活动区域">-->
+<!--                                <el-option label="1" value="shanghai"></el-option>-->
+<!--                                <el-option label="2" value="beijing"></el-option>-->
+<!--                            </el-select>-->
+<!--                        </el-form-item>-->
+<!--                        <el-form-item label="标签">-->
+<!--                            <el-input v-model="form.label"></el-input>-->
+<!--                        </el-form-item>-->
+<!--                        <el-form-item label="时间">-->
+<!--                            <el-col :span="11">-->
+<!--                                <el-date-picker type="date" placeholder="选择日期" v-model="form.date1" style="width: 100%;"></el-date-picker>-->
+<!--                            </el-col>-->
+<!--                            <el-col class="line" :span="2">-</el-col>-->
+<!--                            <el-col :span="11">-->
+<!--                                <el-date-picker type="date" placeholder="选择日期" v-model="form.date2" style="width: 100%;"></el-date-picker>-->
+<!--                            </el-col>-->
+<!--                        </el-form-item>-->
+<!--                        -->
 
+
+            </el-container>
         </el-tab-pane>
+
+
 
         <!--详情-->
         <el-tab-pane label="详情" name="second">
@@ -123,7 +201,6 @@
                         </div>
                     </div>
                     <!--评论  功能选择栏-->
-
                     <div style='display: flex;margin-top: 30px'>
                         <div >
                             <div class="block" style='margin-left: 20px'>
@@ -397,6 +474,8 @@ export default {
     data() {
         return {
             value1:'',
+            isDisabled1:true,
+            isDisabled2:true,
             activeName:'first',
             issueErea:'',
             inputTitle: '',
@@ -424,6 +503,7 @@ export default {
                 date1: '',
                 date2: '',
                 desc: '',
+                StartEndDate:'',
             }
 
 
@@ -431,6 +511,12 @@ export default {
         }
     },
     methods:{
+        changeDisable1(){
+            this.isDisabled1=!this.isDisabled1;
+        },
+        changeDisable2(){
+            this.isDisabled2=!this.isDisabled2;
+        },
         createIss() {
             this.$router.push({path: '/codedetails'});
             console.log('creat successfully!');

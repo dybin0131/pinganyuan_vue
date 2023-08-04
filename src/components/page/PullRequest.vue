@@ -128,11 +128,11 @@ export default {
         },
         onSubmit() {
             this.$router.push({
-                path: '/pullrequestsdetail/:owner/:visitor',
+                path: '/pullrequestsdetail',
                 query:{isCredible:this.isCredible, source:this.prForm.source, aim:this.prForm.aim,
                     username:this.$route.query.username, warehouseName:this.$route.query.warehouseName,
                     title:this.prForm.title, describe:this.prForm.describe },
-                params:{owner:this.username, visitor:this.username}});
+               });
             console.log('submit!');
         }
     }

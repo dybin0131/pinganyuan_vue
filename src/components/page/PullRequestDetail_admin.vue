@@ -35,7 +35,7 @@
                 </el-breadcrumb>
             </div>
         </div>
-            <!--主体部分-->
+        <!--主体部分-->
         <div>
             <el-container>
                 <el-main  style='position: relative'>
@@ -65,31 +65,11 @@
                         <div style='display: flex;margin-top:14px'>
                             <div style='margin-top: 7px;margin-left:5px;font-size: 13px;color: #72767b;display: flex' >
                                 <div style='margin-top: 0'>
-<!--                                <el-avatar :style="`background:${extractColorByName(this.user)},width:30px,height:30px`">{{this.user}}</el-avatar>-->
+                                    <!--                                <el-avatar :style="`background:${extractColorByName(this.user)},width:30px,height:30px`">{{this.user}}</el-avatar>-->
                                     <img src='../../assets/img/user-woman.png' style='width: 40px;height:40px'/>
                                 </div>
                                 <div style='margin-top: 13px;margin-left: 7px'>  {{this.user}} 创建 </div>
                             </div>
-                        </div>
-
-                        <!--此部分不做演示，暂时未做功能-->
-                        <div style='display: flex;position: absolute;right: 20px;margin-top: 9px'>
-                            <el-button icon="el-icon-edit">编辑</el-button>
-                            <el-dropdown>
-                                <el-button type="warning" style='margin-left: 10px'>克隆/下载<i class="el-icon-arrow-down el-icon--right"></i></el-button>
-                                <el-dropdown-menu slot="dropdown">
-                                    <el-dropdown-item style='display: block'>HTTP
-                                        <div style='display: flex'>
-                                            <el-input type="text" readonly :value="http_text" ref="textInput"></el-input>
-                                            <el-button @click="handleCopyClick">复制</el-button>
-                                        </div>
-                                    </el-dropdown-item>
-                                    <el-dropdown-item>SSH</el-dropdown-item>
-                                    <el-dropdown-item>SVN</el-dropdown-item>
-                                    <el-dropdown-item>SSH+SVN</el-dropdown-item>
-                                    <el-dropdown-item> <i class='el-icon-download'></i> 下载ZIP</el-dropdown-item>
-                                </el-dropdown-menu>
-                            </el-dropdown>
                         </div>
                     </div>
                     <div style='font-size: 14px;margin-top: 30px'>{{ this.$route.query.describe }}</div>
@@ -107,73 +87,70 @@
                             </div>
                         </div>
                     </div>
-<!--                    <el-table-->
-<!--                        :data="tableData"-->
-<!--                        style="width: 100%;margin-top: 20px">-->
-<!--                        <el-table-column prop="category" label="类型" width="260"></el-table-column>-->
-<!--                        <el-table-column prop='worker' label="指派人员" width="260">-->
-<!--                            &lt;!&ndash;-->
-<!--                            <template slot-scope="scope">-->
-<!--                                <div v-if="scope.$index === 0">-->
-<!--                                    <div v-for="user in selectedExaminers" >-->
-<!--                                        <div style='width: 30px; height: 30px;display: grid;margin-right: 20px'>-->
-<!--                                            <el-avatar  :style="`background:${extractColorByName(user)}`" :size='"small"'> {{user}} </el-avatar>-->
-<!--                                        </div>-->
-<!--                                    </div>-->
-<!--                                </div>-->
-<!--                                <div v-if="scope.$index === 1">-->
-<!--                                    <div  v-for="user in selectedTesters" >-->
-<!--                                        <div style='width: 30px; height: 30px;display: grid;margin-right: 20px'>-->
-<!--                                            <el-avatar  :style="`background:${extractColorByName(user)}`" :size='"small"'> {{user}} </el-avatar>-->
-<!--                                        </div>-->
-<!--                                    </div>-->
-<!--                                </div>-->
-<!--                            </template>-->
-<!--                            &ndash;&gt;-->
-<!--                        </el-table-column>-->
-<!--                        <el-table-column prop="status" label="状态">-->
-<!--                            <template slot-scope="scope">-->
-<!--                                <i class='el-icon-circle-check' style='color: green'></i>-->
-<!--                                已完成（{{this.selectedTesters.length}}/1）-->
-<!--                            </template>-->
-<!--                        </el-table-column>-->
-<!--                    </el-table>-->
+                    <!--                    <el-table-->
+                    <!--                        :data="tableData"-->
+                    <!--                        style="width: 100%;margin-top: 20px">-->
+                    <!--                        <el-table-column prop="category" label="类型" width="260"></el-table-column>-->
+                    <!--                        <el-table-column prop='worker' label="指派人员" width="260">-->
+                    <!--                            &lt;!&ndash;-->
+                    <!--                            <template slot-scope="scope">-->
+                    <!--                                <div v-if="scope.$index === 0">-->
+                    <!--                                    <div v-for="user in selectedExaminers" >-->
+                    <!--                                        <div style='width: 30px; height: 30px;display: grid;margin-right: 20px'>-->
+                    <!--                                            <el-avatar  :style="`background:${extractColorByName(user)}`" :size='"small"'> {{user}} </el-avatar>-->
+                    <!--                                        </div>-->
+                    <!--                                    </div>-->
+                    <!--                                </div>-->
+                    <!--                                <div v-if="scope.$index === 1">-->
+                    <!--                                    <div  v-for="user in selectedTesters" >-->
+                    <!--                                        <div style='width: 30px; height: 30px;display: grid;margin-right: 20px'>-->
+                    <!--                                            <el-avatar  :style="`background:${extractColorByName(user)}`" :size='"small"'> {{user}} </el-avatar>-->
+                    <!--                                        </div>-->
+                    <!--                                    </div>-->
+                    <!--                                </div>-->
+                    <!--                            </template>-->
+                    <!--                            &ndash;&gt;-->
+                    <!--                        </el-table-column>-->
+                    <!--                        <el-table-column prop="status" label="状态">-->
+                    <!--                            <template slot-scope="scope">-->
+                    <!--                                <i class='el-icon-circle-check' style='color: green'></i>-->
+                    <!--                                已完成（{{this.selectedTesters.length}}/1）-->
+                    <!--                            </template>-->
+                    <!--                        </el-table-column>-->
+                    <!--                    </el-table>-->
                     <!--未通过时，提交者-->
-                    <div v-if='this.isCheckPr===false'>
-                        <div style='display: flex;margin-top: 10px;margin-left: 10px'>
-                            <h4 style='margin-top: 3px' >
-                                此 Pull Request 暂不能合并，一些审核尚未通过</h4>
-                        </div>
-                    </div>
-                    <el-button type='primary'style='margin-top: 10px'  @click='submit'>提交</el-button>
+<!--                    <div v-if='this.isCheckPr===false'>-->
+<!--                        <div style='display: flex;margin-top: 10px;margin-left: 10px'>-->
+<!--                            <h4 style='margin-top: 3px' >-->
+<!--                                此 Pull Request 暂不能合并，一些审核尚未通过</h4>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <el-button type='primary' style='margin-top: 10px'  @click='submit'>提交</el-button>-->
                     <!--未通过时的界面------ 审核者  -->
-                    <div v-if='this.isCheckPr===true'>
+                    <div style='display: grid'>
                         <div style='display: flex;margin-top: 10px;margin-left: 10px'>
                             <h4 style='margin-top: 3px' >需要您进行当前 Pull Request 的一些审核工作</h4>
                             <div style='display: flex;position: absolute;right: 20px;'>
                                 <div v-if="(isExaminationPassed===true)&&(isTestPassed===true)">
                                     <el-button type="text" @click="open" style='height: 5px;color: #00a854;margin-right: 20px'>审核测试完成</el-button>
                                 </div>
-                                <el-button v-if='isExaminationPassed===true' type="warning" @click="PassExamination">取消审查</el-button>
-                                <el-button v-if='isExaminationPassed===false' type="warning" @click="PassExamination">审查通过</el-button>
-                                <el-button v-if='isTestPassed===true'  type="warning" @click="PassTest">取消测试</el-button>
-                                <el-button v-if='isTestPassed===false'  type="warning" @click="PassTest">测试通过</el-button>
+                                <el-button v-if='isExaminationPassed===true' type="primary" @click="PassExamination">取消审查</el-button>
+                                <el-button v-if='isExaminationPassed===false' type="primary" @click="PassExamination">审查通过</el-button>
+                                <el-button v-if='isTestPassed===true'  type="primary" @click="PassTest">取消测试</el-button>
+                                <el-button v-if='isTestPassed===false'  type="primary" @click="PassTest">测试通过</el-button>
                             </div>
                         </div>
                         <!---合并分支--->
                         <div v-if="(isExaminationPassed===true)&&(isTestPassed===true)">
-                        <el-tag  style='font-size: 13px;height: 35px;width:100%;margin-top:20px;background-color: #a4da89;color: #303133'>
-                            源分支与目标分支没有冲突 可自动合并
-                            <el-dropdown split-button type='success' @click="handleMergeClick" style='position: absolute;right: 20px;' >
-                                合并
-                                <el-dropdown-menu slot="dropdown">
-                                    <el-dropdown-item>1</el-dropdown-item>
-                                    <el-dropdown-item>2</el-dropdown-item>
-                                </el-dropdown-menu>
-                            </el-dropdown>
-                        </el-tag>
+                            <el-tag  style='font-size: 13px;height: 35px;width:700px;margin-top:40px;background-color: #a4da89;color: #303133;
+                               font-weight: bolder '>
+                                源分支与目标分支没有冲突 可自动合并
+                                <el-dropdown split-button type='success' @click="handleMergeClick" style='position: absolute;right: 20px;' >
+                                    合并
+                                </el-dropdown>
+                            </el-tag>
                         </div>
-
+                    </div>
                         <!--接受Pull Request-->
                         <!---
                         <div style='display: block;margin-top: 20px'>
@@ -187,38 +164,38 @@
                             <el-button v-if='isPRAuditCompleted===true'  type="warning" @click='denyPR'>取消接受</el-button>
                         </div>
                         -->
-                    </div>
+
 
                     <!--通过时的界面  -->
-<!---
-                    <div style='display: flex;margin-top: 10px;margin-left: 10px'>
-                        <h4 style='margin-top: 3px' >需要您进行当前 Pull Request 的一些审核工作</h4>
-                        <div style='display: flex;position: absolute;right: 20px;'>
-                            <el-button type="text" @click="open" style='height: 5px;color: #00a854;margin-right: 20px'>审核测试完成</el-button>
-                            <el-button>取消审查</el-button><el-button>取消测试</el-button>
-                        </div>
-                    </div>
-                    <el-tag  style='font-size: 13px;height: 35px;width:100%;margin-top:20px;background-color: #a4da89;color: #303133'>
-                        源分支与目标分支没有冲突 可自动合并
-                        <el-dropdown split-button type='success' @click="handleClick" style='position: absolute;right: 20px;' >
-                            合并分支
-                            <el-dropdown-menu slot="dropdown">
-                                <el-dropdown-item>1</el-dropdown-item>
-                                <el-dropdown-item>2</el-dropdown-item>
-                            </el-dropdown-menu>
-                        </el-dropdown>
-                    </el-tag>
---->
+                    <!---
+                                        <div style='display: flex;margin-top: 10px;margin-left: 10px'>
+                                            <h4 style='margin-top: 3px' >需要您进行当前 Pull Request 的一些审核工作</h4>
+                                            <div style='display: flex;position: absolute;right: 20px;'>
+                                                <el-button type="text" @click="open" style='height: 5px;color: #00a854;margin-right: 20px'>审核测试完成</el-button>
+                                                <el-button>取消审查</el-button><el-button>取消测试</el-button>
+                                            </div>
+                                        </div>
+                                        <el-tag  style='font-size: 13px;height: 35px;width:100%;margin-top:20px;background-color: #a4da89;color: #303133'>
+                                            源分支与目标分支没有冲突 可自动合并
+                                            <el-dropdown split-button type='success' @click="handleClick" style='position: absolute;right: 20px;' >
+                                                合并分支
+                                                <el-dropdown-menu slot="dropdown">
+                                                    <el-dropdown-item>1</el-dropdown-item>
+                                                    <el-dropdown-item>2</el-dropdown-item>
+                                                </el-dropdown-menu>
+                                            </el-dropdown>
+                                        </el-tag>
+                    --->
 
                     <!--评论  功能选择栏-->
                     <el-tabs v-model="activeName" @tab-click="handleClick" style='margin-top: 48px'>
                         <el-tab-pane label="评论" name="first">
-<!--                            <div style='display: flex'>-->
-<!--                                <div>user2  指派了 审查人 user1 5分钟前</div>-->
-<!--                            </div>-->
+                            <!--                            <div style='display: flex'>-->
+                            <!--                                <div>user2  指派了 审查人 user1 5分钟前</div>-->
+                            <!--                            </div>-->
                             <!--评论功能区域-->
                             <div style='display: flex;margin-top: 20px'>
-<!--                                <el-avatar  :style="`background:${extractColorByName(user)}`" :size='"small"'> {{user}} </el-avatar>-->
+                                <!--                                <el-avatar  :style="`background:${extractColorByName(user)}`" :size='"small"'> {{user}} </el-avatar>-->
                                 <img src='../../assets/img/user-woman.png' style='width: 40px;height:40px'/>
                                 <div style='display: block;width: 94%;'>
                                     <el-card class="box-card" style='margin-left: 10px'>
@@ -257,22 +234,10 @@
                         <div style='font-size: 12px;color: #777777;margin-top:20px '>审查人员</div>
                         <div style='margin-top: 10px;display: flex'>
                             <div>
-                                <el-select v-model="selectedExaminer" style='height:20px;width: 120px'>
-                                    <el-option disabled value="">请选择</el-option>
-                                    <el-option v-for="user in members"  :value="user">
-                                        {{ user }}
-                                    </el-option>
-                                </el-select>
-                                <el-button @click="addSelectedExaminer" type='text'>
-                                    <i class='el-icon-plus' style='margin-left: 20px'></i>
-                                </el-button>
                                 <div style='display: flex;margin-top: 10px'>
-                                    <div v-for="user in selectedExaminers" >
-                                        <div style='width: 30px; height: 30px;display: grid;margin-right: 20px'>
-<!--                                            <el-avatar  :style="`background:${extractColorByName(user)}`" :size='"medium"'> {{user}} </el-avatar>-->
-                                            <img src='../../assets/img/user-woman.png' style='width: 30px;height: 30px'/>
-                                           <div style='font-size: 13px;color: #72767b;'> {{user}}  </div>
-                                        </div>
+                                    <div style='width: 30px; height: 30px;display: grid;margin-right: 20px'>
+                                        <img src='../../assets/img/user-woman.png' style='width: 30px;height: 30px'/>
+                                        <div style='font-size: 13px;color: #72767b;'> admin  </div>
                                     </div>
                                 </div>
                             </div>
@@ -285,24 +250,10 @@
                         <h4 style='margin-top: 30px'>测试</h4>
                         <div style='font-size: 12px;color: #777777;margin-top:20px '>测试人员</div>
                         <div style='margin-top: 10px;display: flex'>
-                            <div>
-                                <el-select v-model="selectedTester" style='height:20px;width: 120px'>
-                                    <el-option disabled value="">请选择</el-option>
-                                    <el-option v-for="user in members"  :value="user">
-                                        {{ user }}
-                                    </el-option>
-                                </el-select>
-                                <el-button @click="addSelectedTester" type='text'>
-                                    <i class='el-icon-plus' style='margin-left: 20px'></i>
-                                </el-button>
-                                <div style='display: flex;margin-top: 10px'>
-                                    <div v-for="user in selectedTesters" >
-                                        <div style='width: 30px; height: 30px;display: grid;margin-right: 20px'>
-<!--                                            <el-avatar  :style="`background:${extractColorByName(user)}`" :size='"medium"'> {{user}} </el-avatar>-->
-                                            <img src='../../assets/img/user-woman.png' style='width: 30px;height: 30px'/>
-                                            <div style='font-size: 13px;color: #72767b;'> {{user}}  </div>
-                                        </div>
-                                    </div>
+                            <div style='display: flex;margin-top: 10px'>
+                                <div style='width: 30px; height: 30px;display: grid;margin-right: 20px'>
+                                <img src='../../assets/img/user-woman.png' style='width: 30px;height: 30px'/>
+                                    <div style='font-size: 13px;color: #72767b;'> admin  </div>
                                 </div>
                             </div>
                             <div style='margin-top: 5px;font-size: 15px;color: #72767b;position: absolute;right:10px' >最少1人</div>
@@ -324,14 +275,7 @@
                             <div> 严重</div>
                         </div>
                         -->
-                        <el-select v-model="priority" placeholder="请选择" style='margin-top: 10px;height:20px;width: 120px'>
-                            <el-option
-                                v-for="item in priorityOptions"
-                                :key="item.value"
-                                :label="item.label"
-                                :value="item.value">
-                            </el-option>
-                        </el-select>
+                        <div style='margin-top: 15px'>严重</div>
                     </div>
 
                     <!--标签-->
@@ -343,22 +287,10 @@
                             </div>
                         </div>
                         <div style='display: flex;margin-top: 20px'>
-                            <el-input v-model="inputLabel" placeholder="请输入标签" style='height:20px;width: 120px'></el-input>
+                            C++
                         </div>
                     </div>
 
-                    <!--关联Issue-->
-                    <div style='display: block;'>
-                        <div style='display: flex;margin-top: 40px;position: relative;width: 100%'>
-                            <h4 >关联Issue</h4>
-                            <div style='margin-top: 5px;font-size: 15px;color: #72767b;position: absolute;right:10px' >
-                                <i class='el-icon-edit-outline' ></i>
-                            </div>
-                        </div>
-                        <div style='display: flex;margin-top: 20px'>
-                            <div> 未关联</div>
-                        </div>
-                    </div>
 
                     <!--里程碑-->
                     <!---
@@ -387,7 +319,7 @@
                             <el-button type="text" style='margin-top: 30px;font-size: 15px;color: #72767b;position:absolute;right: 0'>全部</el-button>
                         </div>
                         <div style='display: flex;margin-top: 20px'>
-<!--                            <el-avatar  :style="`background:${extractColorByName(this.user)}`" :size='"medium"'> {{this.user}} </el-avatar>-->
+                            <!--                            <el-avatar  :style="`background:${extractColorByName(this.user)}`" :size='"medium"'> {{this.user}} </el-avatar>-->
                             <img src='../../assets/img/user-woman.png'/>
                         </div>
                     </div>
@@ -420,7 +352,7 @@ export default {
             pullTitle:'',
             zan_count:0,
             cha_count:0,
-            watching_count: 1,
+            watching_count: 2,
             star_count: 0,
             fork_count: 0,
             activeName: 'first',
@@ -518,6 +450,15 @@ export default {
         },
         handleMergeClick(tab, event) {
             console.log(tab, event);
+            this.$alert('合并成功', '操作成功提醒', {
+                confirmButtonText: '确定',
+                callback: action => {
+                    this.$message({
+                        type: 'info',
+                        message: `action: ${ action }`
+                    });
+                }
+            });
         },
         handleClickReview() {
             alert('button click');

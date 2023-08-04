@@ -95,10 +95,15 @@
                     title: '【新的审核】请审核是否为该用户颁发可信依赖库证明',
                     //url: 'http://localhost:8080/codedetails?username=user1&warehouseName=11&introduce=11&warehouseKeywords=11',
                     isExamine: 1,
-                    username: 'user1',
-                    warehouseName: '11',
-                    introduce: '11',
-                    warehouseKeywords: '11'
+                    username: 'admin',
+                    warehouseName: '协同课设',
+                    introduce: '这是关于我们的课设',
+                    warehouseKeywords: 'C++',
+                    isCertificator:true,
+                    isOwner:true,
+                    isMember:true,
+                    isManager:true,
+                    owner:'admin',
                 },{
                     date: '2023-07-23 21:00:00',
                     title: '【新的审核】请审核该PR是否通过',
@@ -111,6 +116,18 @@
                     warehouseName: '11',
                     prTitle: '11',
                     describe: '11'
+                },{
+                    title: '【新的审核】请审核该PR是否通过',
+                    //url: 'http://localhost:8080/pullrequestsdetail/:owner/:visitor?isCredible=0&source=test&aim=master&username=user1&warehouseName=11&title=11&describe=11',
+                    isExamine: -1,
+                    isCredible:0,
+                    source:"",
+                    aim:"",
+                    username: '小好',
+                    warehouseName: '协同课设',
+                    owner:'admin',
+                    prTitle: 'test',
+                    describe: 'test'
                 }],
                 read: [{
                     date: '2018-04-19 20:00:00',
@@ -148,23 +165,29 @@
                 console.log(index);
 
                 this.$router.push({
-                    name: 'codedetails',
+                    name: 'codedetails_admin',
                     params: { owner: this.unread[index].username, visitor: this.identity },
                     query: {
                         username: this.unread[index].username,
                         warehouseName: this.unread[index].warehouseName,
                         introduce: this.unread[index].introduce,
                         warehouseKeywords: this.unread[index].warehouseKeywords,
+                        isManager:this.unread[index].warehouseKeywords,
+                        isCertificator:this.unread[index].warehouseKeywords,
+                        isOwner:this.unread[index].isOwner,
+                        isMember:this.unread[index].isMember,
+                        owner:this.unread[index].owner,
                     }
+
                 });
             },
             toExaminPR(index){
                 this.$router.push({
-                    path: '/pullrequestsdetail/:owner/:visitor',
-                    query:{isCredible:this.isCredible, source:this.unread[index].source, aim:this.unread[index].aim,
+                    path: '/pullrequestsdetail_admin',
+                    query:{isCertificator:true,isCredible:this.isCredible, source:this.unread[index].source, aim:this.unread[index].aim,
                         username:this.unread[index].username, warehouseName:this.unread[index].warehouseName,
-                        title:this.unread[index].prTitle, describe:this.unread[index].describe },
-                    params:{owner:this.unread[index].username, visitor:this.identity}});
+                        title:this.unread[index].prTitle, describe:this.unread[index].describe,owner:this.unread[index].owner,},
+                  });
             }
         },
         computed: {

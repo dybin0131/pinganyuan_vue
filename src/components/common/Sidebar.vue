@@ -91,19 +91,20 @@ export default {
                     subs: [
                         {
                             icon: 'el-icon-wallet',
-                            index: 'codedetails',
+                            index: 'codedetails1',
                             title: '我活跃的仓库1',
                         },
                         {
                             icon: 'el-icon-wallet',
-                            index: 'code',
+                            index: 'codedetails2',
                             title: '我活跃的仓库2',
                         },
                     ]
                 },
                 {
                     icon: 'el-icon-office-building',
-                    index: 'tag',//未设置，待修改
+                    //index: 'tag',//未设置，待修改
+                    index: 'pullMerge',//未设置，待修改
                     title: '动态',
                 },
                 {

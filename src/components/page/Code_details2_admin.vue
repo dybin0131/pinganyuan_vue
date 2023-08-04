@@ -23,31 +23,23 @@
 
                 <!--审核是否为可信依赖库-->
                 <el-button type="primary" style=' width: 155px;height: 30px;margin-top: 17px;background: #4092ED;border: 1px solid #4092ED;border-radius: 4px;margin-left: 20px'
-                           @click="acknowledge" v-if='this.isCertificator===true' :disabled='isAuditCompleted'>
+                           @click="acknowledge" :disabled='isAuditCompleted'>
                     <div style='font-size: 14px;font-family: Source Han Sans CN;font-weight: 400;color: #FFFFFF;'>
                         颁发可信依赖库证明
                     </div>
                 </el-button>
                 <el-button type="primary" style=' width: 165px;height: 30px;margin-top: 17px;background: #4092ED;border: 1px solid #4092ED;border-radius: 4px;margin-left: 20px'
-                           @click="deny" v-if='this.isCertificator===true' :disabled='isAuditCompleted'>
+                           @click="deny"  :disabled='isAuditCompleted'>
                     <div style='font-size: 14px;font-family: Source Han Sans CN;font-weight: 400;color: #FFFFFF;'>
                         不颁发可信依赖库证明
                     </div>
                 </el-button>
 
-                <!--未申请时/申请失败-->
-<!--                <div v-if='this.$route.query.isCertificator===false '>-->
-                    <el-button  style=' width: 150px;height: 30px;margin-top: 17px;background: #4092ED;border: 1px solid #4092ED;border-radius: 4px;margin-left: 20px'
-                                @click="dialogVisible = true" :disabled='isDisabled' >
-                        <div style='font-size: 14px;font-family: Source Han Sans CN;font-weight: 400;color: #FFFFFF;'>
-                            {{ applicationStatus }}
-                        </div>
-                    </el-button>
-<!--                </div>-->
+                <!--                </div>-->
                 <!--右侧辅助工具栏-->
                 <div style='position: absolute;right: 12px;display: flex;margin-top: 15px'>
                     <el-dropdown size="small" split-button type="plain" style='font-family: San Francisco Display;font-weight: 400;color: #353D61;'
-                     v-on:click='watching_count++'>
+                                 v-on:click='watching_count++'>
                         <i class='el-icon-view'></i>
                         Watching   {{watching_count}}
                         <el-dropdown-menu slot="dropdown">
@@ -58,9 +50,9 @@
                         </el-dropdown-menu>
                     </el-dropdown>
                     <el-button type="plain" icon="el-icon-star-off" style='margin-left: 12px;font-family: San Francisco Display;font-weight: 400;color: #353D61;'
-                        v-on:click='star_count++'>Star  {{star_count}} </el-button>
+                               v-on:click='star_count++'>Star  {{star_count}} </el-button>
                     <el-button type="plain" icon="el-icon-share" style='font-family: San Francisco Display;font-weight: 400;color: #353D61;'
-                        v-on:click='fork_count++'>Fork  {{fork_count}}</el-button>
+                               v-on:click='fork_count++'>Fork  {{fork_count}}</el-button>
                 </div>
 
                 <!---申请成功--->
@@ -233,6 +225,7 @@
                                     color: #353D61;'>{{item.trends}}</div>
                                         <div style='margin-left: 10px;font-size: 14px;font-family: Source Han Sans CN;font-weight: 500;
                                     color: #353D61;'> {{item.time}} </div>
+
                                     </div>
                                 </div>
                             </div>
@@ -365,6 +358,7 @@ export default {
                 url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'
             }],
 
+
             //此仓库的【贡献者】——后端从数据库里传入数组
             contributor: [
                 { name: 'admin', src: require('../../assets/img/img.jpg') },
@@ -373,7 +367,7 @@ export default {
             //因为图片在assets里面，所以src引入的时候需要require一下。（此次未采用此方法引入头像）
             //此仓库的【管理者】——后端从数据库里传入数组
             manager: [{ name: 'admin', src: require('../../assets/img/img.jpg') },
-                       { name: '小好', src: require('../../assets/img/img.jpg') }],
+                { name: '小好', src: require('../../assets/img/img.jpg') }],
             //此仓库的【近期动态】——后端监测动态，传入前端？maybe，暂时写死数据
             recentTrends: [
                 { name: '小好', trends: '提交了文件RSA.c',time:'5天前' },

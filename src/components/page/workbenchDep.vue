@@ -17,6 +17,11 @@
                             <el-table-column
                                 label="项目名称"
                                 prop="name">
+                                <template slot-scope="scope">
+                                    <router-link :to="{path:'/codedetails',query:{username:scope.row.owner,warehouseName: scope.row.warehouseName,introduce:scope.row.info,
+                        warehouseKeywords:scope.row.language,isOwner:scope.row.isOwner,isMember:scope.row.isMember,owner:scope.row.owner,
+                        isManager:scope.row.isManager,isCertificator:scope.row.isCertificator},}"> {{ scope.row.owner }}/{{scope.row.warehouseName}} </router-link>
+                                </template>
                             </el-table-column>
                             <el-table-column
                                 label="项目标签"
@@ -37,6 +42,11 @@
                             <el-table-column
                                 label="项目名称"
                                 prop="name">
+                                <template slot-scope="scope">
+                                    <router-link :to="{path:'/codedetails',query:{username:scope.row.owner,warehouseName: scope.row.warehouseName,introduce:scope.row.info,
+                        warehouseKeywords:scope.row.key,isOwner:scope.row.isOwner,isMember:scope.row.isMember,owner:scope.row.owner,
+                        isManager:scope.row.isManager,isCertificator:scope.row.isCertificator},}"> {{ scope.row.owner }}/{{scope.row.warehouseName}} </router-link>
+                                </template>
                             </el-table-column>
                             <el-table-column
                                 label="项目标签"
@@ -57,6 +67,11 @@
                             <el-table-column
                                 label="项目名称"
                                 prop="name">
+                                <template slot-scope="scope">
+                                    <router-link :to="{path:'/codedetails',query:{username:scope.row.owner,warehouseName: scope.row.warehouseName,introduce:scope.row.info,
+                        warehouseKeywords:scope.row.key,isOwner:scope.row.isOwner,isMember:scope.row.isMember,owner:scope.row.owner,
+                        isManager:scope.row.isManager,isCertificator:scope.row.isCertificator},}"> {{ scope.row.owner }}/{{scope.row.warehouseName}} </router-link>
+                                </template>
                             </el-table-column>
                             <el-table-column
                                 label="项目标签"
@@ -79,39 +94,52 @@ export default {
     data() {
         return {
             tableData_All: [{
-                name: 'admin/test',
-                tags: '数据库管理',
-                info:  'CHINER元数建模，一款丰富数据库生态，独立于具体数据库之外的，数据库关系模型设计平台，PDManer-v4已完全承接CHINER所有功能，并增加更多更多实用功能',
-                language:  'JavaScript',
+                name: 'admin/协同课设',
+                tags: '课设',
+                info:  '这是关于我们的课设',
+                language:  'C++',
+                date: '2023-08-03',
+                collectnum: '4.4k',
+                branchnum: '822',
+                viewnum: '462',
+                owner:'admin',
+                warehouseName:'协同课设',
+                isOwner:true,
+                isMember:true,
+                isManager:true,
+                isCertificator:false,
+                key:'C++',
+            },
+                {
+                name: '小好/小好的测试仓库',
+                tags: '课设',
+                info:  '这是我的测试仓库',
+                language:  'C++/C',
                 date: '2023-07-24',
                 collectnum: '4.4k',
                 branchnum: '822',
                 viewnum: '462',
-                owener:'admin',
-                url:'http://localhost:8080/codedetails?warehouseName=test&introduce=11&warehouseKeywords=11',
-            },
-                {
-                name: 'robegroup/chiner',
-                tags: '数据库管理',
-                info:  'CHINER元数建模，一款丰富数据库生态，独立于具体数据库之外的，数据库关系模型设计平台，PDManer-v4已完全承接CHINER所有功能，并增加更多更多实用功能',
-                language:  'JavaScript',
-                date: '2023-05-25',
-                collectnum: '4.4k',
-                branchnum: '822',
-                viewnum: '462',
-                owener:'admin',
-                url:'http://localhost:8080/codedetails?warehouseName=test&introduce=11&warehouseKeywords=11',
+                owner:'小好',
+                warehouseName:'小好的测试仓库',
+                isOwner:true,
+                isMember:true,
+                isManager:true,
+                isCertificator:false,
             }, {
                 name: 'AnyLine/anyline',
-                tags: '数据库开发包',
+                tags: '数据库',
                 info: '基于spring-jdbc生态的(No-ORM)DBUtil,兼容各种数据库。动态注册切换数据源，快速执行DDL DML。读写表结构、索引等元数据。常用于动态结构的场景,如:可视化动态多数据源、低代码后台、异构数据库迁移同步、物联网车联网数据处理、数据清洗、运行时自定义',
                 language:  'Java',
                 date: '2023-05-27',
                 collectnum: '3.1k',
                 branchnum: '575',
                 viewnum: '888',
-                owener:'user1',
-                url:'http://localhost:8080/codedetails?warehouseName=test&introduce=11&warehouseKeywords=11',
+                owner:'AnyLine',
+                warehouseName:'anyline',
+                isOwner:true,
+                isMember:true,
+                isManager:true,
+                isCertificator:false,
             }, {
                 name: 'wangzhonnew/SequoiaDB',
                 tags: '数据库服务',
@@ -121,9 +149,13 @@ export default {
                 collectnum: '934',
                 branchnum: '622',
                 viewnum: '597',
-                owener:'user2',
-                url:'http://localhost:8080/codedetails?warehouseName=test&introduce=11&warehouseKeywords=11',
-                }, {
+                owner:'wangzhonnew',
+                warehouseName:'SequoiaDB',
+                isOwner:true,
+                isMember:true,
+                isManager:true,
+                isCertificator:false,
+            }, {
                     name: 'EdurtIO/datacap',
                     tags: '数据库管理、监控',
                     info:  'DataCap是数据转换、集成和可视化的集成软件。支持多种数据源，文件类型，大数据相关数据库，关系型数据库，NoSQL数据库等。通过软件可以实现管理多种数据源，对该源下的数据进行各种操作转换，制作数据图表，监控数据源等各种功能。',
@@ -132,33 +164,45 @@ export default {
                     collectnum: '328',
                     branchnum: '89',
                     viewnum: '43',
-                    owener:'user3',
-                    url:'http://localhost:8080/codedetails?warehouseName=test&introduce=11&warehouseKeywords=11',
-                }],
+                    owner:'EdurtIO',
+                    warehouseName:'datacap',
+                    isOwner:true,
+                    isMember:true,
+                    isManager:true,
+                    isCertificator:false,
+            }],
             tableData_Own: [{
-                name: 'admin/test',
-                tags: '数据库管理',
-                info:  'CHINER元数建模，一款丰富数据库生态，独立于具体数据库之外的，数据库关系模型设计平台，PDManer-v4已完全承接CHINER所有功能，并增加更多更多实用功能',
-                language:  'JavaScript',
+                name: 'admin/协同课设',
+                tags: '课设',
+                info:  '这是关于我们的课设',
+                language:  'C++',
+                date: '2023-08-03',
+                collectnum: '4.4k',
+                branchnum: '822',
+                viewnum: '462',
+                owner:'admin',
+                warehouseName:'协同课设',
+                isOwner:true,
+                isMember:true,
+                isManager:true,
+                isCertificator:false,
+            },
+            {
+                name: '小好/小好的测试仓库',
+                tags: '课设',
+                info:  '这是我的测试仓库',
+                language:  'C++/C',
                 date: '2023-07-24',
                 collectnum: '4.4k',
                 branchnum: '822',
                 viewnum: '462',
-                owener:'admin',
-                url:'http://localhost:8080/codedetails?warehouseName=test&introduce=11&warehouseKeywords=11',
-                },
-                {
-                    name: 'robegroup/chiner',
-                    tags: '数据库管理',
-                    info:  'CHINER元数建模，一款丰富数据库生态，独立于具体数据库之外的，数据库关系模型设计平台，PDManer-v4已完全承接CHINER所有功能，并增加更多更多实用功能',
-                    language:  'JavaScript',
-                    date: '2023-05-25',
-                    collectnum: '4.4k',
-                    branchnum: '822',
-                    viewnum: '462',
-                    owener:'admin',
-                    url:'http://localhost:8080/codedetails?warehouseName=test&introduce=11&warehouseKeywords=11',
-                }],
+                owner:'robegroup',
+                warehouseName:'chiner',
+                isOwner:true,
+                isMember:true,
+                isManager:true,
+                isCertificator:false,
+            }, ],
             tableData_Involved: [{
                     name: 'AnyLine/anyline',
                     tags: '数据库开发包',
@@ -168,8 +212,12 @@ export default {
                     collectnum: '3.1k',
                     branchnum: '575',
                     viewnum: '888',
-                    owener:'user1',
-                    url:'http://localhost:8080/codedetails?warehouseName=test&introduce=11&warehouseKeywords=11',
+                    owner:'user1',
+                warehouseName:'chiner',
+                isOwner:true,
+                isMember:true,
+                isManager:true,
+                isCertificator:false,
                 }, {
                     name: 'wangzhonnew/SequoiaDB',
                     tags: '数据库服务',
@@ -179,8 +227,12 @@ export default {
                     collectnum: '934',
                     branchnum: '622',
                     viewnum: '597',
-                    owener:'user2',
-                    url:'http://localhost:8080/codedetails?warehouseName=test&introduce=11&warehouseKeywords=11',
+                    owner:'user2',
+                warehouseName:'chiner',
+                isOwner:true,
+                isMember:true,
+                isManager:true,
+                isCertificator:false,
                 }, {
                 name: 'EdurtIO/datacap',
                 tags: '数据库管理、监控',
@@ -190,8 +242,12 @@ export default {
                 collectnum: '328',
                 branchnum: '89',
                 viewnum: '43',
-                owener:'user3',
-                url:'http://localhost:8080/codedetails?warehouseName=test&introduce=11&warehouseKeywords=11',
+                owner:'user3',
+                warehouseName:'chiner',
+                isOwner:true,
+                isMember:true,
+                isManager:true,
+                isCertificator:false,
             }],
             activeName: 'first',
         }

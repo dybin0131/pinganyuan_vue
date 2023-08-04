@@ -15,9 +15,9 @@
 
                     <div style='margin-left: 20px;font-size: 23px;display: flex'>
                         <div style='width: 63px;height: 19px;font-size: 24px;font-family: Source Han Sans CN;
-                        font-weight: bold;color: #353D61;line-height: 28px;margin-top: 0;'>{{this.$route.query.owner}}</div>
+                        font-weight: bold;color: #353D61;line-height: 28px;margin-top: 0;'>{{this.owner}}</div>
                         <div style='width: auto;height: 14px;font-size: 18px;font-family: Source Han Sans CN;font-weight: 400;
-                        color: #353D61;line-height: 28px;opacity: 0.8;margin-left: 12px'> / {{this.$route.query.warehouseName}} </div>
+                        color: #353D61;line-height: 28px;opacity: 0.8;margin-left: 12px'> / {{this.warehouse}} </div>
                     </div>
                 </div>
 
@@ -36,18 +36,18 @@
                 </el-button>
 
                 <!--未申请时/申请失败-->
-<!--                <div v-if='this.$route.query.isCertificator===false '>-->
-                    <el-button  style=' width: 150px;height: 30px;margin-top: 17px;background: #4092ED;border: 1px solid #4092ED;border-radius: 4px;margin-left: 20px'
-                                @click="dialogVisible = true" :disabled='isDisabled' >
-                        <div style='font-size: 14px;font-family: Source Han Sans CN;font-weight: 400;color: #FFFFFF;'>
-                            {{ applicationStatus }}
-                        </div>
-                    </el-button>
-<!--                </div>-->
+                <!--                <div v-if='this.$route.query.isCertificator===false '>-->
+                <el-button  style=' width: 150px;height: 30px;margin-top: 17px;background: #4092ED;border: 1px solid #4092ED;border-radius: 4px;margin-left: 20px'
+                            @click="dialogVisible = true" :disabled='isDisabled' >
+                    <div style='font-size: 14px;font-family: Source Han Sans CN;font-weight: 400;color: #FFFFFF;'>
+                        {{ applicationStatus }}
+                    </div>
+                </el-button>
+                <!--                </div>-->
                 <!--右侧辅助工具栏-->
                 <div style='position: absolute;right: 12px;display: flex;margin-top: 15px'>
                     <el-dropdown size="small" split-button type="plain" style='font-family: San Francisco Display;font-weight: 400;color: #353D61;'
-                     v-on:click='watching_count++'>
+                                 v-on:click='watching_count++'>
                         <i class='el-icon-view'></i>
                         Watching   {{watching_count}}
                         <el-dropdown-menu slot="dropdown">
@@ -58,9 +58,9 @@
                         </el-dropdown-menu>
                     </el-dropdown>
                     <el-button type="plain" icon="el-icon-star-off" style='margin-left: 12px;font-family: San Francisco Display;font-weight: 400;color: #353D61;'
-                        v-on:click='star_count++'>Star  {{star_count}} </el-button>
+                               v-on:click='star_count++'>Star  {{star_count}} </el-button>
                     <el-button type="plain" icon="el-icon-share" style='font-family: San Francisco Display;font-weight: 400;color: #353D61;'
-                        v-on:click='fork_count++'>Fork  {{fork_count}}</el-button>
+                               v-on:click='fork_count++'>Fork  {{fork_count}}</el-button>
                 </div>
 
                 <!---申请成功--->
@@ -215,8 +215,8 @@
                 <div style='margin-right: 10px;margin-left: 10px;'>
                     <!--简介-->
                     <h4 style='margin-top: 27px;margin-left: 10px'>简介</h4>
-                    <div style='margin-top: 15px;font-size: 15px;color: #72767b;margin-left: 10px' >{{this.$route.query.introduce}}</div>
-                    <div style='margin-top: 15px;font-size: 15px;color: #72767b;margin-left: 10px' >{{this.$route.query.warehouseKeywords}}</div>
+                    <div style='margin-top: 15px;font-size: 15px;color: #72767b;margin-left: 10px' >{{this.introduce}}</div>
+                    <div style='margin-top: 15px;font-size: 15px;color: #72767b;margin-left: 10px' >{{this.warehouseKeywords}}</div>
 
                     <!--近期动态-->
                     <h4 style='margin-top: 40px;margin-left: 10px'>近期动态</h4>
@@ -233,6 +233,7 @@
                                     color: #353D61;'>{{item.trends}}</div>
                                         <div style='margin-left: 10px;font-size: 14px;font-family: Source Han Sans CN;font-weight: 500;
                                     color: #353D61;'> {{item.time}} </div>
+
                                     </div>
                                 </div>
                             </div>
@@ -339,24 +340,25 @@ export default {
     // },
     data() {
         return {
-            isMember:this.$route.query.isMember,
-            isCertificator:this.$route.query.isCertificator,//判断是不是要进行可信依赖库审核
+            isMember:true,
+            isCertificator:false,//判断是不是要进行可信依赖库审核
             dialogVisible: false,
-            visitor:this.$route.params.visitor,
-            owner:this.$route.query.owner,
-            warehouse: this.$route.query.warehouseName,
+            owner:'小好',
+            warehouse: '小好的测试仓库',
             value:'',
             isCredible: 0,   //低于60不可信;;; 可以用 this.$route.query.isCredible 传参  or  从数据库读取
             //isCredible:this.$store.state.CredibleValue,
             isDisabled: false,  //对于申请按钮的展现
             isAuditCompleted:false, //审核员是否审核完成，已完成则不显示按钮,
             applicationStatus: '申请可信依赖库',
+            warehouseKeywords:'C++/C',
+            introduce:'我的测试仓库',
 
             http_text: 'https://element.eleme.cn/#/zh-CN/component/input',
             isShowHeader: false,
-            star_count: 2,
+            star_count: 1,
             fork_count: 0,
-            watching_count: 3,
+            watching_count: 2,
             donate_count: 0,
 
             //上传文件
@@ -367,18 +369,15 @@ export default {
 
             //此仓库的【贡献者】——后端从数据库里传入数组
             contributor: [
-                { name: 'admin', src: require('../../assets/img/img.jpg') },
-                { name: '小好', src: require('../../assets/img/wzy.png') },
-                { name: '小明', src: require('../../assets/img/wzy.png') },],
+                { name: '小好', src: require('../../assets/img/wzy.png') },],
             //因为图片在assets里面，所以src引入的时候需要require一下。（此次未采用此方法引入头像）
             //此仓库的【管理者】——后端从数据库里传入数组
-            manager: [{ name: 'admin', src: require('../../assets/img/img.jpg') },
-                       { name: '小好', src: require('../../assets/img/img.jpg') }],
+            manager: [{ name: '小好', src: require('../../assets/img/img.jpg') }],
             //此仓库的【近期动态】——后端监测动态，传入前端？maybe，暂时写死数据
             recentTrends: [
-                { name: '小好', trends: '提交了文件RSA.c',time:'5天前' },
-                { name: '小明', trends: '提交了文件3DES.c',time:'10天前' },
-                { name: 'admin', trends: '创建了仓库',time:'15天前' },
+                { name: '小好', trends: '提交了文件router.c',time:'25天前' },
+                { name: '小好', trends: '提交了文件navigation.c',time:'25天前' },
+                { name: '小好', trends: '创建了仓库',time:'25天前' },
             ],
 
             //文件列表的展示——假数据_____从后端请求一个名字为“对应用户选择分支的分支名称”的表，将数据展示在前端
@@ -391,50 +390,50 @@ export default {
             }],
 
             master: [ {
-                file: 'RSA.c',
-                prop: 'add RSA.c',
-                time: '5天前',
+                file: 'router.c',
+                prop: 'add router.c',
+                time: '25天前',
             }, {
-                file: '3DES.c',
-                prop: 'add 3DES.c',
-                time: '10天前',
+                file: 'navigation.c',
+                prop: 'add navigation.c',
+                time: '25天前',
             }, {
                 file: 'README.md',
                 prop: 'Initial commit',
-                time: '15天前',
+                time: '25天前',
             }],
 
             test: [{
-                file: 'RSA.c',
+                file: 'router.c',
                 prop: 'add RSA.c',
-                time: '5天前',
+                time: '25天前',
             }, {
-                file: 'DES.c',
-                prop: 'add DES.c',
-                time: '8天前',
+                file: 'navigation.c',
+                prop: 'add navigation.c',
+                time: '25天前',
             },{
-                file: '3DES.c',
-                prop: 'add 3DES.c',
-                time: '10天前',
+                file: 'test.c',
+                prop: 'add test.c',
+                time: '25天前',
             },{
                 file: 'README.md',
                 prop: 'Initial commit',
-                time: '15天前',
+                time: '25天前',
             }],
             branchName: "master",      //下拉框绑定的model
             particularsDAta: {}, //展示的数据
             displayData:[{
-                file: 'RSA.c',
-                prop: 'add RSA.c',
-                time: '5天前',
+                file: 'router.c',
+                prop: 'add router.c',
+                time: '25天前',
             }, {
-                file: '3DES.c',
-                prop: 'add 3DES.c',
-                time: '10天前',
+                file: 'navigation.c',
+                prop: 'add navigation.c',
+                time: '25天前',
             }, {
                 file: 'README.md',
                 prop: 'Initial commit',
-                time: '15天前',
+                time: '25天前',
             }],
         }
     },

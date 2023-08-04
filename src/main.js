@@ -10,10 +10,15 @@ import './assets/css/icon.css';
 import './components/common/directives';
 import 'babel-polyfill';
 import store from './store/store.js'
+import CodeEditor from 'bin-code-editor';
+import scroll from 'vue-seamless-scroll'
+Vue.use(scroll)
+
 //import axios from 'axios';
 
 //axios.defaults.baseURL = '/api'
 Vue.config.productionTip = false;
+Vue.use(CodeEditor);
 Vue.use(VueI18n);
 Vue.use(ElementUI, {
     size: 'small'
@@ -44,15 +49,15 @@ router.beforeEach((to, from, next) => {
                 confirmButtonText: '确定'
             });
         } else {//进入下一个界面
-            if(to.path === '/login')
-                next();
-            for (let i = 0; i < to.meta.roles.length; i++) {
-                if (role === to.meta.roles[i]) {
-                    next()       //角色匹配已登录，正常进入to.meta.roles[i]的页面
-                    break
-                } else if (i === to.meta.roles.length - 1) {
-                    next({ path: '/Error' }) } }
-            //next();
+            // if(to.path === '/login')
+            //     next();
+            // for (let i = 0; i < to.meta.roles.length; i++) {
+            //     if (role === to.meta.roles[i]) {
+            //         next()       //角色匹配已登录，正常进入to.meta.roles[i]的页面
+            //         break
+            //     } else if (i === to.meta.roles.length - 1) {
+            //         next({ path: '/Error' }) } }
+            next();
         }
     }
 });
