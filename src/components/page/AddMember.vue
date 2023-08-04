@@ -3,7 +3,7 @@
         <div class="title">直接邀请用户</div>
         <div class="formBox">
             <div class="formTitle">权限</div>
-            <el-select v-model="userRight" placeholder="请选择">
+            <el-select v-model="data.repo_name" placeholder="请选择">
                 <el-option
                     v-for="item in options"
                     :key="item.value"
@@ -11,10 +11,10 @@
                     :value="item.value">
                 </el-option>
             </el-select>
-            <div class="formTitle">  平安源用户</div>
+            <div class="formTitle">平安源用户</div>
             <div class="mailbox">
-                <el-input v-model="input" placeholder="请输入完整的邮箱地址"></el-input>
-                <div class="mailColor"><i class="el-icon-circle-check"></i> 已发送邀请</div>
+                <el-input v-model="data.member_name" placeholder="请输入完整的邮箱地址"></el-input>
+                <div class="mailColor" v-show="isShow"><i class="el-icon-circle-check"></i> 已发送邀请</div>
             </div>
         </div>
         <div class="btnBox">
@@ -24,10 +24,16 @@
 </template>
 
 <script>
+import { repomemAddmem } from '@/api/index';
 export default {
     name: 'AddMember',
     data() {
         return {
+            data: {
+                repo_name: '',
+                member_name: ''
+            },
+            isShow: false,
             input: '',
             userRight:'开发者',
             options: [{
@@ -47,10 +53,10 @@ export default {
                cancelButtonText: '取消'
            })
                .then(() => {
-                   this.$message({
-                       type: 'info',
-                       message: '已发送邀请'
-                   });
+                    repomemAddmem(this.data).then(res=>{
+                        this.isShow = true;
+                        this.$message.success({type: 'info',message: '已发送邀请'});
+                    })
                })
                .catch(action => {
                    this.$message({

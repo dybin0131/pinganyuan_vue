@@ -63,6 +63,7 @@ export default {
                             this.$message.success('登录成功');
                             localStorage.setItem('ms_username', this.param.username);
                             this.$router.push('/');
+                            console.log(123);
                         }else{
                             this.$message.error('登录失败');
                         }

@@ -41,40 +41,47 @@
                         <el-button type="primary" @click="()=>{$router.push('./addMember');}">
                             <i class="el-icon-plus"></i> 添加成员
                         </el-button>
-                        <el-button type="danger" plain><i class="el-icon-delete"></i> 移除成员</el-button>
+                        <el-button type="danger" plain @click="deleteBtn"><i class="el-icon-delete"></i> 移除成员</el-button>
                     </div>
                 </div>
                 <div class="tableContent">
                     <el-badge :value="12" class="item">
                         <div class="tableTitle">管理员</div>
                     </el-badge>
-                    <div class="tableBox">
+                    <div class="tableBox" v-for="item in userTable" :key="item.id">
                         <div class="tableLeft">
+                            <div v-if="deleteShow">
+                                <el-radio v-model="delName" :label="item.id">{{''}}</el-radio>
+                            </div>
                             <div class="tImg">
                                 <img src="../../assets/img/img.jpg" alt="">
                             </div>
                             <div>
                                 <div class="tUser">
-                                    <div class="nameBox"><i class="el-icon-user"></i> 王明</div>
-                                    <div class="haveBox">仓库拥有者</div>
+                                    <div class="nameBox"><i class="el-icon-user"></i> {{item.member_name}}</div>
+                                    <div class="haveBox" v-show="item.member_state==0">仓库拥有者</div>
                                 </div>
-                                <div class="tlBtm">user1（12060665+user1@user.com）</div>
+                                <div class="tlBtm">{{item.repo_name}}（12060665+user1@user.com）</div>
                             </div>
                         </div>
-                        <div class="tableRight">
+                        <div class="tableRight" v-show="item.member_state==0">
                             <img src="../../assets/img/cheng.png" alt="" srcset="">
                             <div class="Rtext">创建者 <i class="el-icon-arrow-down"></i></div>
                         </div>
+                        <div class="tableRight" v-show="item.member_manager==0">
+                            <img src="../../assets/img/green.png" alt="" srcset="">
+                            <div class="Rtext">管理员 <i class="el-icon-arrow-down"></i></div>
+                        </div>
                     </div>
                     <div class="page">
-                        <el-pagination
-                        @size-change="handleSizeChange"
-                        @current-change="handleCurrentChange"
-                        :current-page.sync="currentPage1"
-                        :page-size="100"
-                        layout="total, prev, pager, next"
-                        :total="1000">
-                        </el-pagination>
+                        <!-- <el-pagination
+                            background
+                            layout=" sizes, prev, pager, next, jumper"
+                            :total="total"
+                            @current-change="handleCurrentChange"
+                            @size-change="handleSizeChange"
+                        >
+                        </el-pagination> -->
                     </div>
                 </div>
             </div>
@@ -149,7 +156,7 @@
 
 <script>
 import { messages } from '@/components/common/i18n';
-
+import { repomemFindall,repomemDeletemem } from '@/api/index';
 export default {
     name:'ManageComponent',
     props:{
@@ -160,6 +167,8 @@ export default {
             conList: ['仓库成员管理','仓库设置'],
             isCredible:0,
             identity:'开发者',
+            repo_name: 'twf',
+            delName: '',
             identityOptions: [{
                 value: '开发者',
                 label: '开发者'
@@ -168,6 +177,8 @@ export default {
                 label: '管理员'
             }],
             value1:'',
+            pageSize: 10,
+            pageNum: 1,
             activeName:'second',
             issueErea:'',
             inputTitle: '',
@@ -188,25 +199,10 @@ export default {
             }],
             search: '',
             select: '全部',
-
-            userTable: [{
-                isOwner: 1,
-                name: 'admin',
-                isManager: 1
-            }, {
-                isOwner: 0,
-                name: 'user1',
-                isManager: 0
-            }, {
-                isOwner:0,
-                name: 'user2',
-                isManager: 0
-            }, {
-                isOwner: 0,
-                name: 'user3',
-                isManager: 0
-            }],
-            indexs: 0
+            userTable: [],
+            indexs: 0,
+            total: 0,
+            deleteShow: false,
         }
     },
     computed: {
@@ -215,7 +211,40 @@ export default {
             return username ? username : this.name;
         }
     },
+    mounted(){
+        this.repomemFindall();
+    },
     methods:{
+        deleteBtn(){
+            if (!this.delName) {
+                this.deleteShow = !this.deleteShow
+            }else{
+                repomemDeletemem({
+                    member_name: this.delName,
+                    repo_name: this.repo_name
+                }).then(res=>{
+                    this.repomemFindall();
+                    this.$message.success('移除成员成功！')
+                    this.deleteShow = false
+                })
+            }
+        },
+        // 分页
+        handleCurrentChange(val) {
+            this.pageNum = val;
+            this.havequeryUnreadRead();
+        },
+        handleSizeChange(val) {
+            this.pageSize = val;
+            this.havequeryUnreadRead();
+        },
+        repomemFindall(){
+            repomemFindall().then(res=>{
+                console.log(res);
+                this.userTable = res
+                this.total = res.length
+            })
+        },
         extractColorByName(name) {
             // 根据用户姓名随机生成用户头像颜色——————
             // 由于是按照名字第一个元素设定颜色，导致有不同用户颜色不一样，把用户名都换成中文可行，由于前面roles还是英文，暂时未改

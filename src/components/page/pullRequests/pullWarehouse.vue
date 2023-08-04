@@ -32,9 +32,9 @@
                         <div class="originalTitle">源分支</div>
                         <div class="originalContent">
                             <div class="OCtext">user_user1/pinganyuan-system-test</div>
-                            <el-select v-model="value" placeholder="请选择">
+                            <el-select v-model="data.member_name" placeholder="请选择">
                                 <el-option
-                                v-for="item in options"
+                                v-for="item in source"
                                 :key="item.value"
                                 :label="item.label"
                                 :value="item.value">
@@ -46,17 +46,17 @@
                     <div class="originalBox">
                         <div class="originalTitle">目标分支</div>
                         <div class="originalContent">
-                            <el-select v-model="value" placeholder="请选择">
+                            <el-select v-model="data.repo_name" placeholder="请选择">
                                 <el-option
-                                v-for="item in options"
+                                v-for="item in target1"
                                 :key="item.value"
                                 :label="item.label"
                                 :value="item.value">
                                 </el-option>
                             </el-select>
-                            <el-select v-model="value" placeholder="请选择">
+                            <el-select v-model="data.notes" placeholder="请选择">
                                 <el-option
-                                v-for="item in options"
+                                v-for="item in target1"
                                 :key="item.value"
                                 :label="item.label"
                                 :value="item.value">
@@ -70,11 +70,11 @@
                     type="textarea"
                     :rows="10"
                     placeholder="请输入内容"
-                    v-model="textarea">
+                    v-model="data.apply_describe">
                     </el-input>
                 </div>
                 <div class="bottomBtn">
-                    <el-button type="primary">创建pull Requests</el-button>
+                    <el-button @click="repomemAddmem" type="primary">创建pull Requests</el-button>
                 </div>
             </div>
         </div>
@@ -82,32 +82,48 @@
 </template>
 
 <script>
+import { repomemAddmem } from '@/api/index';
 export default {
     name: 'HomePage',
     data() {
         return {
-            options: [{
-                value: '选项1',
-                label: '黄金糕'
+            source: [{
+                value: 'master',
+                label: 'master'
             }, {
-                value: '选项2',
-                label: '双皮奶'
-            }, {
-                value: '选项3',
-                label: '蚵仔煎'
-            }, {
-                value: '选项4',
-                label: '龙须面'
-            }, {
-                value: '选项5',
-                label: '北京烤鸭'
+                value: 'masters',
+                label: 'masters'
             }],
-            value: ''
+            target1: [{
+                value: 'master',
+                label: 'master'
+            }, {
+                value: 'masterd',
+                label: 'masterd'
+            }],
+            target2: [{
+                value: 'master',
+                label: 'master'
+            }],
+            data: {
+                member_name: '',
+                repo_name: '',
+                notes: '',
+                apply_describe: '',
+            },
+            watching_count:this.$route.query.watchCount,
+            star_count:this.$route.query.starCount,
+            fork_count:this.$route.query.forkCount,
         };
     },
+    mounted(){},
     methods: {
+        repomemAddmem(){
+            repomemAddmem(this.data).then(res=>{
+                this.$message.success('创建pull Requests成功！')
+            })
+        },
     }
-
 };
 </script>
 
