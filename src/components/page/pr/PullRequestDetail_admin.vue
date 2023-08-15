@@ -9,7 +9,7 @@
                     <el-tag  v-else-if='this.$route.query.isCredible<60' type='danger'>不可信</el-tag>
                     <el-breadcrumb separator="/" style='margin-top:5px;margin-left: 10px;font-size: 23px'>
                         <el-breadcrumb-item :to="{ path: '/' }">{{ this.$route.query.owner }}</el-breadcrumb-item>
-                        <el-breadcrumb-item><a href="/">{{ this.$route.query.warehouseName }}</a></el-breadcrumb-item>
+                        <el-breadcrumb-item><a href='/public'>{{ this.$route.query.warehouseName }}</a></el-breadcrumb-item>
                     </el-breadcrumb>
                 </div>
                 <!--右侧辅助工具栏-->
@@ -31,7 +31,7 @@
             <div style='margin-top: 20px'>
                 <el-breadcrumb separator="/">
                     <el-breadcrumb-item :to="{ path: '/' }">Pull Requests</el-breadcrumb-item>
-                    <el-breadcrumb-item style='font-weight: bolder'><a href="/">详情</a></el-breadcrumb-item>
+                    <el-breadcrumb-item style='font-weight: bolder'><a href='/public'>详情</a></el-breadcrumb-item>
                 </el-breadcrumb>
             </div>
         </div>
@@ -66,7 +66,7 @@
                             <div style='margin-top: 7px;margin-left:5px;font-size: 13px;color: #72767b;display: flex' >
                                 <div style='margin-top: 0'>
                                     <!--                                <el-avatar :style="`background:${extractColorByName(this.user)},width:30px,height:30px`">{{this.user}}</el-avatar>-->
-                                    <img src='../../assets/img/user-woman.png' style='width: 40px;height:40px'/>
+                                    <img src='../../../assets/img/user-woman.png' style='width: 40px;height:40px'/>
                                 </div>
                                 <div style='margin-top: 13px;margin-left: 7px'>  {{this.user}} 创建 </div>
                             </div>
@@ -196,7 +196,7 @@
                             <!--评论功能区域-->
                             <div style='display: flex;margin-top: 20px'>
                                 <!--                                <el-avatar  :style="`background:${extractColorByName(user)}`" :size='"small"'> {{user}} </el-avatar>-->
-                                <img src='../../assets/img/user-woman.png' style='width: 40px;height:40px'/>
+                                <img src='../../../assets/img/user-woman.png' style='width: 40px;height:40px'/>
                                 <div style='display: block;width: 94%;'>
                                     <el-card class="box-card" style='margin-left: 10px'>
                                         <div style='display: flex;grid-row: 1;font-size: 18px'>
@@ -236,7 +236,7 @@
                             <div>
                                 <div style='display: flex;margin-top: 10px'>
                                     <div style='width: 30px; height: 30px;display: grid;margin-right: 20px'>
-                                        <img src='../../assets/img/user-woman.png' style='width: 30px;height: 30px'/>
+                                        <img src='../../../assets/img/user-woman.png' style='width: 30px;height: 30px'/>
                                         <div style='font-size: 13px;color: #72767b;'> admin  </div>
                                     </div>
                                 </div>
@@ -252,7 +252,7 @@
                         <div style='margin-top: 10px;display: flex'>
                             <div style='display: flex;margin-top: 10px'>
                                 <div style='width: 30px; height: 30px;display: grid;margin-right: 20px'>
-                                <img src='../../assets/img/user-woman.png' style='width: 30px;height: 30px'/>
+                                <img src='../../../assets/img/user-woman.png' style='width: 30px;height: 30px'/>
                                     <div style='font-size: 13px;color: #72767b;'> admin  </div>
                                 </div>
                             </div>
@@ -320,7 +320,7 @@
                         </div>
                         <div style='display: flex;margin-top: 20px'>
                             <!--                            <el-avatar  :style="`background:${extractColorByName(this.user)}`" :size='"medium"'> {{this.user}} </el-avatar>-->
-                            <img src='../../assets/img/user-woman.png'/>
+                            <img src='../../../assets/img/user-woman.png'/>
                         </div>
                     </div>
                 </el-aside>

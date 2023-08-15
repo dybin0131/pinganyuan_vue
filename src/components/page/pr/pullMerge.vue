@@ -2,8 +2,8 @@
     <div class="pullMerge">
         <div class="topBox">
             <el-breadcrumb class="topBreadcrumb" separator="/" >
-                <el-breadcrumb-item :to="{ path: '/' }" style='font-size: 18px'>工作台</el-breadcrumb-item>
-                <el-breadcrumb-item style='font-size: 15px;margin-top:1px'><a href="/">区块链</a></el-breadcrumb-item>
+                <el-breadcrumb-item :to="{ path: '/' }" style='font-size: 18px'>动态</el-breadcrumb-item>
+                <el-breadcrumb-item style='font-size: 15px;margin-top:1px'><a href='/public'>区块链</a></el-breadcrumb-item>
             </el-breadcrumb>
             <!--右侧辅助工具栏-->
             <div style='position: absolute;right: 0;display: flex;;margin-right: 30px'>
@@ -51,32 +51,32 @@ export default {
             blockList: [{
                 id: 1,
                 blockHeight: 'blockHeight1',
-                blockTimeStamp: '2023-07-25 17:46:09',
+                blockTimeStamp: '2023-07-29 17:46:09',
                 txHash: '0x12f024d21b6cdae2777aacfc6bf600cb02037bd6389a8fc1d1548962c5805db1',
                 to: '0x5cc803a8a62f046414c928cdda7488ae81f7672f',
             },{
                 id: 2,
                 blockHeight: 'blockHeight2',
-                blockTimeStamp: '2023-07-25 17:46:09',
-                txHash: '0x12f024d21b6cdae2777aacfc6bf600cb02037bd6389a8fc1d1548962c5805db1',
+                blockTimeStamp: '2023-07-29 12:00:09',
+                txHash: '0x63f054d21b96cdae2797aacfc6bf600cb08427bd6092a8fc1d1248962c0808dc8',
                 to: '0x5cc803a8a62f046414c928cdda7488ae81f7672f',
             },{
                 id: 3,
                 blockHeight: 'blockHeight3',
-                blockTimeStamp: '2023-07-25 17:46:09',
-                txHash: '0x12f024d21b6cdae2777aacfc6bf600cb02037bd6389a8fc1d1548962c5805db1',
+                blockTimeStamp: '2023-07-29 11:07:42',
+                txHash: '0x35f026d20b6cdae2231aacfc6bf600cb08357bd3427a8fc1d2158062c5805fb1',
                 to: '0x5cc803a8a62f046414c928cdda7488ae81f7672f',
             },{
                 id: 4,
                 blockHeight: 'blockHeight4',
-                blockTimeStamp: '2023-07-25 17:46:09',
-                txHash: '0x12f024d21b6cdae2777aacfc6bf600cb02037bd6389a8fc1d1548962c5805db1',
+                blockTimeStamp: '2023-07-29 6:59:11',
+                txHash: '0x26f024d52b6cdae2830aacfc6bf623cb02237bd6635a8fc1d2448968c5830db9',
                 to: '0x5cc803a8a62f046414c928cdda7488ae81f7672f',
             },{
                 id: 5,
                 blockHeight: 'blockHeight5',
-                blockTimeStamp: '2023-07-25 17:46:09',
-                txHash: '0x12f024d21b6cdae2777aacfc6bf600cb02037bd6389a8fc1d1548962c5805db1',
+                blockTimeStamp: '2023-07-28 23:32:45',
+                txHash: '0x36f012d21b6cdae2334aacfc6bf367cb02037bd6749a8fc1d1548232c4597db1',
                 to: '0x5cc803a8a62f046414c928cdda7488ae81f7672f',
             },],
         };
