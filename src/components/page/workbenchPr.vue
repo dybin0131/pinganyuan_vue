@@ -33,10 +33,6 @@
                             prop="depName"
                             label="仓库名称">
                         </el-table-column>
-                        <el-table-column
-                            prop="depName"
-                            label="仓库名称">
-                        </el-table-column>
                         <el-table-column prop="address" label="操作" align="center">
                             <template slot-scope="">
                                 <el-button type="primary" title="申请Pull Requests" @click="()=>{
@@ -106,61 +102,61 @@ export default {
         return {
             prData_ALL: [{
                 date: '2023-05-02',
-                userName:"admin",
-                prName:'pr admin',
-                depName:'admin/TestProject',
+                userName:"韩梅梅",
+                prName:'韩梅梅的拉取请求',
+                depName:'韩梅梅/项目测试',
                 source:'test',
                 aim:'master',
 
             }, {
                 date: '2023-05-04',
-                userName:"user1",
-                prName:'pr user1',
-                depName:'admin/TestProject',
+                userName:"用户1",
+                prName:'用户1的拉取请求',
+                depName:'韩梅梅/项目测试',
                 source:'test',
                 aim:'master',
             }, {
                 date: '2023-05-01',
-                userName:"user2",
-                prName:'pr user2',
-                depName:'admin/TestProject',
+                userName:"用户2",
+                prName:'用户2的拉取请求',
+                depName:'韩梅梅/项目测试',
                 source:'test',
                 aim:'master',
             }, {
                 date: '2023-05-03',
-                userName:"user3",
-                prName:'pr user3',
-                depName:'admin/TestProject',
+                userName:"用户3",
+                prName:' 用户3的拉取请求',
+                depName:'韩梅梅/项目测试',
                 source:'test',
                 aim:'master',
             }],
             prData_CHARGE: [{
                 date: '2023-05-04',
-                userName:"user1",
-                prName:'pr user1',
-                depName:'admin/TestProject',
+                userName:"用户1",
+                prName:'用户1的拉取请求',
+                depName:'韩梅梅/测试项目',
                 source:'test',
                 aim:'master',
             }, {
                 date: '2023-05-01',
-                userName:"user2",
-                prName:'pr user2',
-                depName:'admin/TestProject',
+                userName:"用户2",
+                prName:'用户2的拉取请求',
+                depName:'韩梅梅/测试项目',
                 source:'test',
                 aim:'master',
             }, {
                 date: '2023-05-03',
-                userName:"user3",
-                prName:'pr user3',
-                depName:'admin/TestProject',
+                userName:"用户3",
+                prName:'用户3的拉取请求',
+                depName:'韩梅梅/测试项目',
                 source:'test',
                 aim:'master',
             }],
             prData_SUBMIT: [{
                 date: '2023-05-02',
-                userName: "admin",
-                prName: 'pr admin',
-                depName: 'admin/TestProject',
+                userName: "韩梅梅",
+                prName: '韩梅梅的拉取请求',
+                depName: '韩梅梅/测试项目',
                 source: 'test',
                 aim: 'master',
             }],

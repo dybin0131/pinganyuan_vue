@@ -58,7 +58,7 @@
                 box-shadow: 0 5px 20px 0 rgba(183,183,195,0.07);border-radius: 10px;'>
                     <div slot="header" class="clearfix" style='display: flex;margin-top: 20px'>
                         <div style='margin-top: 10px;margin-left:20px;font-size: 20px;font-family: Source Han Sans CN;font-weight: bold;color: #353D61;'>
-                            2023-07-24</div>
+                            2023-06-24</div>
                         <div style='background-color: #E13131;width: 25px;height: 15px;'>
                             <div style='margin-left: 7px;color: #f0f0f0;font-size: 13px'>
                                 {{this.issueData.length}}
@@ -68,7 +68,7 @@
                     <div style='display: block;width: 100%;margin-top: 20px'>
                         <div v-for="(item) in issueData"  style='display: flex;margin-bottom: 20px'>
                             <div style='display: flex;margin-bottom: 32px;'>
-                                <img src='../../assets/img/user-man.png' style='width: 38px;height: 38px;margin-top: 10px;margin-left: 20px' >
+                                <img src='../../assets/img/user-woman.png' style='width: 38px;height: 38px;margin-top: 10px;margin-left: 20px' >
                                 <!--文件名称+贡献者-->
                                 <div style='display: block;margin-left: 18px'>
                                     <div style='display: flex'>
@@ -179,27 +179,27 @@ export default {
             issueData: [{
                 date: '2023-07-24',
                 fileName: 'add RSA.c',
-                user: '小好',
+                user: '李华',
                 hashCode: '1ecc563',
                 time: '5天前',
             }, {
                 date: '2023-07-24',
                 fileName: 'add DES.c',
-                user: '小好',
+                user: '韩梅梅',
                 hashCode: '2a3b7b6',
-                time: '8天前',
+                time: '7天前',
             }, {
                 date: '2023-07-24',
                 fileName: 'add 3DES.c',
-                user: '小明',
+                user: '李雷',
                 hashCode: '032a495',
-                time: '10天前',
+                time: '7天前',
             }, {
                 date: '2023-07-24',
                 fileName: 'README.md',
-                user: 'admin',
+                user: '韩梅梅',
                 hashCode: '71564ae',
-                time: '15天前',
+                time: '8天前',
             }],
             tableData:[{
                 date: '2016-05-02',

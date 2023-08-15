@@ -7,7 +7,7 @@
             <div style='display: flex;position: relative'>
                 <div style='display: flex;margin-top: 15px;margin-left: 10px'>
                     <el-tag  v-if="isCredible>=60" type='success'
-                             style='width: 55px;height: 24px;background: rgba(0,171,164,0.1);border: 1px solid #00ABA4;
+                             style='width: 55px;height: 24px;background: rgba(0,171,164,0.1);border: 1px solid #00ABA4;padding-left: 10px;
                              border-radius: 4px;'>可信</el-tag>
                     <el-tag  v-else-if='isCredible<60' type='danger'
                              style='width: 55px;height: 24px;background: rgba(237,64,64,0.1);border: 1px solid #ED4040;border-radius: 4px;'
@@ -25,13 +25,13 @@
                 <el-button type="primary" style=' width: 155px;height: 30px;margin-top: 17px;background: #4092ED;border: 1px solid #4092ED;border-radius: 4px;margin-left: 20px'
                            @click="acknowledge" v-if='this.isCertificator===true' :disabled='isAuditCompleted'>
                     <div style='font-size: 14px;font-family: Source Han Sans CN;font-weight: 400;color: #FFFFFF;'>
-                        颁发可信依赖库证明
+                        授予可信标签
                     </div>
                 </el-button>
                 <el-button type="primary" style=' width: 165px;height: 30px;margin-top: 17px;background: #4092ED;border: 1px solid #4092ED;border-radius: 4px;margin-left: 20px'
                            @click="deny" v-if='this.isCertificator===true' :disabled='isAuditCompleted'>
                     <div style='font-size: 14px;font-family: Source Han Sans CN;font-weight: 400;color: #FFFFFF;'>
-                        不颁发可信依赖库证明
+                        不授予可信标签
                     </div>
                 </el-button>
 
@@ -49,7 +49,7 @@
                     <el-dropdown size="small" split-button type="plain" style='font-family: San Francisco Display;font-weight: 400;color: #353D61;'
                                  v-on:click='watching_count++'>
                         <i class='el-icon-view'></i>
-                        Watching   {{watching_count}}
+                        浏览量   {{watching_count}}
                         <el-dropdown-menu slot="dropdown">
                             <el-dropdown-item>不关注</el-dropdown-item>
                             <el-dropdown-item>关注所有动态</el-dropdown-item>
@@ -58,9 +58,9 @@
                         </el-dropdown-menu>
                     </el-dropdown>
                     <el-button type="plain" icon="el-icon-star-off" style='margin-left: 12px;font-family: San Francisco Display;font-weight: 400;color: #353D61;'
-                               v-on:click='star_count++'>Star  {{star_count}} </el-button>
+                               v-on:click='star_count++'>点赞  {{star_count}} </el-button>
                     <el-button type="plain" icon="el-icon-share" style='font-family: San Francisco Display;font-weight: 400;color: #353D61;'
-                               v-on:click='fork_count++'>Fork  {{fork_count}}</el-button>
+                               v-on:click='fork_count++'>下载  {{fork_count}}</el-button>
                 </div>
 
                 <!---申请成功--->
@@ -137,13 +137,13 @@
                                 <el-button type='text'><i class="el-icon-plus" style='font-family: Source Han Sans CN;font-weight: bolder;color: #4092ED;margin-left: 10px;font-size: 14px'></i>
                                     <router-link :to="{path:'/pullrequests',query:{username:username,warehouseName:this.$route.query.warehouseName,isCredible:this.isCredible }}"
                                                  style='font-family: Source Han Sans CN;font-weight: 400;color: #4092ED;font-size: 14px'>
-                                        Pull Request</router-link>
+                                       拉取请求</router-link>
                                 </el-button>
                                 <el-button type='text' style='font-size: 16px;font-family: Source Han Sans CN;font-weight: 400;color: #4092ED;margin-left: 10px;font-size: 14px;
                                 line-height: 46px;'><i class="el-icon-plus" style='font-weight: bolder;color: #4092ED'></i>
                                     <router-link :to="{path:'/issue',query:{username:username,warehouseName:this.$route.query.warehouseName ,isCredible:this.isCredible}}"
                                                  style='font-family: Source Han Sans CN;font-weight: 400;color: #4092ED;font-size: 14px'>
-                                        Issue</router-link>
+                                        问题</router-link>
                                 </el-button>
                                 <div style='margin-left: 10px'>
                                     <el-dropdown>
@@ -192,9 +192,9 @@
                         <!--表格信息_===表格数据根据用户从 选择器 里面的选择 来确定，一个分支对应一个表格-->
                         <el-table :data = "displayData"  style="width: 100%;margin-top:8px;font-size: 16px;font-family: Source Han Sans CN;
                     font-weight: 500;color: #353D61;">
-                            <el-table-column prop="file" width="260px "  label='File name' align="center"> </el-table-column>
-                            <el-table-column prop="prop"  width="260px " label="Submit information" align="center"></el-table-column>
-                            <el-table-column prop="time"  width='260px' label="Creation time" align="center"></el-table-column>
+                            <el-table-column prop="file" width="260px "  label='文件名称' align="center"> </el-table-column>
+                            <el-table-column prop="prop"  width="260px " label="提交信息" align="center"></el-table-column>
+                            <el-table-column prop="time"  width='260px' label="创建时间" align="center"></el-table-column>
                             <!--                        <el-table-column prop="operation" align='right' width='100px' label="Operation">-->
                             <!--                            <template slot-scope="scope" style='display: flex'>-->
                             <!--                                <el-button-->
@@ -343,8 +343,8 @@ export default {
             isMember:true,
             isCertificator:false,//判断是不是要进行可信依赖库审核
             dialogVisible: false,
-            owner:'小好',
-            warehouse: '小好的测试仓库',
+            owner:'李华',
+            warehouse: '李华的测试仓库',
             value:'',
             isCredible: 0,   //低于60不可信;;; 可以用 this.$route.query.isCredible 传参  or  从数据库读取
             //isCredible:this.$store.state.CredibleValue,
@@ -369,71 +369,72 @@ export default {
 
             //此仓库的【贡献者】——后端从数据库里传入数组
             contributor: [
-                { name: '小好', src: require('../../assets/img/wzy.png') },],
+                { name: '韩梅梅', src: require('../../assets/img/wzy.png') },
+                { name: '李华', src: require('../../assets/img/wzy.png') },],
             //因为图片在assets里面，所以src引入的时候需要require一下。（此次未采用此方法引入头像）
             //此仓库的【管理者】——后端从数据库里传入数组
-            manager: [{ name: '小好', src: require('../../assets/img/img.jpg') }],
+            manager: [{ name: '李华', src: require('../../assets/img/img.jpg') }],
             //此仓库的【近期动态】——后端监测动态，传入前端？maybe，暂时写死数据
             recentTrends: [
-                { name: '小好', trends: '提交了文件router.c',time:'25天前' },
-                { name: '小好', trends: '提交了文件navigation.c',time:'25天前' },
-                { name: '小好', trends: '创建了仓库',time:'25天前' },
+                { name: '韩梅梅', trends: '提交了文件router.c',time:'17天前' },
+                { name: '韩梅梅', trends: '提交了文件navigation.c',time:'17天前' },
+                { name: '李华', trends: '创建了仓库',time:'17天前' },
             ],
 
             //文件列表的展示——假数据_____从后端请求一个名字为“对应用户选择分支的分支名称”的表，将数据展示在前端
             branchOptions: [{
-                value: 'master',
-                label: 'master'
+                value: '主分支',
+                label: '主分支'
             }, {
-                value: 'test',
-                label: 'test'
+                value: '测试',
+                label: '测试'
             }],
 
             master: [ {
                 file: 'router.c',
                 prop: 'add router.c',
-                time: '25天前',
+                time: '17天前',
             }, {
                 file: 'navigation.c',
                 prop: 'add navigation.c',
-                time: '25天前',
+                time: '17天前',
             }, {
                 file: 'README.md',
                 prop: 'Initial commit',
-                time: '25天前',
+                time: '17天前',
             }],
 
             test: [{
                 file: 'router.c',
                 prop: 'add RSA.c',
-                time: '25天前',
+                time: '17天前',
             }, {
                 file: 'navigation.c',
                 prop: 'add navigation.c',
-                time: '25天前',
+                time: '17天前',
             },{
                 file: 'test.c',
                 prop: 'add test.c',
-                time: '25天前',
+                time: '17天前',
             },{
                 file: 'README.md',
                 prop: 'Initial commit',
-                time: '25天前',
+                time: '17天前',
             }],
-            branchName: "master",      //下拉框绑定的model
+            branchName: "主分支",      //下拉框绑定的model
             particularsDAta: {}, //展示的数据
             displayData:[{
                 file: 'router.c',
                 prop: 'add router.c',
-                time: '25天前',
+                time: '17天前',
             }, {
                 file: 'navigation.c',
                 prop: 'add navigation.c',
-                time: '25天前',
+                time: '17天前',
             }, {
                 file: 'README.md',
                 prop: 'Initial commit',
-                time: '25天前',
+                time: '17天前',
             }],
         }
     },
@@ -487,14 +488,29 @@ export default {
         },
         //申请可信依赖库证明
         applicationYes(){
-            this.dialogVisible=false
-            this.$message({
-                type: 'info',
-                iconClass:'../../assets/img/payAttention.png',
-                message: '申请已提交，请等待审核！'
-            });
+            // this.dialogVisible=false
+            // this.$message({
+            //     type: 'info',
+            //     iconClass:'../../assets/img/payAttention.png',
+            //     message: '申请已提交，请等待审核！'
+            // });
+            // this.isDisabled= !this.isDisabled;
+            // this.applicationStatus="可信依赖库申请中";
+
+            this.dialogVisible=false;
             this.isDisabled= !this.isDisabled;
-            this.applicationStatus="可信依赖库申请中";
+            this.applicationStatus="已申请可信依赖库";
+
+            // 需要执行的代码
+            setTimeout(this.myMessage, 3000); //1秒后開始运行 √
+            // this. isCredible=60;
+        },
+        myMessage(){
+            this.$message({
+                type: 'warning',
+                iconClass:'../../assets/img/payAttention.png',
+                message: '您收到一条新消息！'
+            });
         },
         applicationNO(){
             this.dialogVisible=false

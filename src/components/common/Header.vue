@@ -44,9 +44,11 @@
                         <el-dropdown-item divided >
                             <router-link to="/newdepot">新建仓库</router-link>
                         </el-dropdown-item>
-                        <el-dropdown-item divided>发布代码片段</el-dropdown-item>
-                        <el-dropdown-item divided>创建组织</el-dropdown-item>
-                        <el-dropdown-item divided>开通企业版</el-dropdown-item>
+                        <el-dropdown-item divided>
+                            <el-button type='text' @click='retrieveDep'>找回仓库</el-button>
+                        </el-dropdown-item>
+<!--                        <el-dropdown-item divided>创建组织</el-dropdown-item>-->
+<!--                        <el-dropdown-item divided>开通企业版</el-dropdown-item>-->
                         <el-dropdown-item divided>---</el-dropdown-item>
                     </el-dropdown-menu>
                 </el-dropdown>
@@ -85,14 +87,64 @@
                 </el-dropdown>
             </div>
         </div>
+
+        <!-- 第一次弹窗确认找回仓库 -->
+        <el-dialog
+            title="找回仓库"
+            :visible.sync="dialog1Visible"
+            width="50%"
+            center
+        >
+            <div class="textBtn" style='display: grid;' >
+                <el-tag type='danger' style='font-weight: bolder;font-size: 14px'>提醒: 您将找回仓库及仓库内的全部信息</el-tag>
+                <el-tag type='danger' style='margin-top: 10px;font-weight: bolder;font-size: 14px'> 为防止意外，确认继续操作请输入仓库名称，例如: </el-tag>
+                <el-tag  type='danger' style='margin-top: 10px;font-weight: bolder;font-size: 14px'>  小A/小A的测试仓库 </el-tag>
+                <el-input style='margin-top: 10px' v-model="retrieveWarehouse" placeholder="请输入您要找回的的仓库名称"></el-input>
+            </div>
+            <span slot="footer" class="dialog-footer" style='margin-top: 20px'>
+                            <el-button  @click="applicationNO">取 消</el-button>
+                            <el-button type="primary" @click="applicationYes">确 定</el-button>
+                        </span>
+        </el-dialog>
+        <!-- 第二次弹窗确认删除仓库 -->
+        <el-dialog
+            title="仓找回库"
+            :visible.sync="dialog2Visible"
+            width="50%"
+            center
+        >
+            <div class="textBtn" style='display: grid;' >
+                <div>你正在找回仓库 李华的练习仓库 (李华/李华的练习仓库)，该操作需要验证你的用户身份是否有权限。</div>
+                <el-tag type='warning' style='margin-top: 10px;margin-bottom: 20px;font-weight: bolder;font-size: 14px;'>
+                    验证通过后，仓库 李华的练习仓库 (李华/李华的练习仓库) 的所有数据将被恢复!</el-tag>
+                <el-tag type='warning' style='margin-top:1px;margin-bottom: 20px;font-weight: bolder;font-size: 14px;'>
+                        区块链存储CID:QmXtQmNzGBG1DwF8iHccS9QZxpB6nQ7nLPSfpMCEHzvvzX</el-tag>
+                <div style='font-weight: bolder;margin-top: 5px;color: #e6a23c'>私钥验证身份</div>
+                <el-input style='margin-top: 10px' v-model="retrievePassword" placeholder="请输入您的私钥"></el-input>
+            </div>
+            <span slot="footer" class="dialog-footer" style='margin-top: 50px'>
+                            <el-button  @click="applicationNO2">取 消</el-button>
+                            <el-button type="primary" @click="applicationYes2">确 定</el-button>
+                        </span>
+        </el-dialog>
+
+
+
+
     </div>
 </template>
 <script>
 import bus from '../common/bus';
+import retrieveDepot from '@/components/page/retrieveDepot.vue';
 export default {
     data() {
         return {
+            dialog1Visible:false,
+            dialog2Visible:false,
+            retrievePassword:'v5IPPgM3ysOkrYQ5+rIFvVOvk6PVLeILnGnXtjw61',
+            retrieveWarehouse:'',
             searchProject:'',
+            isEntitled:true,
             collapse: false,
             fullscreen: false,
             name: 'linxin',
@@ -121,6 +173,9 @@ export default {
     }],
     value: '',
     computed: {
+        retrieveDepot() {
+            return retrieveDepot
+        },
         username() {
             let username = localStorage.getItem('ms_username');
             return username ? username : this.name;
@@ -169,13 +224,59 @@ export default {
                 }
             }
             this.fullscreen = !this.fullscreen;
-        }
+        },
+        retrieveDep(){
+            this.dialog1Visible=!this.dialog1Visible;
+        },
+        //输入仓库名确认
+        applicationYes(){
+            this.dialog1Visible=false
+            this.dialog2Visible=!this.dialog2Visible;
+        },
+        applicationNO(){
+            this.dialog1Visible=false
+
+        },
+        //输入密码确认
+        applicationYes2(){
+            this.dialog2Visible=false;
+
+            if(this.isEntitled===true){
+                this.$store.commit('updateSharedData', 0);
+                this.$router.push({path: '/workbenchDep'});
+                this.$message({
+                    type: 'info',
+                    iconClass:'../../assets/img/payAttention.png',
+                    message: '找回成功'
+                });
+            }
+            else{
+                let action;
+                this.$message({
+                    type: 'info',
+                    message: action === 'cancel'
+                        ? '找回失败'
+                        : '停留在当前页面'
+                })
+            }
+        },
+        applicationNO2(){
+            this.dialog2Visible=false
+            let action;
+            this.$message({
+                type: 'info',
+                message: action === 'cancel'
+                    ? '取消删除'
+                    : '停留在当前页面'
+            })
+        },
     },
     mounted() {
         if (document.body.clientWidth < 1500) {
             this.collapseChage();
         }
-    }
+    },
+
 };
 </script>
 <style lang="less" scoped>

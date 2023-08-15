@@ -8,7 +8,7 @@
                     <el-tag  v-if="this.$route.query.isCredible>=60" type='success'>可信</el-tag>
                     <el-tag  v-else-if='this.$route.query.isCredible<60' type='danger'>不可信</el-tag>
                     <el-breadcrumb separator="/" style='margin-top:5px;margin-left: 10px;font-size: 23px'>
-                        <el-breadcrumb-item :to="{ path: '/' }">{{ this.$route.query.owner }}</el-breadcrumb-item>
+                        <el-breadcrumb-item :to="{ path: '/' }">韩梅梅</el-breadcrumb-item>
                         <el-breadcrumb-item><a href="/">{{ this.$route.query.warehouseName }}</a></el-breadcrumb-item>
                     </el-breadcrumb>
                 </div>
@@ -16,7 +16,7 @@
                 <div style='position: absolute;right: 0;display: flex;margin-top: 60px'>
                     <el-dropdown size="small" split-button type="plain" v-on:click="watching_count++" >
                         <i class='el-icon-view'></i>
-                        Watching   {{watching_count}}
+                        浏览量   {{watching_count}}
                         <el-dropdown-menu slot="dropdown">
                             <el-dropdown-item>不关注</el-dropdown-item>
                             <el-dropdown-item>关注所有动态</el-dropdown-item>
@@ -24,13 +24,13 @@
                             <el-dropdown-item>关注但不提醒动态</el-dropdown-item>
                         </el-dropdown-menu>
                     </el-dropdown>
-                    <el-button type="plain" icon="el-icon-star-on" style='margin-left: 12px'  v-on:click="star_count++">Star  {{star_count}}</el-button>
-                    <el-button type="plain" icon="el-icon-share"  v-on:click="fork_count++">Fork  {{fork_count}}</el-button>
+                    <el-button type="plain" icon="el-icon-star-on" style='margin-left: 12px'  v-on:click="star_count++">点赞  {{star_count}}</el-button>
+                    <el-button type="plain" icon="el-icon-share"  v-on:click="fork_count++">下载  {{fork_count}}</el-button>
                 </div>
             </div>
             <div style='margin-top: 20px'>
                 <el-breadcrumb separator="/">
-                    <el-breadcrumb-item :to="{ path: '/' }">Pull Requests</el-breadcrumb-item>
+                    <el-breadcrumb-item :to="{ path: '/' }">拉取请求</el-breadcrumb-item>
                     <el-breadcrumb-item style='font-weight: bolder'><a href="/">详情</a></el-breadcrumb-item>
                 </el-breadcrumb>
             </div>
@@ -55,11 +55,11 @@
                                 </div>
                             </div>
                         </el-alert>
-                        <el-alert style='font-weight: bolder;font-size: 30px;margin-top: 30px;width:130px;height: 30px' type="info" title=''>
-                            {{this.owner}}  /  {{this.source}}</el-alert>
-                        <i class='el-icon-caret-right' style='margin-top: 40px;margin-left: 10px;margin-right: 10px'></i>
-                        <el-alert style='font-weight: bolder;font-size: 30px;margin-top: 30px;width:130px;height: 30px' type="info" title=''>
-                            {{this.owner}}  /  {{this.aim}}</el-alert>
+<!--                        <el-alert style='font-weight: bolder;font-size: 30px;margin-top: 30px;width:130px;height: 30px' type="info" title=''>-->
+<!--                            {{this.owner}}  /  {{this.source}}</el-alert>-->
+<!--                        <i class='el-icon-caret-right' style='margin-top: 40px;margin-left: 10px;margin-right: 10px'></i>-->
+<!--                        <el-alert style='font-weight: bolder;font-size: 30px;margin-top: 30px;width:130px;height: 30px' type="info" title=''>-->
+<!--                            {{this.owner}}  /  {{this.aim}}</el-alert>-->
                     </div>
                     <div style='display: flex'>
                         <div style='display: flex;margin-top:14px'>
@@ -142,14 +142,14 @@
                     <div v-if='this.isCheckPr===false'>
                         <div style='display: flex;margin-top: 10px;margin-left: 10px'>
                             <h4 style='margin-top: 3px' >
-                                此 Pull Request 暂不能合并，一些审核尚未通过</h4>
+                                此 拉取请求 暂不能合并，一些审核尚未通过</h4>
                         </div>
                     </div>
                     <el-button type='primary'style='margin-top: 10px'  @click='submit'>提交</el-button>
                     <!--未通过时的界面------ 审核者  -->
                     <div v-if='this.isCheckPr===true'>
                         <div style='display: flex;margin-top: 10px;margin-left: 10px'>
-                            <h4 style='margin-top: 3px' >需要您进行当前 Pull Request 的一些审核工作</h4>
+                            <h4 style='margin-top: 3px' >需要您进行当前 拉取请求 的一些审核工作</h4>
                             <div style='display: flex;position: absolute;right: 20px;'>
                                 <div v-if="(isExaminationPassed===true)&&(isTestPassed===true)">
                                     <el-button type="text" @click="open" style='height: 5px;color: #00a854;margin-right: 20px'>审核测试完成</el-button>
@@ -268,7 +268,7 @@
                                 </el-button>
                                 <div style='display: flex;margin-top: 10px'>
                                     <div v-for="user in selectedExaminers" >
-                                        <div style='width: 30px; height: 30px;display: grid;margin-right: 20px'>
+                                        <div style='width: 50px; height: 30px;display: grid;margin-right: 20px'>
 <!--                                            <el-avatar  :style="`background:${extractColorByName(user)}`" :size='"medium"'> {{user}} </el-avatar>-->
                                             <img src='../../assets/img/user-woman.png' style='width: 30px;height: 30px'/>
                                            <div style='font-size: 13px;color: #72767b;'> {{user}}  </div>
@@ -297,7 +297,7 @@
                                 </el-button>
                                 <div style='display: flex;margin-top: 10px'>
                                     <div v-for="user in selectedTesters" >
-                                        <div style='width: 30px; height: 30px;display: grid;margin-right: 20px'>
+                                        <div style='width: 50px; height: 30px;display: grid;margin-right: 20px'>
 <!--                                            <el-avatar  :style="`background:${extractColorByName(user)}`" :size='"medium"'> {{user}} </el-avatar>-->
                                             <img src='../../assets/img/user-woman.png' style='width: 30px;height: 30px'/>
                                             <div style='font-size: 13px;color: #72767b;'> {{user}}  </div>
@@ -350,7 +350,7 @@
                     <!--关联Issue-->
                     <div style='display: block;'>
                         <div style='display: flex;margin-top: 40px;position: relative;width: 100%'>
-                            <h4 >关联Issue</h4>
+                            <h4 >关联问题</h4>
                             <div style='margin-top: 5px;font-size: 15px;color: #72767b;position: absolute;right:10px' >
                                 <i class='el-icon-edit-outline' ></i>
                             </div>
@@ -459,7 +459,7 @@ export default {
             selectedTester:'',
             selectedExaminers:[],
             selectedTesters:[],
-            members:['admin',],
+            members:['韩梅梅',],
 
             priorityOptions: [{
                 value: '严重',

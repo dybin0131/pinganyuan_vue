@@ -7,14 +7,16 @@
         </div>
         <div class="container">
             <el-tabs v-model="message">
-                <el-tab-pane :label="`未读消息(${unread.length})`" name="first">
-                    <el-table :data="unread" :show-header="false" style="width: 100%">
+                <el-tab-pane :label="`消息(${unread_store.length})`" name="first">
+                    <el-table :data="unread_store" :show-header="false" style="width: 100%">
                         <el-table-column>
 
                             <template slot-scope="scope">
                                 <span class="message-title">{{scope.row.title}}</span>
                                 <el-button type='text'  @click='toExamin(scope.$index)'  v-if='scope.row.isExamine>=1'> ——→前往审核仓库 </el-button>
                                 <el-button type='text'  @click='toExaminPR(scope.$index)'  v-if='scope.row.isExamine<=-1'> ——→前往审核PR </el-button>
+                                <el-button type='text'  @click='toWarehouse(scope.$index)'  v-if='scope.row.isApplication===1'> ——→前往仓库 </el-button>
+                                <el-button type='text'  @click='toWarehouse2(scope.$index)'  v-if='scope.row.isApplication===2'> ——→前往仓库 </el-button>
                             </template>
                         </el-table-column>
                         <el-table-column prop="date" width="180"></el-table-column>
@@ -28,46 +30,46 @@
                         <el-button type="primary">全部标为已读</el-button>
                     </div>
                 </el-tab-pane>
-                <el-tab-pane :label="`已读消息(${read.length})`" name="second">
-                    <template v-if="message === 'second'">
-                        <el-table :data="read" :show-header="false" style="width: 100%">
-                            <el-table-column>
-                                <template slot-scope="scope">
-                                    <span class="message-title">{{scope.row.title}}</span>
-                                </template>
-                            </el-table-column>
-                            <el-table-column prop="date" width="150"></el-table-column>
-                            <el-table-column width="120">
-                                <template slot-scope="scope">
-                                    <el-button type="danger" @click="handleDel(scope.$index)">删除</el-button>
-                                </template>
-                            </el-table-column>
-                        </el-table>
-                        <div class="handle-row">
-                            <el-button type="danger">删除全部</el-button>
-                        </div>
-                    </template>
-                </el-tab-pane>
-                <el-tab-pane :label="`回收站(${recycle.length})`" name="third">
-                    <template v-if="message === 'third'">
-                        <el-table :data="recycle" :show-header="false" style="width: 100%">
-                            <el-table-column>
-                                <template slot-scope="scope">
-                                    <span class="message-title">{{scope.row.title}}</span>
-                                </template>
-                            </el-table-column>
-                            <el-table-column prop="date" width="150"></el-table-column>
-                            <el-table-column width="120">
-                                <template slot-scope="scope">
-                                    <el-button @click="handleRestore(scope.$index)">还原</el-button>
-                                </template>
-                            </el-table-column>
-                        </el-table>
-                        <div class="handle-row">
-                            <el-button type="danger">清空回收站</el-button>
-                        </div>
-                    </template>
-                </el-tab-pane>
+<!--                <el-tab-pane :label="`已读消息(${read.length})`" name="second">-->
+<!--                    <template v-if="message === 'second'">-->
+<!--                        <el-table :data="read" :show-header="false" style="width: 100%">-->
+<!--                            <el-table-column>-->
+<!--                                <template slot-scope="scope">-->
+<!--                                    <span class="message-title">{{scope.row.title}}</span>-->
+<!--                                </template>-->
+<!--                            </el-table-column>-->
+<!--                            <el-table-column prop="date" width="150"></el-table-column>-->
+<!--                            <el-table-column width="120">-->
+<!--                                <template slot-scope="scope">-->
+<!--                                    <el-button type="danger" @click="handleDel(scope.$index)">删除</el-button>-->
+<!--                                </template>-->
+<!--                            </el-table-column>-->
+<!--                        </el-table>-->
+<!--                        <div class="handle-row">-->
+<!--                            <el-button type="danger">删除全部</el-button>-->
+<!--                        </div>-->
+<!--                    </template>-->
+<!--                </el-tab-pane>-->
+<!--                <el-tab-pane :label="`回收站(${recycle.length})`" name="third">-->
+<!--                    <template v-if="message === 'third'">-->
+<!--                        <el-table :data="recycle" :show-header="false" style="width: 100%">-->
+<!--                            <el-table-column>-->
+<!--                                <template slot-scope="scope">-->
+<!--                                    <span class="message-title">{{scope.row.title}}</span>-->
+<!--                                </template>-->
+<!--                            </el-table-column>-->
+<!--                            <el-table-column prop="date" width="150"></el-table-column>-->
+<!--                            <el-table-column width="120">-->
+<!--                                <template slot-scope="scope">-->
+<!--                                    <el-button @click="handleRestore(scope.$index)">还原</el-button>-->
+<!--                                </template>-->
+<!--                            </el-table-column>-->
+<!--                        </el-table>-->
+<!--                        <div class="handle-row">-->
+<!--                            <el-button type="danger">清空回收站</el-button>-->
+<!--                        </div>-->
+<!--                    </template>-->
+<!--                </el-tab-pane>-->
             </el-tabs>
         </div>
     </div>
@@ -80,9 +82,49 @@
             return {
                 message: 'first',
                 showHeader: false,
+                unread_store: this.$store.state.unread_store,
                 unread: [{
-                    date: '2018-04-19 20:00:00',
-                    title: '【系统通知】该系统将于今晚凌晨2点到5点进行升级维护',
+                    date: '',
+                    title: '【系统通知】欢迎加入仓库',
+                    url: '',
+                    isExamine: 0,
+                }, {
+                    date: '',
+                    title: '【申请消息通知】您申请的可信依赖库证明已成功',
+                    //url: 'http://localhost:8080/codedetails?username=user1&warehouseName=11&introduce=11&warehouseKeywords=11',
+                    isExamine: 0,
+                    isApplication:1,
+                    username: '小好',
+                    warehouseName: '小好的测试仓库',
+                    introduce: '我的测试仓库',
+                    warehouseKeywords: 'C++/C',
+                    isCertificator:false,
+                    isOwner:true,
+                    isMember:true,
+                    isManager:true,
+                    isCredible:60,
+                    owner:'小好',
+                },
+                    {
+                        date: '',
+                        title: '【申请消息通知】您申请的可信依赖库证明未成功',
+                        //url: 'http://localhost:8080/codedetails?username=user1&warehouseName=11&introduce=11&warehouseKeywords=11',
+                        isExamine: 0,
+                        isApplication:2,
+                        username: '小好',
+                        warehouseName: '小好的临时仓库',
+                        introduce: '我的临时仓库',
+                        warehouseKeywords: 'C++',
+                        isCertificator:false,
+                        isOwner:true,
+                        isMember:true,
+                        isManager:true,
+                        isCredible:0,
+                        owner:'小好',
+                    }],
+                unread_failed: [{
+                    date: '2023-06-29 20:04:17',
+                    title: '【系统通知】欢迎加入仓库',
                     url: '',
                     isExamine: 0,
                 }, {
@@ -126,8 +168,8 @@
                     username: '小好',
                     warehouseName: '协同课设',
                     owner:'admin',
-                    prTitle: 'test',
-                    describe: 'test'
+                    prTitle: 'SM2',
+                    describe: 'test SM2'
                 }],
                 read: [{
                     date: '2018-04-19 20:00:00',
@@ -188,7 +230,40 @@
                         username:this.unread[index].username, warehouseName:this.unread[index].warehouseName,
                         title:this.unread[index].prTitle, describe:this.unread[index].describe,owner:this.unread[index].owner,},
                   });
-            }
+            },
+            toWarehouse(index){
+                this.$store.commit('updateMessage', 1);
+                this.$router.push({
+                    path: 'codedetails3',
+                    query: {
+                        username: this.unread[index].username,
+                        warehouseName: this.unread[index].warehouseName,
+                        introduce: this.unread[index].introduce,
+                        warehouseKeywords: this.unread[index].warehouseKeywords,
+                        isManager: this.unread[index].warehouseKeywords,
+                        isCertificator: this.unread[index].warehouseKeywords,
+                        isOwner: this.unread[index].isOwner,
+                        isMember: this.unread[index].isMember,
+                        owner: this.unread[index].owner,
+                    }
+                });
+            },
+            toWarehouse2(index){
+                this.$router.push({
+                    path: 'codedetails4',
+                    query: {
+                        username: this.unread[index].username,
+                        warehouseName: this.unread[index].warehouseName,
+                        introduce: this.unread[index].introduce,
+                        warehouseKeywords: this.unread[index].warehouseKeywords,
+                        isManager: this.unread[index].warehouseKeywords,
+                        isCertificator: this.unread[index].warehouseKeywords,
+                        isOwner: this.unread[index].isOwner,
+                        isMember: this.unread[index].isMember,
+                        owner: this.unread[index].owner,
+                    }
+                });
+            },
         },
         computed: {
             unreadNum() {

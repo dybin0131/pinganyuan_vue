@@ -12,14 +12,14 @@
                 >不可信</el-tag>
                 <el-breadcrumb separator="/" style='margin-top:5px;margin-left: 10px;font-size: 23px'>
                     <el-breadcrumb-item :to="{ path: '/' }">{{ username }}</el-breadcrumb-item>
-                    <el-breadcrumb-item><a href="/">{{this.$route.query.warehouseName}}</a></el-breadcrumb-item>
+                    <el-breadcrumb-item><a href='/public'>{{this.$route.query.warehouseName}}</a></el-breadcrumb-item>
                 </el-breadcrumb>
             </div>
             <!--右侧辅助工具栏-->
             <div class="topRight">
                 <el-dropdown size="small" split-button type="plain">
                     <i class='el-icon-view'></i>
-                    Watching   {{watching_count}}
+                    浏览量   {{watching_count}}
                     <el-dropdown-menu slot="dropdown">
                         <el-dropdown-item>不关注</el-dropdown-item>
                         <el-dropdown-item>关注所有动态</el-dropdown-item>
@@ -27,17 +27,17 @@
                         <el-dropdown-item>关注但不提醒动态</el-dropdown-item>
                     </el-dropdown-menu>
                 </el-dropdown>
-                <el-button type="plain" icon="el-icon-star-on" style='margin-left: 12px'>Star  {{star_count}}</el-button>
-                <el-button type="plain" icon="el-icon-share">Fork  {{fork_count}}</el-button>
+                <el-button type="plain" icon="el-icon-star-on" style='margin-left: 12px'>点赞  {{star_count}}</el-button>
+                <el-button type="plain" icon="el-icon-share">下载  {{fork_count}}</el-button>
             </div>
         </div>
         <div class="contentBox">
-<!--            <div class="contentNav">-->
-<!--                <div @click="contentNavBtn(index)" :class="index==indexs?'conNavColor':'conNavBox'" v-for="(item,index) in conList" :key="index">-->
-<!--                    {{item}}-->
-<!--                    <div class="contentXian"></div>-->
-<!--                </div>-->
-<!--            </div>-->
+            <!--            <div class="contentNav">-->
+            <!--                <div @click="contentNavBtn(index)" :class="index==indexs?'conNavColor':'conNavBox'" v-for="(item,index) in conList" :key="index">-->
+            <!--                    {{item}}-->
+            <!--                    <div class="contentXian"></div>-->
+            <!--                </div>-->
+            <!--            </div>-->
             <el-tabs v-model="activeName" @tab-click="handleClick">
                 <el-tab-pane label="成员管理" name="first">
 
@@ -52,27 +52,9 @@
                             </div>
                         </div>
                         <div class="tableContent">
-                            <el-badge :value="2" class="item">
+                            <el-badge :value="1" class="item">
                                 <div class="tableTitle">管理员</div>
                             </el-badge>
-                            <div class="tableBox">
-                                <div class="tableLeft">
-                                    <div class="tImg">
-                                        <img src="../../assets/img/user-woman.png" alt="">
-                                    </div>
-                                    <div>
-                                        <div class="tUser">
-                                            <div class="nameBox"><i class="el-icon-user"></i> 韩梅梅</div>
-                                            <div class="haveBox">仓库拥有者</div>
-                                        </div>
-                                        <!--                                <div class="tlBtm">user1（12060665+user1@user.com）</div>-->
-                                    </div>
-                                </div>
-                                <div class="tableRight">
-                                    <img src="../../assets/img/cheng.png" alt="" srcset="">
-                                    <div class="Rtext">创建者 <i class="el-icon-arrow-down"></i></div>
-                                </div>
-                            </div>
 
                             <div class="tableBox">
                                 <div class="tableLeft">
@@ -89,7 +71,7 @@
                                 </div>
                                 <div class="tableRight">
                                     <img src="../../assets/img/cheng.png" alt="" srcset="">
-                                    <div class="Rtext">管理者 <i class="el-icon-arrow-down"></i></div>
+                                    <div class="Rtext">拥有者 <i class="el-icon-arrow-down"></i></div>
                                 </div>
                             </div>
                             <div class="page">
@@ -108,18 +90,18 @@
                 <el-tab-pane label="删除仓库" name="second">
                     <div style='margin-left: 40px'>
                         <div class="contentTile" >
-                             <div class="title" style='font-weight: bolder'>删除仓库</div>
+                            <div class="title" style='font-weight: bolder'>删除仓库</div>
                         </div>
                         <div style='display: grid'>
-                        <el-tag   type='danger'
-                                 style='width: 850px;height: 40px;background: rgba(237,64,64,0.1);border: 1px solid #ED4040;border-radius: 4px;font-weight: bolder;
+                            <el-tag   type='danger'
+                                      style='width: 850px;height: 40px;background: rgba(237,64,64,0.1);border: 1px solid #ED4040;border-radius: 4px;font-weight: bolder;
                             font-size: 16px;padding-top: 8px;padding-left: 25px;margin-top: 30px'
-                        >此操作无法恢复！请慎重操作！</el-tag>
+                            >此操作无法恢复！请慎重操作！</el-tag>
 
-                        <el-tag   type='danger'
-                                  style='width: 850px;height: 40px;background: rgba(237,64,64,0.1);border: 1px solid #ED4040;border-radius: 4px;
+                            <el-tag   type='danger'
+                                      style='width: 850px;height: 40px;background: rgba(237,64,64,0.1);border: 1px solid #ED4040;border-radius: 4px;
                             font-size: 16px;padding-top: 8px;padding-left: 25px;margin-top: 30px'
-                        >删除仓库将会连同其相关的所有数据(包括 ssues、Pull Reguests等在内)一起删除，同时取消仓库的协作者关联</el-tag>
+                            >删除仓库将会连同其相关的所有数据(包括 问题、拉取请求等在内)一起删除，同时取消仓库的协作者关联</el-tag>
                             <el-button type='danger' style='width: 100px;margin-top: 40px'  @click='deleteBtn'> 删除仓库 </el-button>
                         </div>
                     </div>
@@ -131,11 +113,11 @@
                         :visible.sync="dialog1Visible"
                         width="50%"
                         center
-                   >
+                    >
                         <div class="textBtn" style='display: grid;' >
                             <el-tag type='danger' style='font-weight: bolder;font-size: 14px'>警告: 仓库删除无法撤消!请慎重操作!该操作将永久删除仓库的数据，同时取消仓库的协作者关联</el-tag>
                             <el-tag type='danger' style='margin-top: 10px;font-weight: bolder;font-size: 14px'> 为防止意外，确认继续操作请输入以下内容: </el-tag>
-                            <el-tag  type='danger' style='margin-top: 10px;font-weight: bolder;font-size: 14px'>  小好/小好的测试仓库 </el-tag>
+                            <el-tag  type='danger' style='margin-top: 10px;font-weight: bolder;font-size: 14px'>  李华/地图导航课设 </el-tag>
 
                             <el-input style='margin-top: 10px' v-model="deleteWarehouse" placeholder="请输入您的仓库名称"></el-input>
                         </div>
@@ -153,9 +135,9 @@
                         center
                     >
                         <div class="textBtn" style='display: grid;' >
-                            <div>你正在操作删除仓库 小好的测试仓库 (小好/小好的测试仓库)，该操作需要验证你的用户身份。</div>
+                            <div>你正在操作删除仓库 地图导航课设 (李华/地图导航课设)，该操作需要验证你的用户身份。</div>
                             <el-tag type='warning' style='margin-top: 20px;margin-bottom: 20px;font-weight: bolder;font-size: 14px'>
-                                验证通过后，仓库 小好的测试仓库 (小好/小好的测试仓库) 的所有数据将被删除，此操作无法恢复!
+                                验证通过后，仓库 地图导航课设 (李华/地图导航课设) 的所有数据将被删除，此操作无法恢复!
                             </el-tag>
                             <div style='font-weight: bolder;margin-top: 5px;color: #e6a23c'>密码验证</div>
                             <el-input style='margin-top: 10px' v-model="deletePassword" placeholder="请输入您的密码"></el-input>
@@ -250,7 +232,7 @@ export default {
             conList: ['仓库成员管理','删除仓库'],
             deleteWarehouse:'',
             deletePassword:'',
-            isCredible:60,
+            isCredible:0,
             dialog1Visible:false,
             dialog2Visible:false,
             identity:'开发者',
@@ -341,7 +323,7 @@ export default {
         //输入仓库名确认
         applicationYes(){
             this.dialog1Visible=false;
-           this.dialog2Visible=!this.dialog2Visible;
+            this.dialog2Visible=!this.dialog2Visible;
         },
         applicationNO(){
             this.dialog1Visible=false;
@@ -349,7 +331,7 @@ export default {
         //输入密码确认
         applicationYes2(){
             this.dialog2Visible=false;
-           this.$store.commit('updateSharedData', 1);
+            this.$store.commit('updateSharedData', 1);
             this.$router.push({path: '/workbenchDep'});
             this.$message({
                 type: 'info',

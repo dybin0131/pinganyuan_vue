@@ -20,9 +20,10 @@
 
                 <!--面包屑 -->
                 <div style='margin-left: 15px;display: flex'>
-                   <div style='font-size: 24px;font-family: Source Han Sans CN;font-weight: bold;color: #353D61;'> test{{this.$route.query.warehouseName}} </div>
+                   <div style='font-size: 24px;font-family: Source Han Sans CN;font-weight: bold;color: #353D61;'> 协同课设{{this.$route.query.warehouseName}} </div>
+
                    <div style='margin-right: 10px;margin-left: 10px;margin-top: 4px;font-size: 24px'>/</div>
-                   <div style='font-size: 18px;font-family: Source Han Sans CN;font-weight: 400;color: #353D61;opacity: 0.8;margin-top: 4px'>  p r </div>
+                   <div style='font-size: 18px;font-family: Source Han Sans CN;font-weight: 400;color: #353D61;opacity: 0.8;margin-top: 4px'>  RSA.c </div>
                 </div>
                 <el-icon class='el-icon-copy-document' style='width: 22px;height: 22px;color: #4092ED;margin-top: 9px;margin-left: 10px'></el-icon>
                 <!--标签行 右侧栏目内容-->
@@ -64,7 +65,7 @@
                                 <!--提交信息-->
                                 <div style='display: flex'>
                                     <div style='margin-top: 9px;font-size: 15px;color: #72767b'>
-                                        {{this.file.user }}  提交于 {{this.file.time}} .
+                                        {{this.file.user}}  提交于 {{this.file.time}} .
                                     </div>
                                 </div>
                             </div>
@@ -120,10 +121,10 @@ export default {
             fileContent: '',
             http_text: 'https://element.eleme.cn/#/zh-CN/component/input',
             file: {
-                name: 'pr',
-                user: 'user1',
-                length: '2bytes',
-                time: '2天前',
+                name: 'RSA.c',
+                user: '李华',
+                length: '1304bytes',
+                time: '5天前',
             },
             prodDesc: 'SQL.url=jdbc:sqlserver://127.0.0.1; DatabaseName=BaseFrame\n' +
                 'SQL.userName=sa\n' +

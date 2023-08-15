@@ -5,7 +5,7 @@ module.exports = {
     devServer: {
         proxy: {
             '/api':{
-                target:'http://192.168.1.135:9090',
+                target: 'http://localhost:8080',
                 changeOrigin:true,
                 pathRewrite:{
                     '^/api':''
@@ -16,7 +16,7 @@ module.exports = {
     // devServer: {
     //     proxy: {
     //         '/api': {
-    //             target: 'http://localhost:8080',  // 需要转发到后端服务的服务地址----后端地址
+    //             target: 'http://localhost:8080',  // 需要转发到后端服务的服务地址----后端地址 target:'http://192.168.1.135:9090',
     //             //ws:true,//启用webSocket
     //             changeOrigin: true,
     //             pathRewrite: {

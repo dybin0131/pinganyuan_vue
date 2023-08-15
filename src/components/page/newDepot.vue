@@ -42,6 +42,7 @@ box-shadow: 0 5px 20px 0 rgba(183,183,195,0.07);border-radius: 10px;margin-top: 
                 >
                 </el-input>
             </el-form-item>
+
             <el-form-item label="特殊资源"  prop="source" >
                 <div style='display: flex;'>
                     <el-form-item>
@@ -82,6 +83,7 @@ box-shadow: 0 5px 20px 0 rgba(183,183,195,0.07);border-radius: 10px;margin-top: 
                     region: '',
                     introduce: '',
                     warehouseKeywords:'',
+
                     isOwner:true,
                     isMember:true,
                     isManager:true,
@@ -128,8 +130,9 @@ box-shadow: 0 5px 20px 0 rgba(183,183,195,0.07);border-radius: 10px;margin-top: 
         methods: {
             onSubmit() {
                 console.log('submit!');
+                this.$store.commit('updateNR', 0);
                 this.$router.push(
-                    { name :'codedetails',
+                    { name :'codedetails6',
                         query:{owner:this.username,username:this.username,warehouseName: this.form.warehouseName,introduce:this.form.introduce,
                         warehouseKeywords:this.form.warehouseKeywords,isOwner:this.form.isOwner,isMember:this.form.isMember,
                         isManager:this.form.isManager,isCertificator:this.form.isCertificator},

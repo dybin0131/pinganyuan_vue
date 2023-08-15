@@ -14,10 +14,11 @@
                 <el-button type="success" style='width: auto;height: 40px;margin-top: 10px;margin-left: 10px' @click="confirmApply">确认可信</el-button>
                 <el-button type="danger" style='width: auto;height: 40px;margin-top: 10px;margin-left: 10px' @click="deny">确认不可信</el-button>
                 <!--右侧辅助工具栏-->
-                <div style='position: absolute;right: 0;display: flex;margin-top: 60px'>
-                    <el-dropdown size="small" split-button type="plain">
+                <div style='position: absolute;right: 12px;display: flex;margin-top: 15px'>
+                    <el-dropdown size="small" split-button type="plain" style='font-family: San Francisco Display;font-weight: 400;color: #353D61;'
+                                 v-on:click='watching_count++'>
                         <i class='el-icon-view'></i>
-                        Watching   {{watching_count}}
+                        浏览量   {{watching_count}}
                         <el-dropdown-menu slot="dropdown">
                             <el-dropdown-item>不关注</el-dropdown-item>
                             <el-dropdown-item>关注所有动态</el-dropdown-item>
@@ -25,8 +26,10 @@
                             <el-dropdown-item>关注但不提醒动态</el-dropdown-item>
                         </el-dropdown-menu>
                     </el-dropdown>
-                    <el-button type="plain" icon="el-icon-star-on" style='margin-left: 12px'>Star  {{star_count}}</el-button>
-                    <el-button type="plain" icon="el-icon-share">Fork  {{fork_count}}</el-button>
+                    <el-button type="plain" icon="el-icon-star-off" style='margin-left: 12px;font-family: San Francisco Display;font-weight: 400;color: #353D61;'
+                               v-on:click='star_count++'>点赞  {{star_count}} </el-button>
+                    <el-button type="plain" icon="el-icon-share" style='font-family: San Francisco Display;font-weight: 400;color: #353D61;'
+                               v-on:click='fork_count++'>下载  {{fork_count}}</el-button>
                 </div>
             </div>
         </div>
@@ -42,8 +45,8 @@
                             master<i class="el-icon-arrow-down el-icon--right"></i>
                         </el-button>
                         <el-dropdown-menu slot="dropdown">
-                            <el-dropdown-item>master</el-dropdown-item>
-                            <el-dropdown-item>branch</el-dropdown-item>
+                            <el-dropdown-item>主分支</el-dropdown-item>
+                            <el-dropdown-item>测试分支</el-dropdown-item>
                         </el-dropdown-menu>
                     </el-dropdown>
                     <i class="el-icon-share" style='margin-top: 7px;margin-left: 15px'></i>

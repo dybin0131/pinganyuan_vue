@@ -45,7 +45,7 @@ export default {
     data: function() {
         return {
             param: {
-                username: 'admin',
+                username: '韩梅梅',
                 password: '123123',
             },
             rules: {
@@ -55,19 +55,32 @@ export default {
         };
     },
     methods: {
+        // submitForm() {
+        //     this.$refs.login.validate(valid => {
+        //         if (valid) {
+        //             login(this.param).then(res=>{
+        //                 if (res===1) {
+        //                     this.$message.success('登录成功');
+        //                     localStorage.setItem('ms_username', this.param.username);
+        //                     this.$router.push('/');
+        //                 }else{
+        //                     this.$message.error('登录失败');
+        //                 }
+        //             })
+        //
+        //         } else {
+        //             this.$message.error('请输入账号和密码');
+        //             console.log('error submit!!');
+        //             return false;
+        //         }
+        //     });
+        // },
         submitForm() {
             this.$refs.login.validate(valid => {
                 if (valid) {
-                    login(this.param).then(res=>{
-                        if (res===1) {
-                            this.$message.success('登录成功');
-                            localStorage.setItem('ms_username', this.param.username);
-                            this.$router.push('/');
-                        }else{
-                            this.$message.error('登录失败');
-                        }
-                    })
-
+                    this.$message.success('登录成功');
+                    localStorage.setItem('ms_username', this.param.username);
+                    this.$router.push('/');
                 } else {
                     this.$message.error('请输入账号和密码');
                     console.log('error submit!!');

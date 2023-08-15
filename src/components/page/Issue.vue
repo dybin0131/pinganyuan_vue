@@ -6,7 +6,7 @@
             <div style='display: flex;position: relative'>
                 <div style='display: flex;margin-top: 20px'>
                     <el-tag v-if="this.$route.query.isCredible>=60" type='success'
-                            style='width: 55px;height: 24px;background: rgba(0,171,164,0.1);border: 1px solid #00ABA4;
+                            style='width: 55px;height: 24px;background: rgba(0,171,164,0.1);border: 1px solid #00ABA4;padding-left: 14px;
                              border-radius: 4px;margin-top: 4px'>可信</el-tag>
                     <el-tag  v-else-if='this.$route.query.isCredible<60' type='danger'
                              style='width: 55px;height: 24px;background: rgba(237,64,64,0.1);border: 1px solid #ED4040;
@@ -17,10 +17,11 @@
                     </el-breadcrumb>
                 </div>
                 <!--右侧辅助工具栏-->
-                <div style='position: absolute;right: 0;display: flex;margin-top: 20px'>
-                    <el-dropdown size="small" split-button type="plain">
+                <div style='position: absolute;right: 12px;display: flex;margin-top: 15px'>
+                    <el-dropdown size="small" split-button type="plain" style='font-family: San Francisco Display;font-weight: 400;color: #353D61;'
+                                 v-on:click='watching_count++'>
                         <i class='el-icon-view'></i>
-                        Watching   {{watching_count}}
+                        浏览量   {{watching_count}}
                         <el-dropdown-menu slot="dropdown">
                             <el-dropdown-item>不关注</el-dropdown-item>
                             <el-dropdown-item>关注所有动态</el-dropdown-item>
@@ -28,8 +29,10 @@
                             <el-dropdown-item>关注但不提醒动态</el-dropdown-item>
                         </el-dropdown-menu>
                     </el-dropdown>
-                    <el-button type="plain" icon="el-icon-star-on" style='margin-left: 12px'>Star  {{star_count}}</el-button>
-                    <el-button type="plain" icon="el-icon-share">Fork  {{fork_count}}</el-button>
+                    <el-button type="plain" icon="el-icon-star-off" style='margin-left: 12px;font-family: San Francisco Display;font-weight: 400;color: #353D61;'
+                               v-on:click='star_count++'>点赞  {{star_count}} </el-button>
+                    <el-button type="plain" icon="el-icon-share" style='font-family: San Francisco Display;font-weight: 400;color: #353D61;'
+                               v-on:click='fork_count++'>下载  {{fork_count}}</el-button>
                 </div>
             </div>
         </div>
@@ -37,13 +40,13 @@
     <!--分页-->
     <el-tabs v-model="activeName"   style='margin-top: 10px;'>
         <!--Issue-->
-        <el-tab-pane label="Issue" name="first" style='margin-top: 10px'>
+        <el-tab-pane label="问题" name="first" style='margin-top: 10px'>
             <el-container>
                 <div style='width: 67%;background: rgba(255,255,255,0.6);border: 1px solid;border-image: linear-gradient(0deg, #FFFFFF, #FFFFFF) 1 1;
                     box-shadow: 0 5px 20px 0 rgba(183,183,195,0.07);border-radius: 10px;'>
                     <el-form ref="form" :model="form" style='margin-left: 15px;margin-right: 20px'>
                         <div style='margin-top: 18px;font-size: 17px;font-family: Source Han Sans CN;font-weight: bold;color: #353D61;'>
-                            新建Issue</div>
+                            新建问题</div>
                         <el-form-item   style='margin-top: 10px;width: 760px;'>
                             <el-input v-model="form.name"></el-input>
                         </el-form-item>
@@ -121,6 +124,7 @@
                                         <el-date-picker
                                             v-model="form.StartEndDate"
                                             type="daterange"
+                                            default-value='2023-06-24'
                                             range-separator="至"
                                             start-placeholder="开始日期"
                                             end-placeholder="结束日期">
@@ -382,7 +386,7 @@
         </el-tab-pane>
 
         <!--查看Issue列表-->
-        <el-tab-pane label="查看Issue列表" name="third" >
+        <el-tab-pane label="查看问题列表" name="third" >
 
             <div style='display: flex;width: 100%;position:relative;'>
                 <!--搜索区域-->
@@ -503,7 +507,7 @@ export default {
                 date1: '',
                 date2: '',
                 desc: '',
-                StartEndDate:'',
+                StartEndDate:'2023-6-24',
             }
 
 
@@ -526,6 +530,8 @@ export default {
         },
         onSubmit() {
             console.log('submit!');
+            this.$message('创建成功');
+
         }
     }
 }

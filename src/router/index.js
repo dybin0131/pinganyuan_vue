@@ -62,8 +62,61 @@ export default new Router({
                     meta: { title: '我活跃的仓库2' }
                 },
                 {
+                    path: '/codedetails3',
+                    name: 'codedetails3',
+                    component: () => import(/* webpackChunkName: "dashboard" */ '../components/page/Code_details2_success.vue'),
+                    meta: { title: '仓库界面' }
+                },
+                {
+                    path: '/codedetails4',
+                    name: 'codedetails4',
+                    component: () => import(/* webpackChunkName: "dashboard" */ '../components/page/Code_details2_fail.vue'),
+                    meta: { title: '仓库界面' }
+                },
+                {
+                    path: '/codedetails5',
+                    name: 'codedetails5',
+                    component: () => import(/* webpackChunkName: "dashboard" */ '../components/page/Code_details2_fail_btn.vue'),
+                    meta: { title: '仓库界面' }
+                },
+                //新的空白仓库页面
+                {
+                    path: '/codedetails6',
+                    name: 'codedetails6',
+                    component: () => import(/* webpackChunkName: "dashboard" */ '../components/page/Code_details_newDep.vue'),
+                    meta: { title: '仓库界面' }
+                },
+                //删库
+                {
+                    path: '/codedetails7',
+                    name: 'codedetails7',
+                    component: () => import(/* webpackChunkName: "dashboard" */ '../components/page/Code_details_delete.vue'),
+                    meta: { title: '仓库界面' }
+                },
+                //找回仓库
+                {
+                    path: '/codedetails8',
+                    name: 'codedetails8',
+                    component: () => import(/* webpackChunkName: "dashboard" */ '../components/page/Code_details2_lianxi.vue'),
+                    meta: { title: '仓库界面' }
+                },
+                {
                     path: '/codeview',
                     component: () => import(/* webpackChunkName: "dashboard" */ '../components/page/Code_view.vue'),
+                    meta: {
+                        title: '查看文件',
+                    }
+                },
+                {
+                    path: '/codeview_file',
+                    component: () => import(/* webpackChunkName: "dashboard" */ '../components/page/Code_view_file.vue'),
+                    meta: {
+                        title: '查看文件',
+                    }
+                },
+                {
+                    path: '/codeview_file_lihua',
+                    component: () => import(/* webpackChunkName: "dashboard" */ '../components/page/Code_view_lihua_main.vue'),
                     meta: {
                         title: '查看文件',
                     }
@@ -109,6 +162,11 @@ export default new Router({
                     meta: { title: '工作台-仓库' }
                 },
                 {
+                    path: '/workbenchDep2',
+                    component: () => import(/* webpackChunkName: "dashboard" */ '../components/page/workbenchDep2.vue'),
+                    meta: { title: '工作台-仓库' }
+                },
+                {
                     path: '/workbenchPr',
                     component: () => import(/* webpackChunkName: "dashboard" */ '../components/page/workbenchPr.vue'),
                     meta: { title: '工作台-PR' }
@@ -124,8 +182,18 @@ export default new Router({
                     meta: { title: '新建仓库'}
                 },
                 {
+                    path: '/retrieveDepot',
+                    component: () => import(/* webpackChunkName: "dashboard" */ '../components/page/retrieveDepot.vue'),
+                    meta: { title: '找回仓库'}
+                },
+                {
                     path: '/manage',
                     component: () => import(/* webpackChunkName: "dashboard" */ '../components/page/Manage.vue'),
+                    meta: { title: '管理成员' }
+                },
+                {
+                    path: '/manage2',
+                    component: () => import(/* webpackChunkName: "dashboard" */ '../components/page/Manage2.vue'),
                     meta: { title: '管理成员' }
                 },
                 {
@@ -133,6 +201,7 @@ export default new Router({
                     component: () => import(/* webpackChunkName: "dashboard" */ '../components/page/AddMember.vue'),
                     meta: { title: '邀请成员' }
                 },
+
                 {
                     path: '/depot',
                     component: () => import(/* webpackChunkName: "icon" */ '../components/page/workbenchDep.vue'),
@@ -268,7 +337,7 @@ export default new Router({
         },
         {
             path: '/login',
-            component: () => import(/* webpackChunkName: "dashboard" */ '../components/page/Login2.vue'),
+            component: () => import(/* webpackChunkName: "dashboard" */ '../components/page/Login.vue'),
             meta: { title: '登录',isRegister:false  },
         },
         {
