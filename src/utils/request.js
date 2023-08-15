@@ -39,7 +39,7 @@ import { Message } from 'element-ui'
 import router from "../router";
 axios.defaults.headers['Content-Type'] = 'application/json;charset=utf-8'
 const service = axios.create({
-    baseURL: '/api',
+    baseURL: process.env.VUE_APP_BASE_API,
 
 })
 service.interceptors.request.use(
