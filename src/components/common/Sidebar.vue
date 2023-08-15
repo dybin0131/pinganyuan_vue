@@ -75,12 +75,12 @@ export default {
                         {
                             icon: 'el-icon-thumb',
                             index: 'workbenchIssue',
-                            title: 'Issue',
+                            title: '问题',
                         },
                         {
                             icon: 'el-icon-question',
                             index: 'workbenchPr',
-                            title: 'Pull Requests',
+                            title: '拉取请求',
                         },
                     ]
                 },
@@ -91,20 +91,20 @@ export default {
                     subs: [
                         {
                             icon: 'el-icon-wallet',
-                            index: 'codedetails',
-                            title: '我活跃的仓库1',
+                            index: 'codedetails5',
+                            title: '李华的临时仓库',
                         },
                         {
                             icon: 'el-icon-wallet',
-                            index: 'editor',
-                            title: '我活跃的仓库2',
+                            index: 'codedetails2',
+                            title: '李华的测试仓库',
                         },
                     ]
                 },
                 {
                     icon: 'el-icon-office-building',
-                    //index: 'tag',//未设置，待修改
-                    index: 'codeview',//未设置，待修改
+                    //index: 'tag',//
+                    index: 'pullMerge',//
                     title: '动态',
                 },
                 {

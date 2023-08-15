@@ -16,11 +16,11 @@ export function registers(data) {
     })
 }
 // 登录
-export function login(params) {
+export function login(data) {
     return request({
         url: '/user/login',
-        method: 'get',
-        params
+        method: 'post',
+        data
     })
 }
 // 查询所以用户信息

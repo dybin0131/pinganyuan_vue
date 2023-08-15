@@ -1,0 +1,2 @@
+filereader——可以应用在缩略图
+blob---

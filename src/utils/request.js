@@ -39,45 +39,45 @@ import { Message } from 'element-ui'
 import router from "../router";
 axios.defaults.headers['Content-Type'] = 'application/json;charset=utf-8'
 const service = axios.create({
-  baseURL: '/api',
+    baseURL: '/api',
 
 })
 service.interceptors.request.use(
-  config => {
-    if (localStorage.getItem("user")) {
-      config.headers['Authorization'] = "Bearer " + JSON.parse(localStorage.getItem("user")).token
+    config => {
+        if (localStorage.getItem("user")) {
+            config.headers['Authorization'] = "Bearer " + JSON.parse(localStorage.getItem("user")).token
+        }
+        return config
+    },
+    error => {
+        console.log(error) // for debug
+        return Promise.reject(error)
     }
-    return config
-  },
-  error => {
-    console.log(error) // for debug
-    return Promise.reject(error)
-  }
 )
 service.interceptors.response.use(
-  response => {
-    const res = response.data
-    if (res.code == 1 || res.code == 10001) {
-      if (res.msg == "身份认证信息失效"  || res.msg =="重新登录" || res.msg == "没有登录" || res.msg == "登录信息或已过期，请重新登录" || res.msg == "登录失效，请重新登录") {
-        window.localStorage.clear();
-        localStorage.setItem("tian", 1);
-        router.push({ path: '/' });
-      } else {
-        Message({
-          message: res.msg,
-          type: 'error',
-          duration: 2000
-        })
-      }
+    response => {
+        const res = response.data
+        if (res.code == 1 || res.code == 10001) {
+            if (res.msg == "身份认证信息失效"  || res.msg =="重新登录" || res.msg == "没有登录" || res.msg == "登录信息或已过期，请重新登录" || res.msg == "登录失效，请重新登录") {
+                window.localStorage.clear();
+                localStorage.setItem("tian", 1);
+                router.push({ path: '/' });
+            } else {
+                Message({
+                    message: res.msg,
+                    type: 'error',
+                    duration: 2000
+                })
+            }
+        }
+        else {
+            return res
+        }
+    },
+    error => {
+        console.log('err' + error) // for debug
+        return Promise.reject(error)
     }
-    else {
-      return res
-    }
-  },
-  error => {
-    console.log('err' + error) // for debug
-    return Promise.reject(error)
-  }
 )
 
 export default service
