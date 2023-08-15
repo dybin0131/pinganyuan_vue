@@ -38,7 +38,7 @@
                 <div class="uplodeFile">
                     <div class="fileLeft">
                         <div class="title">将文件拖到此处或 <span>点击上传</span></div>
-                        <div class="text">支持png、jpg、svg、gif格式</div>
+                        <div class="text">支持图片、文档等</div>
                     </div>
                     <div class="fileRight">
                         <img src="../../../assets/img/uplodeimg.png" alt="">
