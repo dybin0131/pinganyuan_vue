@@ -103,8 +103,8 @@ export default {
                 },
                 {
                     icon: 'el-icon-office-building',
-                    //index: 'tag',//未设置，待修改
-                    index: 'pullMerge',//未设置，待修改
+                    //index: 'tag',//
+                    index: 'pullMerge',//
                     title: '动态',
                 },
                 {
