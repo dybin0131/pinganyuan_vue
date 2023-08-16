@@ -18,11 +18,14 @@
               style="width: 100%;font-size:13px;margin-top: 10px">
               <el-table-column label="项目名称" prop="rName">
               </el-table-column>
+              <el-table-column label="拥有者" prop="rUser" width="200">
+              </el-table-column>
               <el-table-column label="项目标签" prop="repo_label">
               </el-table-column>
               <el-table-column label="项目语言" prop="repo_language">
               </el-table-column>
-
+              <el-table-column label="描述" prop="repo_language" width="500">
+              </el-table-column>
               <el-table-column label="操作">
                 <template slot-scope="scope">
                   <el-button type="primary" @click="viewDetail(scope.row.rId)">查看</el-button>
@@ -37,9 +40,13 @@
               style="width: 100%;font-size:13px;margin-top: 10px">
               <el-table-column label="项目名称" prop="rName">
               </el-table-column>
+              <el-table-column label="拥有者" prop="rUser" width="200">
+              </el-table-column>
               <el-table-column label="项目标签" prop="repo_label">
               </el-table-column>
               <el-table-column label="项目语言" prop="repo_language">
+              </el-table-column>
+              <el-table-column label="描述" prop="repo_language" width="500">
               </el-table-column>
               <el-table-column label="操作">
                 <template slot-scope="scope">
@@ -89,8 +96,9 @@ export default {
       this.$router.push({
         path: "./codedetails",
         query: { 
-            rId: rId,
-            activeName:this.activeName
+            repoId: rId,
+            activeName:this.activeName,
+            branchId:0,
         },
       });
     },

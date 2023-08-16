@@ -13,11 +13,14 @@
                              style='width: 55px;height: 24px;background: rgba(237,64,64,0.1);border: 1px solid #ED4040;border-radius: 4px;'
                     >不可信</el-tag>
 
-                    <div style='margin-left: 20px;font-size: 23px;display: flex'>
-                        <div style='width: 63px;height: 19px;font-size: 24px;font-family: Source Han Sans CN;
-                        font-weight: bold;color: #353D61;line-height: 28px;margin-top: 0;'>{{this.$route.query.username}}</div>
-                        <div style='width: 32px;height: 14px;font-size: 18px;font-family: Source Han Sans CN;font-weight: 400;
-                        color: #353D61;line-height: 28px;opacity: 0.8;margin-left: 12px'> / {{this.$route.query.warehouseName}} </div>
+                    <!-- style='background-color: #4092ED;opacity: 0.8;border-radius: 4px;
+                                   font-size: 18px;font-family: Source Han Sans CN;font-weight: 400;color: #4092ED;'> -->
+
+                    <div style='margin-left: 20px;display: flex'>
+                        <div style='width: 30px;height: 19px;font-size: 14px;font-family: Source Han Sans CN;
+                        font-weight: bold;color: #353D61;line-height: 28px;margin-top: 0;'>{{this.repoData.rUser}}</div>
+                        <div style='height: 14px;font-size: 14px;font-family: Source Han Sans CN;font-weight: 400;
+                        color: #353D61;line-height: 28px;opacity: 0.8;margin-left: 12px'> / {{this.repoData.rName}} </div>
                     </div>
                 </div>
 
@@ -36,8 +39,8 @@
                 </el-button>
 
                 <!--未申请时/申请失败-->
-                <el-button  style=' width: 130px;height: 30px;margin-top: 17px;background: #4092ED;border: 1px solid #4092ED;border-radius: 4px;margin-left: 20px'@click="dialogVisible = true" :disabled='isDisabled' v-if='this.owner===this.visitor '>
-                    <div style='font-size: 14px;font-family: Source Han Sans CN;font-weight: 400;color: #FFFFFF;'>
+                <el-button  style=' width: 130px;height: 30px;margin-top: 14px;background: #4092ED;border: 1px solid #4092ED;border-radius: 4px;margin-left: 20px'@click="dialogVisible = true" :disabled='isDisabled' v-if='this.owner===this.visitor '>
+                    <div style='font-size: 14px;line-height:11px;font-family: Source Han Sans CN;font-weight: 400;color: #FFFFFF;'>
                         {{ applicationStatus }}
                     </div>
                 </el-button>
@@ -98,26 +101,27 @@
                         <div style='display: flex;margin-top:5px;margin-bottom: 15px'>
                             <div style='display: flex;margin-top: 14px'>
                                 <div>
-                                    <!--                                    <el-select v-model="branchName" placeholder="选择分支"  @change='choiceBranch(branchName)'-->
-                                    <!--                                    style='background-color: #4092ED;opacity: 0.1;border-radius: 4px;-->
-                                    <!--                                   font-size: 18px;font-family: Source Han Sans CN;font-weight: 400;color: #4092ED;'>-->
-                                    <el-select v-model="branchName" placeholder="选择分支"  @change='choiceBranch(branchName)'
+                                    <el-select v-model="selectBranchId" placeholder="选择分支"  @change='choiceBranch()'
                                                style='background-color: #4092ED;opacity: 0.8;border-radius: 4px;
                                    font-size: 18px;font-family: Source Han Sans CN;font-weight: 400;color: #4092ED;'>
                                         <el-option
-                                            v-for="item in branchOptions"
-                                            :key="item.value"
-                                            :label="item.label"
-                                            :value="item.value"
+                                            v-for="item in branchList"
+                                            :key="item.id"
+                                            :label="item.branchName"
+                                            :value="item.id"
                                         >
                                         </el-option>
                                     </el-select>
                                 </div>
                                 <img src='../../../assets/img/branch.png' style='margin-top: 9px;width: 13px;height: 13px;margin-left: 16px'>
                                 <div style='font-size: 14px;margin-top: 7px;margin-left: 6px;font-family: Source Han Sans CN;font-weight: bold;color: #353D61;'>
-                                    分支 {{this.branchOptions.length}} </div>
-                                <div style='font-size: 12px;margin-top: 10px;margin-left: 16px;font-family: Source Han Sans CN;font-weight: 500;color: #353D61;'>
-                                    标签 1</div>
+                                    共 {{this.branchList.length}} 个分支
+                                </div>
+                                <el-button type='text' @click="addBranch()">
+                                    <i class="el-icon-plus" style='font-family: Source Han Sans CN;font-weight: bolder;color: #4092ED;margin-left: 10px;font-size: 14px'></i>
+                                </el-button>
+                                <!-- <div style='font-size: 12px;margin-top: 10px;margin-left: 16px;font-family: Source Han Sans CN;font-weight: 500;color: #353D61;'>
+                                    标签 1</div> -->
                             </div>
                             <!--标签行 右侧栏目内容-->
                             <div style='display: flex;position: absolute;right: 18px;'>
@@ -143,7 +147,7 @@
                                         Issue</router-link>
                                 </el-button>
                                 <div style='margin-left: 10px'>
-                                    <el-dropdown>
+                                    <el-dropdown @command="handleCommand">
                                         <el-button type="text" style='margin-left: 6px;font-size: 14px;font-family: Source Han Sans CN;font-weight: 400;
                                         color: #00ABA4;line-height: 46px;'>文件</el-button>
                                         <img src='../../../assets/img/arrow-down-green.png' style='width: 10px;height: 5px;margin-left: 5px' />
@@ -155,8 +159,8 @@
                                             <!-- <el-dropdown-item>新建Diagram文件</el-dropdown-item>
                                             <el-dropdown-item>新建文件夹</el-dropdown-item>
                                             <el-dropdown-item>新建子模块</el-dropdown-item> -->
-                                            <el-dropdown-item>
-                                                <router-link to="/upload">上传文件</router-link>
+                                            <el-dropdown-item command="uploadFile">
+                                                上传文件
                                             </el-dropdown-item>
                                             <!-- <el-dropdown-item>搜索文件</el-dropdown-item> -->
                                         </el-dropdown-menu>
@@ -187,22 +191,12 @@
                     <!--左侧标签行下面内容  表格数据-->
                     <div>
                         <!--表格信息_===表格数据根据用户从 选择器 里面的选择 来确定，一个分支对应一个表格-->
-                        <el-table :data = "displayData"  style="width: 100%;margin-top:8px;font-size: 16px;font-family: Source Han Sans CN;
-                    font-weight: 500;color: #353D61;">
-                            <el-table-column prop="file" width="260px "  label='File name' align="center"> </el-table-column>
-                            <el-table-column prop="prop"  width="260px " label="Submit information" align="center"></el-table-column>
-                            <el-table-column prop="time"  width='260px' label="Creation time" align="center"></el-table-column>
-                            <!--                        <el-table-column prop="operation" align='right' width='100px' label="Operation">-->
-                            <!--                            <template slot-scope="scope" style='display: flex'>-->
-                            <!--                                <el-button-->
-                            <!--                                    type="text"-->
-                            <!--                                    icon="el-icon-view"-->
-                            <!--                                    @click="handleView(scope.$index, scope.row)"-->
-                            <!--                                >查看</el-button>-->
-                            <!--                            </template>-->
-                            <!--                        </el-table-column>-->
+                        <el-table :data="displayData"  :header-cell-style="{'text-align':'center'}" :cell-style="{'text-align':'center'}"
+                            style="width: 100%;font-size:13px;margin-top: 10px">
+                            <el-table-column prop="fileName"  label='文件名' align="center"> </el-table-column>
+                            <el-table-column prop="remark" label="扩展信息" align="center"></el-table-column>
+                            <el-table-column prop="timeDesc" label="提交时间" align="center"></el-table-column>
                         </el-table>
-                        <!--点赞打赏区域   已删除-->
                     </div>
                 </div>
             </div>
@@ -313,28 +307,25 @@ import axios from 'axios';
 import ManageComponent from '@/components/page/depot/Manage.vue';
 import CounterCom from '@/components/page/CounterCom.vue'
 import { messages } from '../../common/i18n';
+import { selectBranchList,addBranch,searchDetail } from '../../../api/depot';
 
 
 
 export default {
     name: "FilePreview",
     components: { CounterCom },
-
-    props: {
-        // 父组件传入文件格式类型例如 [1,2]
-        accept: {
-            type: Array,
-            default: () => {
-                return [".rar",".zip",".doc",".docx",".xls",".txt",".pdf",".jpg",".png",".jpeg",".vue",".c",".cpp",".xml",".yml"];
-            },
-        },
+    mounted() {
+        this.repoId = this.$route.query.repoId;
+        this.activeName = this.$route.query.activeName; //owner我拥有的，member我参与的
+        this.selectBranchId = this.$route.query.branchId;
+        this.selectRepoInfo();
+        this.selectBranchList();
     },
-    // mounted() {
-    //     // this.owner = this.$route.params.owner;
-    //     // this.visitor = this.$route.params.visitor;
-    // },
     data() {
         return {
+            repoId:0,
+            repoData:[],
+            activeName:'',
             dialogVisible: false,
             visitor:this.$route.params.visitor,
             owner:this.$route.params.owner,
@@ -352,13 +343,6 @@ export default {
             fork_count: 1,
             watching_count: 3,
             donate_count: 11,
-
-            //上传文件
-            fileList: [{
-                name: 'food.jpeg',
-                url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'
-            }],
-
             //此仓库的【贡献者】——后端从数据库里传入数组
             contributor: [
                 { name: 'admin', src: require('../../../assets/img/img.jpg') },
@@ -374,68 +358,20 @@ export default {
                 { name: 'user2', trends: '推送了新的提交到 master 分支',time:'16小时前' },
                 { name: 'user3', trends: '合并了 PR !3 12',time:'16小时前' },
             ],
-
-            //文件列表的展示——假数据_____从后端请求一个名字为“对应用户选择分支的分支名称”的表，将数据展示在前端
-            branchOptions: [{
-                value: 'master',
-                label: 'master'
-            }, {
-                value: 'test',
-                label: 'test'
-            }],
-
-            master: [{
-                file: 'test_user1',
-                prop: 'add test_user1',
-                time: '10小时前',
-            }, {
-                file: 'test_user2',
-                prop: 'add test_user2',
-                time: '1个月前',
-            },  {
-                file: 'README.md',
-                prop: 'Initial commit',
-                time: '2个月前',
-            }],
-
-            test: [{
-                file: 'test_user1',
-                prop: 'add test_user1',
-                time: '10小时前',
-            }, {
-                file: 'test_user2',
-                prop: 'add test_user2',
-                time: '1个月前',
-            }, {
-                file: 'test_user3',
-                prop: 'add test_user3',
-                time: '1小时前',
-            }, {
-                file: 'README.md',
-                prop: 'Initial commit',
-                time: '2个月前',
-            }],
+            //真实数据
+            branchList:[],
+            selectBranchId:0,
             branchName: "master",      //下拉框绑定的model
-            particularsDAta: {}, //展示的数据
             displayData:[{
-                file: 'test_user1',
-                prop: 'add test_user1',
-                time: '10小时前',
-            }, {
-                file: 'test_user2',
-                prop: 'add test_user2',
-                time: '1个月前',
-            },  {
-                file: 'README.md',
-                prop: 'Initial commit',
-                time: '2个月前',
+                fileName: '',
+                remark: '该分支下还没有文件',
+                uploadDate:'',
+                timeDesc: '',
             }],
+            newBranchName:''
         }
     },
     created() {
-        axios.get('http://localhost:8080/codedetails').then(function(resp){
-            this.fileList = resp.data;
-        });
         // 在 created 钩子函数中将 CredibleValue 值设置为 0
         this.$store.dispatch('setCredibleValue', 0);
         // 在 created 钩子函数中监听 CredibleValue 的变化
@@ -448,6 +384,51 @@ export default {
         );
     },
     methods: {
+        selectRepoInfo(){
+            searchDetail({
+                rId: this.repoId
+            }).then((res) => {
+                this.repoData = res.data;
+            });
+        },
+        selectBranchList(){
+            selectBranchList({
+                repoId: this.repoId
+            }).then((res) => {
+                this.branchList = res.data;
+                if(this.selectBranchId==0){
+                    this.selectBranchId = this.branchList[0].id;
+                }
+                this.choiceBranch();
+            });
+        },
+        addBranch(){
+            this.$prompt("请输入分支名称", "提示", {
+                confirmButtonText: "确定",
+                cancelButtonText: "取消",
+                showClose: false,
+                distinguishCancelAndClose: true,
+            }).then(({ value }) => {
+                for (var i=0;i<this.branchList.length;i++)
+                { 
+                    if(this.branchList[i].branchName===value){ //已有重复名字
+                        this.$message({ type: 'error', message:'创建失败，已存在该分支！'})
+                        return;
+                    }
+                }
+                this.newBranchName = value;
+                addBranch({
+                    repoId: this.repoId,
+                    branchName:this.newBranchName
+                }).then((res) => {
+                    this.$message({ type: 'success', message: res.msg })
+                    this.selectBranchList();
+                }).catch((res) => {
+                    this.$message({ type: 'error', message: res.msg })
+                    this.selectBranchList();
+                });
+            });
+        },
         extractColorByName(name) {
             // 根据用户姓名随机生成用户头像颜色——————
             // 由于是按照名字第一个元素设定颜色，导致有不同用户颜色不一样，把用户名都换成中文可行，由于前面roles还是英文，暂时未改
@@ -463,7 +444,6 @@ export default {
             }
             return '#0c' + str.slice(1, 2)
         },
-
         handleNodeClick(data) {
             console.log(data);
         },
@@ -501,32 +481,6 @@ export default {
                     : '停留在当前页面'
             })
         },
-        // application() {
-        //     const confirmText = ['1. 你的可信依赖库申请将由平安源nber审核。','2. 凡是经过安全检验确保安全的依赖库，平台会为其颁发可信依赖库证明。','3.申请提交后，如一个工作日内未得到推荐，则默认表示被拒。'];
-        //     const newDatas = [];
-        //     const h = this.$createElemnet;
-        //     for (const i in confirmText) {
-        //         newDatas.push(h('p', null, confirmText[i]));
-        //     }
-        //     this.$confirm({
-        //         message: h('div', null, newDatas),
-        //         title: '申请可信依赖库',
-        //         distinguishCancelAndClose: true,
-        //         confirmButtonText: '确定',
-        //         cancelButtonText: '取消',
-        //     })
-        //         .then(() => {
-
-        //         })
-        //         .catch(action => {
-        //             this.$message({
-        //                 type: 'info',
-        //                 message: action === 'cancel'
-        //                     ? '取消申请'
-        //                     : '停留在当前页面'
-        //             })
-        //         });
-        // },
         acknowledge() {
             console.log(this.owner);
             console.log(this.visitor);
@@ -585,58 +539,29 @@ export default {
             window.open(file.response.url);
             console.log(file);
         },
-        handleRemove(file, fileList) {
-            console.log(file, fileList);
-        },
-        handleExceed(files, fileList) {
-            this.$message.warning(`当前限制选择 10 个文件，本次选择了 ${files.length} 个文件，共选择了 ${files.length + fileList.length} 个文件`);
-        },
-        beforeRemove(file, fileList) {
-            return this.$confirm(`确定移除 ${ file.name }？`);
-        },
-        //测试上传文件(注意web的上下文)
-        handleBeforeUpload(file){
-            this.uploadUrl = 'http://localhost:8080/codedetails'
-            console.log("开始上传，上传的文件为："+file.name)
-            let formData = new FormData();
-            formData.append("multipartFiles", file);
-            this.fileList.value.push({
-                name:file.name,
-                url:file.url,
-            })
-            axios({
-                method: 'post',
-                url: 'http://localhost:8080/codedetails',
-                data: formData,
-                headers: {'Content-Type': 'multipart/form-data' }
-            }).then((res) => {
-                console.log("文件上传返回："+res)
-            }).catch(error => {
-                console.log("文件上传异常:"+error)
-            })
-            this.uploadUrl ='http://localhost:8080/codedetails'
-        },
-        //////文件列表 对应分支 渲染
         // change事件匹配对应数据
-        choiceBranch(branch) {
-            // let idx = "";
-            // branch.map((item, index) => {
-            //     if (item.name === value) {
-            //         idx = index;
-            //     }
-            // });
-            // this.particularsDAta = this.fileData.name[idx];
-            console.log(branch);
-            if(branch === "master"){
-                this.displayData = this.master;}
-            if(branch === "test"){
-                this.displayData = this.test;}
+        choiceBranch(){
+            for (var i=0;i<this.branchList.length;i++)
+            { 
+                if(this.branchList[i].id==this.selectBranchId){
+                    this.displayData = this.branchList[i].repoFileList;
+                }
+            }
         },
+        handleCommand(command) {
+            if(command==="uploadFile"){
+                this.$router.push({
+                    path: "./upload",
+                    query: { 
+                        repoId: this.repoId,
+                        branchId:this.selectBranchId,
+                        activeName:this.activeName
+                    },
+                });
+            }
+        }
     },
     computed: {
-        // warehouse() {
-        //     return messages
-        // },
         username() {
             let username = localStorage.getItem('ms_username');
             return username ? username : this.name;
@@ -649,14 +574,6 @@ export default {
             })
             .catch(_ => {});
     },
-    //created()：在创造之前就执行的东西，拿到跨域json数据格式
-    // created() {
-    //     let that=this;
-    //     axios.get('地址').then(function (resp) {
-    //         that.XXX变量=resp.data;
-    //     })
-    // }
-
 }
 </script>
 

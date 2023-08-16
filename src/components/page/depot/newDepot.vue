@@ -5,40 +5,31 @@ box-shadow: 0px 5px 20px 0px rgba(183,183,195,0.07);border-radius: 10px;margin-t
         <div style=' font-size: 22px;font-family: Source Han Sans CN;font-weight: bold;color: #353D61;line-height: 40px;
         margin-left:30px;margin-top:30px;width: 60%'>新建仓库
         <el-form ref="form" :model="form" :rules='rules' label-width="80px" style='width: 60%;margin-top: 25px' label-position='top'>
-            <el-form-item label="仓库名称" prop="warehouseName"
+            <el-form-item label="仓库名称" prop="rName"
             style='font-size: 18px;font-family: Source Han Sans CN;font-weight: bold;color: #353D61;'>
-                <el-input v-model="form.warehouseName" placeholder="请输入仓库名称"  style='width: 456px;height: 21px;'></el-input>
+                <el-input v-model="form.rName" placeholder="请输入仓库名称"  style='width: 456px;height: 21px;'></el-input>
             </el-form-item>
-            <el-form-item label="归属" prop="ownership" style='margin-top: 10px'>
+            <el-form-item label="归属" prop="rUser" style='margin-top: 10px'>
                 <el-input
                     placeholder="请输入内容"
-                    v-model="username"
+                    v-model="form.rUser"
                     :disabled="true">
                 </el-input>
             </el-form-item>
             <div style='display: flex'></div>
-            <el-form-item label="路径" prop="warehouseAddress"  placeholder="请输入路径" style='margin-top: 10px'>
-                    <el-input v-model="form.warehouseName" ></el-input>
+            <el-form-item label="开发语言" prop="repo_language" style='margin-top: 10px'>
+                <el-input v-model="form.repo_language" placeholder="请输入开发语言"></el-input>
             </el-form-item>
-                <!--暂不现实路径-->
-<!--            <el-form-item>-->
-<!--                <div style='display: flex;margin-top: 13px;margin-left: 9px'>-->
-<!--                    <div style='margin-top: 2px;margin-right: 5px'>-->
-<!--                        <img src='../../assets/img/exclamation-green.png' />-->
-<!--                    </div>-->
-<!--                    <div style='font-size: 14px;font-family: Source Han Sans CN;font-weight: 500;color: #00ABA4;'> 您的仓库路径： {{ warehouse_address }}  </div>-->
-<!--                </div>-->
-<!--            </el-form-item>-->
-            <el-form-item label="关键词" prop="warehouseKeywords" style='margin-top: 10px'>
-                <el-input v-model="form.warehouseKeywords" placeholder="请输入仓库关键词"></el-input>
+            <el-form-item label="关键词" prop="repo_label" style='margin-top: 10px'>
+                <el-input v-model="form.repo_label" placeholder="请输入仓库关键词"></el-input>
             </el-form-item>
-            <el-form-item label="仓库介绍" prop="introduce" style='margin-top: 10px'>
+            <el-form-item label="仓库介绍" prop="desc" style='margin-top: 10px'>
                 <el-input
                     style='width: 1200px'
                     type="textarea"
                     :rows="2"
                     placeholder="用简短的语言来描述一下吧"
-                    v-model="form.introduce"
+                    v-model="form.desc"
                 >
                 </el-input>
             </el-form-item>
@@ -55,16 +46,16 @@ box-shadow: 0px 5px 20px 0px rgba(183,183,195,0.07);border-radius: 10px;margin-t
                         </div>
                     </el-form-item>
                     <el-form-item>
-                        <el-radio label="开源（所有人可见）" v-model='form.openSource' disabled style='margin-left: 20px'></el-radio>
+                        <el-radio label="1" v-model='form.privateSourse' disabled  style='margin-left: 20px'>开源（所有人可见）</el-radio>
                     </el-form-item>
                     <el-form-item>
-                        <el-radio label="私有（仅仓库成员可见）" v-model='form.privateSourse'  style='margin-left: 20px'></el-radio>
+                        <el-radio label="2" v-model='form.privateSourse' style='margin-left: 20px'>私有（仅仓库成员可见）</el-radio>
                     </el-form-item>
                 </div>
             </el-form-item>
 
             <el-form-item>
-                <el-button type="primary" @click="onSubmit">
+                <el-button type="primary" @click="onSubmit()">
                     <div style='color: #f0f0f0'>立即创建</div>
                 </el-button>
             </el-form-item>
@@ -74,69 +65,66 @@ box-shadow: 0px 5px 20px 0px rgba(183,183,195,0.07);border-radius: 10px;margin-t
 </template>
 
 <script>
+    import { addDepo } from '../../../api/depot';
     export default {
         data() {
             return {
                 value:'',
                 form: {
-                    warehouseName: '',
-                    region: '',
-                    introduce: '',
-                    warehouseKeywords:'',
-                    date1: '',
-                    date2: '',
-                    delivery: false,
-                    type: [],
-                    openSource: '',
-                    privateSourse: '',
-                    desc: '',
-                    address:'',
-                    warehouse_addr:'',
-                    wangzhitou: 'https://pinganyuan.com/',
-                    xiegang:'/'
+                    rName: '',
+                    rUser: '',
+                    repo_label: '',
+                    repo_language:'',
+                    desc:'',
+                    privateSourse:'2'
                 },
                 rules: {
-                    warehouseName: [
+                    rName: [
                         { required: true, message:'请输入仓库名称'}
                     ],
-                    ownership: [
-                        { required: true, }
+                    rUser: [
+                        { required: true, message:'请输入所属用户'}
                     ],
-                    source: [
-                        { required: true,  trigger: 'blur' }
+                    repo_label: [
+                        { required: true,  message:'请输入关键词'}
                     ],
-                    warehouseAddress: [
-                        { required: true,  trigger: 'blur' }
+                    repo_language: [
+                        { required: true,  message:'请输入开发语言'}
+                    ],
+                    desc: [
+                        { required: true,  message:'请输入仓库介绍'}
                     ]
                 }
             };
         },
-        computed:{
-            /*
-            warehouse_address() {
-                return this.form.warehouse_addr === this.form.wangzhitou+this.value + this.form.xiegang + this.form.address
-            },
-            */
-            username() {
-                let username = localStorage.getItem('ms_username');
-                return username ? username : this.name;
-            },
+        mounted(){
+            this.getUsername();
         },
         methods: {
             onSubmit() {
-                console.log('submit!');
-                this.$router.push(
-                    { name :'codedetails',
-                        query:{username:this.username,warehouseName: this.form.warehouseName,introduce:this.form.introduce,
-                        warehouseKeywords:this.form.warehouseKeywords},
-                params:{owner:this.username, visitor:this.username}})
+                this.$refs['form'].validate((valid) => {
+                if (valid) {
+                    addDepo(this.form).then((res) => {
+                        this.$message({ type: 'success', message: "创建成功！" })
+                        this.$router.push({
+                            path: "./codedetails",
+                            query: { 
+                                repoId: res.data,
+                                activeName:'owner',
+                                branchId:0,
+                            },
+                        });
+                    });
+                } else {
+                    console.log('提交失败，未通过验证!!');
+                    return false;
+                }
+                });
+                
             },
-            chooseOwner(){
-                console.log('choose owner');
-                this.options.push({
-                   value: this.username,
-                   label: this.username,
-                })
+            getUsername() {
+                let username = localStorage.getItem('ms_username');
+                this.form.rUser = username;
             }
         },
     }

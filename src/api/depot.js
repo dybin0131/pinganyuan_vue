@@ -10,6 +10,15 @@ export function findAllDepot(params) {
     })
 }
 
+// 新增仓库
+export function addDepo(data) {
+    return request({
+        url: '/workbench/addDepo',
+        method: 'post',
+        data
+    })
+}
+
 // 搜索我拥有的仓库
 export function findMyDepot(params) {
     return request({
@@ -36,3 +45,32 @@ export function searchDetail(data) {
         data
     })
 }
+
+// 搜索仓库的分支列表
+export function selectBranchList(params) {
+    return request({
+        url: '/workbench/selectBranchList',
+        method: 'get',
+        params
+    })
+}
+
+// 新增分支
+export function addBranch(data) {
+    return request({
+        url: '/workbench/addBranch',
+        method: 'post',
+        data
+    })
+}
+
+// 修改文件的备注信息
+export function updateFileInfo(data) {
+    return request({
+        url: '/file/updateFileInfo',
+        method: 'post',
+        data
+    })
+}
+
+ 

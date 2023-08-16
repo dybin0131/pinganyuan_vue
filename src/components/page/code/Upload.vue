@@ -23,6 +23,7 @@
                 </div>
             </el-upload> -->
             <el-upload
+                    v-loading="uploading"
                     class="upload-demo"
                     drag
                     style='text-align: center'
@@ -47,23 +48,27 @@
             </el-upload>
 
         <div class="upTitle">扩展信息</div>
-        <el-input type="textarea" :rows="6" placeholder="此处可填写为什么修改，做了什么修改，以及开发的思路等更加详细的提交信息（相当于Git commit message的body）" v-model="textarea"></el-input>
+        <el-input type="textarea" :rows="6" placeholder="此处可填写为什么修改，做了什么修改，以及开发的思路等更加详细的提交信息（相当于Git commit message的body）" v-model="remark"></el-input>
         <div class="btnBox">
-            <el-button type="primary">提交审核</el-button>
+            <el-button type="primary" @click="updateFileRemark()">提交</el-button>
             <el-button type="primary" plain>取消</el-button>
         </div>
-        <div class="btmText">点击提交审核后，你将创建一个轻量级PR（ <span>详情</span> ），作者审核通过后合入仓库</div>
+        <!-- <div class="btmText">点击提交审核后，你将创建一个轻量级PR（ <span>详情</span> ），作者审核通过后合入仓库</div> -->
     </div>
 </template>
 
 <script>
     import VueCropper  from 'vue-cropperjs';
     import axios from 'axios';
+    import { updateFileInfo } from '../../../api/depot';
     export default {
         name: 'upload',
         data: function(){
             return {
+                uploading:false,
                 repoId:0,
+                branchId:0,
+                remark:"",
                 repoFileId:0,
                 name: localStorage.getItem('ms_username'),
                 fileList: [],
@@ -79,8 +84,14 @@
         components: {
             VueCropper
         },
+        mounted() {
+            this.repoId = this.$route.query.repoId;
+            this.branchId = this.$route.query.branchId;
+            this.activeName = this.$route.query.activeName;
+        },
         methods:{
             upload(param) {
+                this.uploading = true;
                 let config = {
                     //添加请求头
                     headers: { "Content-Type": "multipart/form-data" },
@@ -90,12 +101,37 @@
                 formData.append("uploadFile", param.file);
                 formData.append("fName", param.file.name);
                 formData.append("fSize", param.file.size);
-                formData.append("repoId", param.file.size);
+                formData.append("repoId", this.repoId);
+                formData.append("branchId", this.branchId);
                 formData.append("relativePath", "/");
                 const url = process.env.VUE_APP_BASE_API + "/file/uploadRepoFile";
                 axios.post(url, formData, config).then((res) => {
                     this.repoFileId=res.data.data;
                     console.log(this.repoFileId);
+                    this.uploading = false;
+                }).catch((res) => {
+                    this.$message({ type: 'error', message: "上传失败，请重新操作！" })
+                    this.uploading = false;
+                });
+            },
+            updateFileRemark(){
+                if(this.uploading){
+                    this.$message({ type: 'error', message: "正在上传文件，请稍后再试！" });
+                    return;
+                }
+                updateFileInfo({
+                    id: this.repoFileId,
+                    remark:this.remark
+                }).then((res) => {
+                    this.$message({ type: 'success', message: "保存成功！" })
+                    this.$router.push({
+                        path: "./codedetails",
+                        query: { 
+                            repoId: this.repoId,
+                            branchId:this.branchId,
+                            activeName:this.activeName
+                        },
+                    });
                 });
             },
             setImage(e){
