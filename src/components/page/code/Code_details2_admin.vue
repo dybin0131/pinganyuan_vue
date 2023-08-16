@@ -14,7 +14,7 @@
                     >不可信</el-tag>
 
                     <div style='margin-left: 20px;font-size: 23px;display: flex'>
-                        <div style='width: 85px;height: 19px;font-size: 24px;font-family: Source Han Sans CN;
+                        <div style='width: 63px;height: 19px;font-size: 24px;font-family: Source Han Sans CN;
                         font-weight: bold;color: #353D61;line-height: 28px;margin-top: 0;'>{{this.$route.query.owner}}</div>
                         <div style='width: auto;height: 14px;font-size: 18px;font-family: Source Han Sans CN;font-weight: 400;
                         color: #353D61;line-height: 28px;opacity: 0.8;margin-left: 12px'> / {{this.$route.query.warehouseName}} </div>
@@ -23,26 +23,18 @@
 
                 <!--审核是否为可信依赖库-->
                 <el-button type="primary" style=' width: 155px;height: 30px;margin-top: 17px;background: #4092ED;border: 1px solid #4092ED;border-radius: 4px;margin-left: 20px'
-                           @click="acknowledge" v-if='this.isCertificator===true' :disabled='isAuditCompleted'>
+                           @click="acknowledge" :disabled='isAuditCompleted'>
                     <div style='font-size: 14px;font-family: Source Han Sans CN;font-weight: 400;color: #FFFFFF;'>
                         授予可信标签
                     </div>
                 </el-button>
                 <el-button type="primary" style=' width: 165px;height: 30px;margin-top: 17px;background: #4092ED;border: 1px solid #4092ED;border-radius: 4px;margin-left: 20px'
-                           @click="deny" v-if='this.isCertificator===true' :disabled='isAuditCompleted'>
+                           @click="deny"  :disabled='isAuditCompleted'>
                     <div style='font-size: 14px;font-family: Source Han Sans CN;font-weight: 400;color: #FFFFFF;'>
                         不授予可信标签
                     </div>
                 </el-button>
 
-                <!--未申请时/申请失败-->
-                <!--                <div v-if='this.$route.query.isCertificator===false '>-->
-                <el-button  style=' width: 150px;height: 30px;margin-top: 17px;background: #4092ED;border: 1px solid #4092ED;border-radius: 4px;margin-left: 20px'
-                            @click="dialogVisible = true" :disabled='isDisabled' >
-                    <div style='font-size: 14px;font-family: Source Han Sans CN;font-weight: 400;color: #FFFFFF;'>
-                        {{ applicationStatus }}
-                    </div>
-                </el-button>
                 <!--                </div>-->
                 <!--右侧辅助工具栏-->
                 <div style='position: absolute;right: 12px;display: flex;margin-top: 15px'>
@@ -116,7 +108,7 @@
                                         </el-option>
                                     </el-select>
                                 </div>
-                                <img src='../../assets/img/branch.png' style='margin-top: 9px;width: 13px;height: 13px;margin-left: 16px'>
+                                <img src='../../../assets/img/branch.png' style='margin-top: 9px;width: 13px;height: 13px;margin-left: 16px'>
                                 <div style='font-size: 14px;margin-top: 7px;margin-left: 6px;font-family: Source Han Sans CN;font-weight: bold;color: #353D61;'>
                                     分支 {{this.branchOptions.length}} </div>
                                 <div style='font-size: 12px;margin-top: 10px;margin-left: 16px;font-family: Source Han Sans CN;font-weight: 500;color: #353D61;'>
@@ -149,10 +141,10 @@
                                     <el-dropdown>
                                         <el-button type="text" style='margin-left: 6px;font-size: 14px;font-family: Source Han Sans CN;font-weight: 400;
                                         color: #00ABA4;line-height: 46px;'>文件</el-button>
-                                        <img src='../../assets/img/arrow-down-green.png' style='width: 10px;height: 5px;margin-left: 5px' />
+                                        <img src='../../../assets/img/arrow-down-green.png' style='width: 10px;height: 5px;margin-left: 5px' />
                                         <el-dropdown-menu slot="dropdown">
                                             <el-dropdown-item>
-                                                <router-link :to="{path:'/newFile',query:{username:this.username,warehouseName:this.$route.query.warehouseName,isCredible:this.isCredible,owner:this.owner }}" >
+                                                <router-link :to="{path:'/newFile',query:{username:username,warehouseName:this.$route.query.warehouseName,isCredible:this.isCredible,owner:this.owner }}" >
                                                     新建文件   </router-link>
                                             </el-dropdown-item>
                                             <el-dropdown-item>新建Diagram文件</el-dropdown-item>
@@ -169,7 +161,7 @@
                                     <el-dropdown>
                                         <el-button type="text" style='margin-left: 6px;font-size: 14px;font-family: Source Han Sans CN;font-weight: 400;
                                         color: #F6833B;line-height: 46px;'>克隆/下载</el-button>
-                                        <img src='../../assets/img/arrow-down-orange.png' style='width: 10px;height: 5px;margin-left: 5px'>
+                                        <img src='../../../assets/img/arrow-down-orange.png' style='width: 10px;height: 5px;margin-left: 5px'>
                                         <el-dropdown-menu slot="dropdown">
                                             <el-dropdown-item style='display: block'>HTTP
                                                 <div style='display: flex'>
@@ -233,6 +225,7 @@
                                     color: #353D61;'>{{item.trends}}</div>
                                         <div style='margin-left: 10px;font-size: 14px;font-family: Source Han Sans CN;font-weight: 500;
                                     color: #353D61;'> {{item.time}} </div>
+
                                     </div>
                                 </div>
                             </div>
@@ -249,7 +242,7 @@
                             </div>
                             <!--el-button type="text" style='margin-top: 34px;margin-left:10px;font-size: 15px;color: #72767b'>({{this.manager.length}})</el-button>-->
                             <div style='position:absolute;right: 0;'>
-                                <img src='../../assets/img/all-icon.png'/>
+                                <img src='../../../assets/img/all-icon.png'/>
                                 <el-button type="text" style='margin-top: 30px;font-size: 15px;font-family: Source Han Sans CN;
                                 font-weight: 400;color: #4192ED;'>全部</el-button>
                             </div>
@@ -275,7 +268,7 @@
                             </div>
 
                             <div style='position:absolute;right: 0;margin-left: 10px'>
-                                <img src='../../assets/img/all-icon.png'/>
+                                <img src='../../../assets/img/all-icon.png'/>
                                 <el-button type="text" style='margin-top: 30px;font-size: 15px;font-family: Source Han Sans CN;
                             font-weight: 400;color: #4192ED;'>全部</el-button>
                             </div>
@@ -283,7 +276,7 @@
                         <div style='display: flex;margin-top: 20px'>
                             <div v-for="(item) in contributor"  style='display: grid'>
                                 <div style='margin-right: 10px'>
-                                    <img src="../../assets/img/user-woman.png" style='height: 50px;width: 50px;margin-left: 10px'/>
+                                    <img src='../../../assets/img/user-woman.png' style='height: 50px;width: 50px;margin-left: 10px'/>
                                     <!--                                <el-avatar :style="`background:${extractColorByName(item.name)}`"> {{item.name}} </el-avatar>-->
                                 </div>
                                 <div style='font-size: 16px;font-family: Source Han Sans CN;font-weight: bold;color: #353D61;margin-left: 17px'> {{item.name}} </div>
@@ -314,9 +307,9 @@
 
 <script>
 import axios from 'axios';
-import ManageComponent from '@/components/page/Manage.vue';
+import ManageComponent from '@/components/page/depot/Manage.vue';
 import CounterCom from '@/components/page/CounterCom.vue'
-import { messages } from '../common/i18n';
+import { messages } from '../../common/i18n';
 
 
 
@@ -354,9 +347,9 @@ export default {
 
             http_text: 'https://element.eleme.cn/#/zh-CN/component/input',
             isShowHeader: false,
-            star_count: 0,
+            star_count: 2,
             fork_count: 0,
-            watching_count: 0,
+            watching_count: 3,
             donate_count: 0,
 
             //上传文件
@@ -365,44 +358,77 @@ export default {
                 url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'
             }],
 
+
             //此仓库的【贡献者】——后端从数据库里传入数组
             contributor: [
-
-                { name: '韩梅梅', src: require('../../assets/img/wzy.png') },
-                ],
+                { name: '韩梅梅', src: require('../../../assets/img/img.jpg') },
+                { name: '李华', src: require('../../../assets/img/wzy.png') },
+                { name: '李雷', src: require('../../../assets/img/wzy.png') },],
             //因为图片在assets里面，所以src引入的时候需要require一下。（此次未采用此方法引入头像）
             //此仓库的【管理者】——后端从数据库里传入数组
-            manager: [
-                { name: '韩梅梅', src: require('../../assets/img/img.jpg') }],
+            manager: [{ name: '韩梅梅', src: require('../../../assets/img/img.jpg') },
+                { name: '李华', src: require('../../../assets/img/img.jpg') }],
             //此仓库的【近期动态】——后端监测动态，传入前端？maybe，暂时写死数据
             recentTrends: [
-                { name: '韩梅梅', trends: '新建了仓库',time:'今天' },
-
+                { name: '李华', trends: '提交了文件RSA.c',time:'5天前' },
+                { name: '李雷', trends: '提交了文件3DES.c',time:'10天前' },
+                { name: '韩梅梅', trends: '创建了仓库',time:'15天前' },
             ],
 
             //文件列表的展示——假数据_____从后端请求一个名字为“对应用户选择分支的分支名称”的表，将数据展示在前端
             branchOptions: [{
                 value: '主分支',
                 label: '主分支'
+            }, {
+                value: '测试',
+                label: '测试'
             }],
 
-            master: [{
+            master: [ {
+                file: 'RSA.c',
+                prop: 'add RSA.c',
+                time: '5天前',
+            }, {
+                file: '3DES.c',
+                prop: 'add 3DES.c',
+                time: '10天前',
+            }, {
                 file: 'README.md',
                 prop: 'Initial commit',
-                time: '今天',
+                time: '15天前',
             }],
 
             test: [{
+                file: 'RSA.c',
+                prop: 'add RSA.c',
+                time: '5天前',
+            }, {
+                file: 'DES.c',
+                prop: 'add DES.c',
+                time: '8天前',
+            },{
+                file: '3DES.c',
+                prop: 'add 3DES.c',
+                time: '10天前',
+            },{
                 file: 'README.md',
                 prop: 'Initial commit',
-                time: '今天',
+                time: '15天前',
             }],
             branchName: "主分支",      //下拉框绑定的model
             particularsDAta: {}, //展示的数据
             displayData:[{
+                file: 'RSA.c',
+                prop: 'add RSA.c',
+                time: '5天前',
+            }, {
+                file: '3DES.c',
+                prop: 'add 3DES.c',
+                time: '10天前',
+            }, {
                 file: 'README.md',
                 prop: 'Initial commit',
-                time: '今天',
+                time: '15天前',
             }],
         }
     },
@@ -456,29 +482,14 @@ export default {
         },
         //申请可信依赖库证明
         applicationYes(){
-            // this.dialogVisible=false
-            // this.$message({
-            //     type: 'info',
-            //     iconClass:'../../assets/img/payAttention.png',
-            //     message: '申请已提交，请等待审核！'
-            // });
-            // this.isDisabled= !this.isDisabled;
-            // this.applicationStatus="可信依赖库申请中";
-
-            this.dialogVisible=false;
-            this.isDisabled= !this.isDisabled;
-            this.applicationStatus="已申请可信依赖库";
-
-            // 需要执行的代码
-            setTimeout(this.myMessage, 10000); //1秒后開始运行 √
-            // this. isCredible=60;
-        },
-        myMessage(){
+            this.dialogVisible=false
             this.$message({
-                type: 'warning',
+                type: 'info',
                 iconClass:'../../assets/img/payAttention.png',
-                message: '您收到一条新消息！'
+                message: '申请已提交，请等待审核！'
             });
+            this.isDisabled= !this.isDisabled;
+            this.applicationStatus="可信依赖库申请中";
         },
         applicationNO(){
             this.dialogVisible=false

@@ -8,15 +8,15 @@
                     <el-tag  v-if="this.$route.query.isCredible>=60" type='success'>可信</el-tag>
                     <el-tag  v-else-if='this.$route.query.isCredible<60' type='danger'>不可信</el-tag>
                     <el-breadcrumb separator="/" style='margin-top:5px;margin-left: 10px;font-size: 23px'>
-                        <el-breadcrumb-item :to="{ path: '/' }">{{ this.$route.query.username }}</el-breadcrumb-item>
-                        <el-breadcrumb-item><a href="/">{{ this.$route.query.warehouseName }}</a></el-breadcrumb-item>
+                        <el-breadcrumb-item :to="{ path: '/' }">韩梅梅</el-breadcrumb-item>
+                        <el-breadcrumb-item><a href='/public'>{{ this.$route.query.warehouseName }}</a></el-breadcrumb-item>
                     </el-breadcrumb>
                 </div>
                 <!--右侧辅助工具栏-->
                 <div style='position: absolute;right: 0;display: flex;margin-top: 60px'>
                     <el-dropdown size="small" split-button type="plain" v-on:click="watching_count++" >
                         <i class='el-icon-view'></i>
-                        Watching   {{watching_count}}
+                        浏览量   {{watching_count}}
                         <el-dropdown-menu slot="dropdown">
                             <el-dropdown-item>不关注</el-dropdown-item>
                             <el-dropdown-item>关注所有动态</el-dropdown-item>
@@ -24,14 +24,14 @@
                             <el-dropdown-item>关注但不提醒动态</el-dropdown-item>
                         </el-dropdown-menu>
                     </el-dropdown>
-                    <el-button type="plain" icon="el-icon-star-on" style='margin-left: 12px'  v-on:click="star_count++">Star  {{star_count}}</el-button>
-                    <el-button type="plain" icon="el-icon-share"  v-on:click="fork_count++">Fork  {{fork_count}}</el-button>
+                    <el-button type="plain" icon="el-icon-star-on" style='margin-left: 12px'  v-on:click="star_count++">点赞  {{star_count}}</el-button>
+                    <el-button type="plain" icon="el-icon-share"  v-on:click="fork_count++">下载  {{fork_count}}</el-button>
                 </div>
             </div>
             <div style='margin-top: 20px'>
                 <el-breadcrumb separator="/">
-                    <el-breadcrumb-item :to="{ path: '/' }">Pull Requests</el-breadcrumb-item>
-                    <el-breadcrumb-item style='font-weight: bolder'><a href="/">详情</a></el-breadcrumb-item>
+                    <el-breadcrumb-item :to="{ path: '/' }">拉取请求</el-breadcrumb-item>
+                    <el-breadcrumb-item style='font-weight: bolder'><a href='/public'>详情</a></el-breadcrumb-item>
                 </el-breadcrumb>
             </div>
         </div>
@@ -42,7 +42,6 @@
                     <h2>{{this.$route.query.title}}</h2>
                     <div style='display: flex'>
                         <el-alert style='font-weight: bolder;font-size: 30px;margin-top: 30px;width:130px;height: 30px' type="success" >
-
                             <div v-if="(isExaminationPassed===true)&&(isTestPassed===true)">
                                 <div style='display: flex'>
                                     <i class='el-icon-info' style='height: 15px;width: 13px' ></i>
@@ -56,19 +55,20 @@
                                 </div>
                             </div>
                         </el-alert>
-                        <el-alert style='font-weight: bolder;font-size: 30px;margin-top: 30px;width:130px;height: 30px' type="info" title=''>
-                            {{this.user}}  /  {{this.source}}</el-alert>
-                        <i class='el-icon-caret-right' style='margin-top: 40px;margin-left: 10px;margin-right: 10px'></i>
-                        <el-alert style='font-weight: bolder;font-size: 30px;margin-top: 30px;width:130px;height: 30px' type="info" title=''>
-                            {{this.user}}  /  {{this.aim}}</el-alert>
+<!--                        <el-alert style='font-weight: bolder;font-size: 30px;margin-top: 30px;width:130px;height: 30px' type="info" title=''>-->
+<!--                            {{this.owner}}  /  {{this.source}}</el-alert>-->
+<!--                        <i class='el-icon-caret-right' style='margin-top: 40px;margin-left: 10px;margin-right: 10px'></i>-->
+<!--                        <el-alert style='font-weight: bolder;font-size: 30px;margin-top: 30px;width:130px;height: 30px' type="info" title=''>-->
+<!--                            {{this.owner}}  /  {{this.aim}}</el-alert>-->
                     </div>
                     <div style='display: flex'>
                         <div style='display: flex;margin-top:14px'>
                             <div style='margin-top: 7px;margin-left:5px;font-size: 13px;color: #72767b;display: flex' >
                                 <div style='margin-top: 0'>
-                                <el-avatar :style="`background:${extractColorByName(this.user)},width:30px,height:30px`">{{this.user}}</el-avatar>
+<!--                                <el-avatar :style="`background:${extractColorByName(this.user)},width:30px,height:30px`">{{this.user}}</el-avatar>-->
+                                    <img src='../../../assets/img/user-woman.png' style='width: 40px;height:40px'/>
                                 </div>
-                                <div style='margin-top: 13px;margin-left: 7px'>  {{this.user}} 创建于 {{PRCreationTime}}  </div>
+                                <div style='margin-top: 13px;margin-left: 7px'>  {{this.user}} 创建 </div>
                             </div>
                         </div>
 
@@ -107,41 +107,49 @@
                             </div>
                         </div>
                     </div>
-                    <el-table
-                        :data="tableData"
-                        style="width: 100%;margin-top: 20px">
-                        <el-table-column prop="category" label="类型" width="260"></el-table-column>
-                        <el-table-column prop='worker' label="指派人员" width="260">
-                            <!--
-                            <template slot-scope="scope">
-                                <div v-if="scope.$index === 0">
-                                    <div v-for="user in selectedExaminers" >
-                                        <div style='width: 30px; height: 30px;display: grid;margin-right: 20px'>
-                                            <el-avatar  :style="`background:${extractColorByName(user)}`" :size='"small"'> {{user}} </el-avatar>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div v-if="scope.$index === 1">
-                                    <div  v-for="user in selectedTesters" >
-                                        <div style='width: 30px; height: 30px;display: grid;margin-right: 20px'>
-                                            <el-avatar  :style="`background:${extractColorByName(user)}`" :size='"small"'> {{user}} </el-avatar>
-                                        </div>
-                                    </div>
-                                </div>
-                            </template>
-                            -->
-                        </el-table-column>
-                        <el-table-column prop="status" label="状态">
-                            <template slot-scope="scope">
-                                <i class='el-icon-circle-check' style='color: green'></i>
-                                已完成（{{this.selectedTesters.length}}/1）
-                            </template>
-                        </el-table-column>
-                    </el-table>
-                    <!--未通过时的界面------ 审核者  -->
-                    <div v-if='this.visitor!==this.owner'>
+<!--                    <el-table-->
+<!--                        :data="tableData"-->
+<!--                        style="width: 100%;margin-top: 20px">-->
+<!--                        <el-table-column prop="category" label="类型" width="260"></el-table-column>-->
+<!--                        <el-table-column prop='worker' label="指派人员" width="260">-->
+<!--                            &lt;!&ndash;-->
+<!--                            <template slot-scope="scope">-->
+<!--                                <div v-if="scope.$index === 0">-->
+<!--                                    <div v-for="user in selectedExaminers" >-->
+<!--                                        <div style='width: 30px; height: 30px;display: grid;margin-right: 20px'>-->
+<!--                                            <el-avatar  :style="`background:${extractColorByName(user)}`" :size='"small"'> {{user}} </el-avatar>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                                <div v-if="scope.$index === 1">-->
+<!--                                    <div  v-for="user in selectedTesters" >-->
+<!--                                        <div style='width: 30px; height: 30px;display: grid;margin-right: 20px'>-->
+<!--                                            <el-avatar  :style="`background:${extractColorByName(user)}`" :size='"small"'> {{user}} </el-avatar>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </template>-->
+<!--                            &ndash;&gt;-->
+<!--                        </el-table-column>-->
+<!--                        <el-table-column prop="status" label="状态">-->
+<!--                            <template slot-scope="scope">-->
+<!--                                <i class='el-icon-circle-check' style='color: green'></i>-->
+<!--                                已完成（{{this.selectedTesters.length}}/1）-->
+<!--                            </template>-->
+<!--                        </el-table-column>-->
+<!--                    </el-table>-->
+                    <!--未通过时，提交者-->
+                    <div v-if='this.isCheckPr===false'>
                         <div style='display: flex;margin-top: 10px;margin-left: 10px'>
-                            <h4 style='margin-top: 3px' >需要您进行当前 Pull Request 的一些审核工作</h4>
+                            <h4 style='margin-top: 3px' >
+                                此 拉取请求 暂不能合并，一些审核尚未通过</h4>
+                        </div>
+                    </div>
+                    <el-button type='primary'style='margin-top: 10px'  @click='submit'>提交</el-button>
+                    <!--未通过时的界面------ 审核者  -->
+                    <div v-if='this.isCheckPr===true'>
+                        <div style='display: flex;margin-top: 10px;margin-left: 10px'>
+                            <h4 style='margin-top: 3px' >需要您进行当前 拉取请求 的一些审核工作</h4>
                             <div style='display: flex;position: absolute;right: 20px;'>
                                 <div v-if="(isExaminationPassed===true)&&(isTestPassed===true)">
                                     <el-button type="text" @click="open" style='height: 5px;color: #00a854;margin-right: 20px'>审核测试完成</el-button>
@@ -157,7 +165,7 @@
                         <el-tag  style='font-size: 13px;height: 35px;width:100%;margin-top:20px;background-color: #a4da89;color: #303133'>
                             源分支与目标分支没有冲突 可自动合并
                             <el-dropdown split-button type='success' @click="handleMergeClick" style='position: absolute;right: 20px;' >
-                                合并分支
+                                合并
                                 <el-dropdown-menu slot="dropdown">
                                     <el-dropdown-item>1</el-dropdown-item>
                                     <el-dropdown-item>2</el-dropdown-item>
@@ -205,12 +213,13 @@
                     <!--评论  功能选择栏-->
                     <el-tabs v-model="activeName" @tab-click="handleClick" style='margin-top: 48px'>
                         <el-tab-pane label="评论" name="first">
-                            <div style='display: flex'>
-                                <div>user2  指派了 审查人 user1 5分钟前</div>
-                            </div>
+<!--                            <div style='display: flex'>-->
+<!--                                <div>user2  指派了 审查人 user1 5分钟前</div>-->
+<!--                            </div>-->
                             <!--评论功能区域-->
                             <div style='display: flex;margin-top: 20px'>
-                                <el-avatar  :style="`background:${extractColorByName(user)}`" :size='"small"'> {{user}} </el-avatar>
+<!--                                <el-avatar  :style="`background:${extractColorByName(user)}`" :size='"small"'> {{user}} </el-avatar>-->
+                                <img src='../../../assets/img/user-woman.png' style='width: 40px;height:40px'/>
                                 <div style='display: block;width: 94%;'>
                                     <el-card class="box-card" style='margin-left: 10px'>
                                         <div style='display: flex;grid-row: 1;font-size: 18px'>
@@ -254,11 +263,15 @@
                                         {{ user }}
                                     </el-option>
                                 </el-select>
-                                <el-button @click="addSelectedExaminer" type='text'>选择</el-button>
+                                <el-button @click="addSelectedExaminer" type='text'>
+                                    <i class='el-icon-plus' style='margin-left: 20px'></i>
+                                </el-button>
                                 <div style='display: flex;margin-top: 10px'>
                                     <div v-for="user in selectedExaminers" >
-                                        <div style='width: 30px; height: 30px;display: grid;margin-right: 20px'>
-                                            <el-avatar  :style="`background:${extractColorByName(user)}`" :size='"medium"'> {{user}} </el-avatar>
+                                        <div style='width: 50px; height: 30px;display: grid;margin-right: 20px'>
+<!--                                            <el-avatar  :style="`background:${extractColorByName(user)}`" :size='"medium"'> {{user}} </el-avatar>-->
+                                            <img src='../../../assets/img/user-woman.png' style='width: 30px;height: 30px'/>
+                                           <div style='font-size: 13px;color: #72767b;'> {{user}}  </div>
                                         </div>
                                     </div>
                                 </div>
@@ -279,11 +292,15 @@
                                         {{ user }}
                                     </el-option>
                                 </el-select>
-                                <el-button @click="addSelectedTester" type='text'>选择</el-button>
+                                <el-button @click="addSelectedTester" type='text'>
+                                    <i class='el-icon-plus' style='margin-left: 20px'></i>
+                                </el-button>
                                 <div style='display: flex;margin-top: 10px'>
                                     <div v-for="user in selectedTesters" >
-                                        <div style='width: 30px; height: 30px;display: grid;margin-right: 20px'>
-                                            <el-avatar  :style="`background:${extractColorByName(user)}`" :size='"medium"'> {{user}} </el-avatar>
+                                        <div style='width: 50px; height: 30px;display: grid;margin-right: 20px'>
+<!--                                            <el-avatar  :style="`background:${extractColorByName(user)}`" :size='"medium"'> {{user}} </el-avatar>-->
+                                            <img src='../../../assets/img/user-woman.png' style='width: 30px;height: 30px'/>
+                                            <div style='font-size: 13px;color: #72767b;'> {{user}}  </div>
                                         </div>
                                     </div>
                                 </div>
@@ -333,7 +350,7 @@
                     <!--关联Issue-->
                     <div style='display: block;'>
                         <div style='display: flex;margin-top: 40px;position: relative;width: 100%'>
-                            <h4 >关联Issue</h4>
+                            <h4 >关联问题</h4>
                             <div style='margin-top: 5px;font-size: 15px;color: #72767b;position: absolute;right:10px' >
                                 <i class='el-icon-edit-outline' ></i>
                             </div>
@@ -370,7 +387,8 @@
                             <el-button type="text" style='margin-top: 30px;font-size: 15px;color: #72767b;position:absolute;right: 0'>全部</el-button>
                         </div>
                         <div style='display: flex;margin-top: 20px'>
-                            <el-avatar  :style="`background:${extractColorByName(this.user)}`" :size='"medium"'> {{this.user}} </el-avatar>
+<!--                            <el-avatar  :style="`background:${extractColorByName(this.user)}`" :size='"medium"'> {{this.user}} </el-avatar>-->
+                            <img src='../../../assets/img/user-woman.png'/>
                         </div>
                     </div>
                 </el-aside>
@@ -393,17 +411,18 @@ export default {
             source:this.$route.query.source,
             aim:this.$route.query.aim,
             isCredible:this.$route.query.isCredible,
-            owner:this.$route.params.owner,
-            visitor:this.$route.params.visitor,
+            owner:this.$route.query.owner,
+            isCheckPr:this.$route.query.isCheckPr,
+
             participant:1,
             reviewErea:'',
             textarea: '',
             pullTitle:'',
             zan_count:0,
             cha_count:0,
-            watching_count: 9,
-            star_count: 4,
-            fork_count: 2,
+            watching_count: 1,
+            star_count: 0,
+            fork_count: 0,
             activeName: 'first',
             http_text:'',
             PRCreationTime:'2023-05-26 21:51',
@@ -440,7 +459,7 @@ export default {
             selectedTester:'',
             selectedExaminers:[],
             selectedTesters:[],
-            members:['admin','user','user1','user2','user3'],
+            members:['韩梅梅',],
 
             priorityOptions: [{
                 value: '严重',
@@ -478,6 +497,17 @@ export default {
     },
     methods: {
         ...mapActions(['PraisePRIncrement', 'PraisePRDecrement']),
+        submit(){
+            this.$alert('提交成功，请等待审核', '操作成功提示', {
+                confirmButtonText: '确定',
+                callback: action => {
+                    this.$message({
+                        type: 'info',
+                        message: `action: ${ action }`
+                    });
+                }
+            });
+        },
         handleCopyClick() {
             // 复制文本到剪切板
             this.$refs.textInput.select();

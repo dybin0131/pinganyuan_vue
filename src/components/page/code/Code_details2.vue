@@ -7,7 +7,7 @@
             <div style='display: flex;position: relative'>
                 <div style='display: flex;margin-top: 15px;margin-left: 10px'>
                     <el-tag  v-if="isCredible>=60" type='success'
-                             style='width: 55px;height: 24px;background: rgba(0,171,164,0.1);border: 1px solid #00ABA4;
+                             style='width: 55px;height: 24px;background: rgba(0,171,164,0.1);border: 1px solid #00ABA4;padding-left: 14px;
                              border-radius: 4px;'>可信</el-tag>
                     <el-tag  v-else-if='isCredible<60' type='danger'
                              style='width: 55px;height: 24px;background: rgba(237,64,64,0.1);border: 1px solid #ED4040;border-radius: 4px;'
@@ -25,18 +25,18 @@
                 </div>
 
                 <!--审核是否为可信依赖库-->
-                <el-button type="primary" style=' width: 130px;height: 30px;margin-top: 17px;background: #4092ED;border: 1px solid #4092ED;border-radius: 4px;margin-left: 20px'
-                           @click="acknowledge" v-if='this.visitor!==this.owner' :disabled='isAuditCompleted'>
-                    <div style='font-size: 14px;font-family: Source Han Sans CN;font-weight: 400;color: #FFFFFF;'>
-                        颁发可信依赖库证明
-                    </div>
-                </el-button>
-                <el-button type="primary" style=' width: 130px;height: 30px;margin-top: 17px;background: #4092ED;border: 1px solid #4092ED;border-radius: 4px;margin-left: 20px'
-                           @click="deny" v-if='this.visitor!==this.owner' :disabled='isAuditCompleted'>
-                    <div style='font-size: 14px;font-family: Source Han Sans CN;font-weight: 400;color: #FFFFFF;'>
-                        不颁发可信依赖库证明
-                    </div>
-                </el-button>
+<!--                <el-button type="primary" style=' width: 130px;height: 30px;margin-top: 17px;background: #4092ED;border: 1px solid #4092ED;border-radius: 4px;margin-left: 20px'-->
+<!--                           @click="acknowledge" v-if='this.visitor!==this.owner' :disabled='isAuditCompleted'>-->
+<!--                    <div style='font-size: 14px;font-family: Source Han Sans CN;font-weight: 400;color: #FFFFFF;'>-->
+<!--                        颁发可信依赖库证明-->
+<!--                    </div>-->
+<!--                </el-button>-->
+<!--                <el-button type="primary" style=' width: 130px;height: 30px;margin-top: 17px;background: #4092ED;border: 1px solid #4092ED;border-radius: 4px;margin-left: 20px'-->
+<!--                           @click="deny" v-if='this.visitor!==this.owner' :disabled='isAuditCompleted'>-->
+<!--                    <div style='font-size: 14px;font-family: Source Han Sans CN;font-weight: 400;color: #FFFFFF;'>-->
+<!--                        不颁发可信依赖库证明-->
+<!--                    </div>-->
+<!--                </el-button>-->
 
                 <!--未申请时/申请失败-->
                 <el-button  style=' width: 130px;height: 30px;margin-top: 14px;background: #4092ED;border: 1px solid #4092ED;border-radius: 4px;margin-left: 20px'@click="dialogVisible = true" :disabled='isDisabled' v-if='this.owner===this.visitor '>
@@ -49,7 +49,7 @@
                 <div style='position: absolute;right: 12px;display: flex;margin-top: 15px'>
                     <el-dropdown size="small" split-button type="plain" style='font-family: San Francisco Display;font-weight: 400;color: #353D61;'>
                         <i class='el-icon-view'></i>
-                        Watching   {{watching_count}}
+                        浏览量   {{watching_count}}
                         <el-dropdown-menu slot="dropdown">
                             <el-dropdown-item>不关注</el-dropdown-item>
                             <el-dropdown-item>关注所有动态</el-dropdown-item>
@@ -58,9 +58,9 @@
                         </el-dropdown-menu>
                     </el-dropdown>
                     <el-button type="plain" icon="el-icon-star-off" style='margin-left: 12px;font-family: San Francisco Display;font-weight: 400;color: #353D61;'>
-                       Star  {{star_count}} </el-button>
+                       点赞  {{star_count}} </el-button>
                     <el-button type="plain" icon="el-icon-share" style='font-family: San Francisco Display;font-weight: 400;color: #353D61;'>
-                        Fork  {{fork_count}}</el-button>
+                        下载  {{fork_count}}</el-button>
                 </div>
 
                 <!---申请成功--->
@@ -138,13 +138,13 @@
                                 <el-button type='text'><i class="el-icon-plus" style='font-family: Source Han Sans CN;font-weight: bolder;color: #4092ED;margin-left: 10px;font-size: 14px'></i>
                                     <router-link :to="{path:'/pullrequests',query:{username:username,warehouseName:this.$route.query.warehouseName,isCredible:this.isCredible }}"
                                                  style='font-family: Source Han Sans CN;font-weight: 400;color: #4092ED;font-size: 14px'>
-                                        Pull Request</router-link>
+                                        拉取请求</router-link>
                                 </el-button>
                                 <el-button type='text' style='font-size: 16px;font-family: Source Han Sans CN;font-weight: 400;color: #4092ED;margin-left: 10px;font-size: 14px;
                                 line-height: 46px;'><i class="el-icon-plus" style='font-weight: bolder;color: #4092ED'></i>
                                     <router-link :to="{path:'/issue',query:{username:username,warehouseName:this.$route.query.warehouseName ,isCredible:this.isCredible}}"
                                                  style='font-family: Source Han Sans CN;font-weight: 400;color: #4092ED;font-size: 14px'>
-                                        Issue</router-link>
+                                        问题</router-link>
                                 </el-button>
                                 <div style='margin-left: 10px'>
                                     <el-dropdown @command="handleCommand">
@@ -153,8 +153,8 @@
                                         <img src='../../../assets/img/arrow-down-green.png' style='width: 10px;height: 5px;margin-left: 5px' />
                                         <el-dropdown-menu slot="dropdown">
                                             <el-dropdown-item>
-                                                <router-link :to="{path:'/newFile',query:{username:username,warehouseName:this.$route.query.warehouseName }}" >
-                                                    新建文件</router-link>
+                                                <router-link :to="{path:'/newFile',query:{username:this.username,warehouseName:this.$route.query.warehouseName,isCredible:this.isCredible,owner:this.owner }}" >
+                                                    新建文件   </router-link>
                                             </el-dropdown-item>
                                             <!-- <el-dropdown-item>新建Diagram文件</el-dropdown-item>
                                             <el-dropdown-item>新建文件夹</el-dropdown-item>
@@ -162,7 +162,6 @@
                                             <el-dropdown-item command="uploadFile">
                                                 上传文件
                                             </el-dropdown-item>
-                                            <!-- <el-dropdown-item>搜索文件</el-dropdown-item> -->
                                         </el-dropdown-menu>
                                     </el-dropdown>
                                 </div>
@@ -224,7 +223,6 @@
                                     color: #353D61;'>{{item.trends}}</div>
                                         <div style='margin-left: 10px;font-size: 14px;font-family: Source Han Sans CN;font-weight: 500;
                                     color: #353D61;'> {{item.time}} </div>
-
                                     </div>
                                 </div>
                             </div>
@@ -241,9 +239,9 @@
                             </div>
                             <!--el-button type="text" style='margin-top: 34px;margin-left:10px;font-size: 15px;color: #72767b'>({{this.manager.length}})</el-button>-->
                             <div style='position:absolute;right: 0;'>
-                                <img src='../../../assets/img/user-man.png'  />
+                                <img src='../../../assets/img/all-icon.png'/>
                                 <el-button type="text" style='margin-top: 30px;font-size: 15px;font-family: Source Han Sans CN;
-                        font-weight: 400;color: #4192ED;'>全部</el-button>
+                                font-weight: 400;color: #4192ED;'>全部</el-button>
                             </div>
                         </div>
 
@@ -253,10 +251,11 @@
                                 <img :src="item.src" style='width: 38px;height: 38px;margin-left: 10px'>
                                 -->
                                 <div style='margin-right: 10px;width: 50px;height: 50px'>
-                                    <!--                                <img src='../../assets/img/user-woman.jpg' >-->
-                                    <img src='@/assets/img/user-woman.png' style='width: 50px;height: 50px'/>
-                                    <!--                                <el-avatar :style="`background:${extractColorByName(item.name)}`"> {{item.name}} </el-avatar>-->
+                                    <img src='@/assets/img/user-woman.png' style='width: 50px;height: 50px;margin-left: 10px'/>
+                                    <!--  <el-avatar :style="`background:${extractColorByName(item.name)}`"> {{item.name}} </el-avatar>-->
                                 </div>
+                                <div style='font-size: 16px;font-family: Source Han Sans CN;font-weight: bold;color: #353D61;margin-left: 17px'>
+                                    {{item.name}} </div>
                             </div>
                         </div>
                         <div style='display: flex'>
@@ -266,7 +265,7 @@
                             </div>
 
                             <div style='position:absolute;right: 0;margin-left: 10px'>
-                                <img src='src/assets/img/all-icon.png'/>
+                                <img src='../../../assets/img/all-icon.png'/>
                                 <el-button type="text" style='margin-top: 30px;font-size: 15px;font-family: Source Han Sans CN;
                             font-weight: 400;color: #4192ED;'>全部</el-button>
                             </div>
@@ -274,9 +273,10 @@
                         <div style='display: flex;margin-top: 20px'>
                             <div v-for="(item) in contributor"  style='display: grid'>
                                 <div style='margin-right: 10px'>
-                                    <img src="../../../assets/img/user-woman.png" style='height: 50px;width: 50px'/>
+                                    <img src="../../../assets/img/user-woman.png" style='height: 50px;width: 50px;margin-left: 10px'/>
                                     <!--                                <el-avatar :style="`background:${extractColorByName(item.name)}`"> {{item.name}} </el-avatar>-->
                                 </div>
+                                <div style='font-size: 16px;font-family: Source Han Sans CN;font-weight: bold;color: #353D61;margin-left: 17px'> {{item.name}} </div>
                             </div>
                         </div>
                     </div>
@@ -310,7 +310,6 @@ import { messages } from '../../common/i18n';
 import { selectBranchList,addBranch,searchDetail } from '../../../api/depot';
 
 
-
 export default {
     name: "FilePreview",
     components: { CounterCom },
@@ -326,12 +325,14 @@ export default {
             repoId:0,
             repoData:[],
             activeName:'',
+            isMember:this.$route.query.isMember,
+            isCertificator:this.$route.query.isCertificator,//判断是不是要进行可信依赖库审核
             dialogVisible: false,
-            visitor:this.$route.params.visitor,
-            owner:this.$route.params.owner,
+            visitor:this.$route.query.visitor,
+            owner:this.$route.query.owner,
             warehouse: this.$route.query.warehouseName,
             value:'',
-            isCredible: 0,   //低于60不可信;;; 可以用 this.$route.query.isCredible 传参  or  从数据库读取
+            isCredible: 60,   //低于60不可信;;; 可以用 this.$route.query.isCredible 传参  or  从数据库读取
             //isCredible:this.$store.state.CredibleValue,
             isDisabled: false,  //对于申请按钮的展现
             isAuditCompleted:false, //审核员是否审核完成，已完成则不显示按钮,
@@ -339,24 +340,24 @@ export default {
 
             http_text: 'https://element.eleme.cn/#/zh-CN/component/input',
             isShowHeader: false,
-            star_count: 2,
-            fork_count: 1,
+            star_count: 0,
+            fork_count: 0,
             watching_count: 3,
-            donate_count: 11,
+            donate_count: 0,
             //此仓库的【贡献者】——后端从数据库里传入数组
             contributor: [
-                { name: 'admin', src: require('../../../assets/img/img.jpg') },
-                { name: 'user1', src: require('../../../assets/img/lxy.png') },
-                { name: 'user2', src: require('../../../assets/img/dyb.png') },
-                { name: 'user3', src: require('../../../assets/img/wzy.png') },],
+                { name: '韩梅梅', src: require('../../../assets/img/img.jpg') },
+                { name: '李华', src: require('../../../assets/img/wzy.png') },
+               ],
             //因为图片在assets里面，所以src引入的时候需要require一下。（此次未采用此方法引入头像）
             //此仓库的【管理者】——后端从数据库里传入数组
-            manager: [{ name: 'admin', src: require('../../../assets/img/img.jpg') }],
+            manager: [{ name: '韩梅梅', src: require('../../../assets/img/img.jpg') },
+                { name: '李华', src: require('../../../assets/img/img.jpg') }],
             //此仓库的【近期动态】——后端监测动态，传入前端？maybe，暂时写死数据
             recentTrends: [
-                { name: 'user1', trends: '创建了新的 Pull Request',time:'3分钟前' },
-                { name: 'user2', trends: '推送了新的提交到 master 分支',time:'16小时前' },
-                { name: 'user3', trends: '合并了 PR !3 12',time:'16小时前' },
+                { name: '李华', trends: '提交了文件RSA.c',time:'5天前' },
+                { name: '李华', trends: '提交了文件3DES.c',time:'7天前' },
+                { name: '韩梅梅', trends: '创建了仓库',time:'8天前' },
             ],
             //真实数据
             branchList:[],
@@ -458,19 +459,38 @@ export default {
             this.$router.push(
                 {path: '/codeview',query:{warehouseName: this.warehouse,isCredible: this.isCredible} })
         },
+        readFile(){
+            this.$router.push(
+                {path: '/codeview_file',query:{warehouseName: this.warehouse,isCredible: this.isCredible} })
+        },
         handleEdit(){ //点击文件名称跳转进入查看文件页面
             this.$router.push({path: '/newFile'});
         },
         //申请可信依赖库证明
         applicationYes(){
-            this.dialogVisible=false
-            this.$message({
-                type: 'info',
-                iconClass:'../../assets/img/payAttention.png',
-                message: '申请已提交，请等待审核！'
-            });
+            // this.dialogVisible=false
+            // this.$message({
+            //     type: 'info',
+            //     iconClass:'../../assets/img/payAttention.png',
+            //     message: '申请已提交，请等待审核！'
+            // });
+            // this.isDisabled= !this.isDisabled;
+            // this.applicationStatus="可信依赖库申请中";
+
+            this.dialogVisible=false;
             this.isDisabled= !this.isDisabled;
-            this.applicationStatus="可信依赖库申请中";
+            this.applicationStatus="已申请可信依赖库";
+
+            // 需要执行的代码
+            setTimeout(this.myMessage, 3000); //3秒后開始运行 √
+            // this. isCredible=60;
+        },
+        myMessage(){
+            this.$message({
+                type: 'warning',
+                iconClass:'../../assets/img/payAttention.png',
+                message: '您收到一条新消息！'
+            });
         },
         applicationNO(){
             this.dialogVisible=false
@@ -490,7 +510,6 @@ export default {
                 cancelButtonText: '取消'
             })
                 .then(() => {
-
                     this.$message({
                         type: 'info',
                         message: '已确认颁发可信依赖库证明'

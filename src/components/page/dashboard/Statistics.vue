@@ -58,7 +58,7 @@
                 box-shadow: 0 5px 20px 0 rgba(183,183,195,0.07);border-radius: 10px;'>
                     <div slot="header" class="clearfix" style='display: flex;margin-top: 20px'>
                         <div style='margin-top: 10px;margin-left:20px;font-size: 20px;font-family: Source Han Sans CN;font-weight: bold;color: #353D61;'>
-                            2023-05-26</div>
+                            2023-07-29</div>
                         <div style='background-color: #E13131;width: 25px;height: 15px;'>
                             <div style='margin-left: 7px;color: #f0f0f0;font-size: 13px'>
                                 {{this.issueData.length}}
@@ -68,11 +68,11 @@
                     <div style='display: block;width: 100%;margin-top: 20px'>
                         <div v-for="(item) in issueData"  style='display: flex;margin-bottom: 20px'>
                             <div style='display: flex;margin-bottom: 32px;'>
-                                <img src='../../../assets/img/user-man.png' style='width: 38px;height: 38px;margin-top: 10px;margin-left: 20px' >
+                                <img src='../../../assets/img/user-woman.png' style='width: 38px;height: 38px;margin-top: 10px;margin-left: 20px' >
                                 <!--文件名称+贡献者-->
                                 <div style='display: block;margin-left: 18px'>
                                     <div style='display: flex'>
-                                        <el-button type="text" style='font-size: 16px'>{{item.issueName}}</el-button>
+                                        <el-button type="text" style='font-size: 16px'>{{item.fileName}}</el-button>
                                         <el-tag  type='success' style='width: 55px;height: 24px;background: rgba(0,171,164,0.1);
                                             border: 1px solid #00ABA4;border-radius: 4px;color: #00ABA4;margin-left: 10px;margin-top: 7px'>已验证</el-tag>
                                     </div>
@@ -117,7 +117,7 @@
 
 <script>
 import bus from '../../common/bus';
-import Icon from '@/components/page/demo/Icon.vue';
+import Icon from '@/components/page/Icon.vue';
 export default {
     components: { Icon },
     data() {
@@ -176,32 +176,32 @@ export default {
                     title: '附件',
                 },
             ],
-            tableData: [{
-                date: '2016-05-02',
-                fileName: 'add admin',
-                user: 'admin',
+            issueData: [{
+                date: '2023-07-24',
+                fileName: 'add RSA.c',
+                user: '李华',
                 hashCode: '1ecc563',
-                time: '10天前',
+                time: '5天前',
             }, {
-                date: '2016-05-04',
-                fileName: 'add user1',
-                user: 'user1',
+                date: '2023-07-24',
+                fileName: 'add DES.c',
+                user: '韩梅梅',
                 hashCode: '2a3b7b6',
-                time: '10天前',
+                time: '7天前',
             }, {
-                date: '2016-05-01',
-                fileName: 'add user2',
-                user: 'user2',
+                date: '2023-07-24',
+                fileName: 'add 3DES.c',
+                user: '李华',
                 hashCode: '032a495',
-                time: '10天前',
+                time: '7天前',
             }, {
-                date: '2016-05-03',
-                fileName: 'add user3',
-                user: 'user3',
+                date: '2023-07-24',
+                fileName: 'README.md',
+                user: '韩梅梅',
                 hashCode: '71564ae',
-                time: '10天前',
+                time: '8天前',
             }],
-            issueData:[{
+            tableData:[{
                 date: '2016-05-02',
                 issueName: 'add admin',
                 user: 'admin',

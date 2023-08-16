@@ -323,7 +323,7 @@
 
 <script>
 import axios from 'axios';
-import ManageComponent from '@/components/page/Manage.vue';
+import ManageComponent from '@/components/page/depot/Manage.vue';
 import CounterCom from '@/components/page/CounterCom.vue'
 import { messages } from '../common/i18n';
 
