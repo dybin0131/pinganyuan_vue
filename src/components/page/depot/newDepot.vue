@@ -5,7 +5,7 @@ box-shadow: 0 5px 20px 0 rgba(183,183,195,0.07);border-radius: 10px;margin-top: 
       <div style=' font-size: 22px;font-family: Source Han Sans CN;font-weight: bold;color: #353D61;line-height: 40px;
         margin-left:30px;margin-top:30px;width: 60%'>新建仓库
         <el-form ref="form" :model="form" :rules='rules' label-width="80px" style='width: 60%;margin-top: 25px' label-position='top'>
-            <el-form-item label="仓库名称" prop="rName" style='font-size: 18px;font-family: Source Han Sans CN;font-weight: bold;color: #353D61;'>
+          <el-form-item label="仓库名称" prop="rName" style='font-size: 18px;font-family: Source Han Sans CN;font-weight: bold;color: #353D61;'>
             <el-input v-model="form.rName" placeholder="请输入仓库名称" style='width: 456px;height: 21px;'></el-input>
           </el-form-item>
           <el-form-item label="归属" prop="rUser" style='margin-top: 10px'>
@@ -36,30 +36,24 @@ box-shadow: 0 5px 20px 0 rgba(183,183,195,0.07);border-radius: 10px;margin-top: 
                 </div>
               </el-form-item>
               <el-form-item>
-                <el-radio label="开源（所有人可见）" v-model='form.openSource' disabled style='margin-left: 20px'></el-radio>
-              </el-form-item>
-              <el-form-item>
-                <el-radio label="私有（仅仓库成员可见）" v-model='form.privateSourse' style='margin-left: 20px'></el-radio>
-              </el-form-item>
+                    <el-radio label="1" v-model='form.privateSourse' disabled style='margin-left: 20px'>开源（所有人可见）</el-radio>
+                </el-form-item>
+                <el-form-item>
+                    <el-radio label="2" v-model='form.privateSourse' style='margin-left: 20px'>私有（仅仓库成员可见）</el-radio>
+                </el-form-item>
             </div>
           </el-form-item>
 
-            <el-form-item>
-                <el-radio label="1" v-model='form.privateSourse' disabled style='margin-left: 20px'>开源（所有人可见）</el-radio>
-            </el-form-item>
-            <el-form-item>
-                <el-radio label="2" v-model='form.privateSourse' style='margin-left: 20px'>私有（仅仓库成员可见）</el-radio>
-            </el-form-item>
-            </el-form-item>
+          
 
-            <el-form-item>
-                <el-button type="primary" @click="onSubmit()">
-                <div style='color: #f0f0f0'>立即创建</div>
-                </el-button>
-            </el-form-item>
+          <el-form-item>
+            <el-button type="primary" @click="onSubmit()">
+              <div style='color: #f0f0f0'>立即创建</div>
+            </el-button>
+          </el-form-item>
         </el-form>
+      </div>
     </div>
-  </div>
   </div>
 </template>
 
