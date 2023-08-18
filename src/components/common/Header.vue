@@ -108,23 +108,23 @@
         </el-dialog>
         <!-- 第二次弹窗确认删除仓库 -->
         <el-dialog
-            title="仓找回库"
+            title="找回仓库"
             :visible.sync="dialog2Visible"
             width="50%"
             center
         >
             <div class="textBtn" style='display: grid;' >
-                <div>你正在找回仓库 地图导航课设 (李华/地图导航课设)，该操作需要验证你的用户身份是否有权限。</div>
+                <div>你正在找回仓库 [ {{this.retrieveWarehouse}} ]，该操作需要验证你的用户身份是否有权限。</div>
                 <el-tag type='warning' style='margin-top: 10px;margin-bottom: 20px;font-weight: bolder;font-size: 14px;'>
-                    验证通过后，仓库 地图导航课设 (李华/地图导航课设) 的所有数据将被恢复!</el-tag>
+                    验证通过后，仓库 [ {{this.retrieveWarehouse}} ] 的所有数据将被恢复!</el-tag>
                 <el-tag type='warning' style='margin-top:1px;margin-bottom: 20px;font-weight: bolder;font-size: 14px;'>
                     区块链存储CID:QmXtQmNzGBG1DwF8iHccS9QZxpB6nQ7nLPSfpMCEHzvvzX</el-tag>
                 <div style='font-weight: bolder;margin-top: 5px;color: #e6a23c'>私钥验证身份</div>
-                <el-input style='margin-top: 10px' v-model="retrievePassword" placeholder="请输入您的私钥"></el-input>
+                <el-input style='margin-top: 10px' v-model="priKey" placeholder="请输入您的私钥"></el-input>
             </div>
             <span slot="footer" class="dialog-footer" style='margin-top: 50px'>
                             <el-button  @click="applicationNO2">取 消</el-button>
-                            <el-button type="primary" @click="applicationYes2">确 定</el-button>
+                            <el-button type="primary" @click="getBackDepo">确 定</el-button>
                         </span>
         </el-dialog>
 
@@ -136,6 +136,7 @@
 <script>
 import bus from '../common/bus';
 import retrieveDepot from '@/components/page/retrieveDepot.vue';
+import { getBackDepo } from '../../api/depot';
 export default {
     data() {
         return {
@@ -143,6 +144,7 @@ export default {
             dialog2Visible:false,
             retrievePassword:'v5IPPgM3ysOkrYQ5+rIFvVOvk6PVLeILnGnXtjw61',
             retrieveWarehouse:'',
+            priKey:'',
             searchProject:'',
             isEntitled:true,
             collapse: false,
@@ -182,6 +184,34 @@ export default {
         }
     },
     methods: {
+        getBackDepo(){
+            if (this.priKey.length != 64) {
+                this.$alert("无效的私钥格式！", "提示", {
+                    confirmButtonText: "确定",
+                });
+                return;
+            }
+            getBackDepo({     
+                keyword: this.retrieveWarehouse,
+                priKey:this.priKey
+            }).then((res) => {
+                if(res.code==0){
+                    this.$message({
+                        type: 'success',
+                        message: '仓库找回成功!'
+                    });
+                    this.$router.push({path: '/workbenchDep'});
+                    location.reload();
+                }else{
+                    this.$message({
+                        type: 'error',
+                        message: '仓库找回失败!请检查仓库名称!'
+                    });
+                    this.$router.push({path: '/workbenchDep'});
+                    location.reload();
+                }
+            });
+        },
         // 用户名下拉菜单选择事件
         handleCommand(command) {
             if (command === 'loginout') {

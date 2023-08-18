@@ -72,10 +72,28 @@ export function getRepoAuditScore(params) {
     })
 }
 
-// 获取仓库的评分情况
+// 重新申请可信依赖
 export function applyForAudit(params) {
     return request({
         url: '/workbench/applyForAudit',
+        method: 'get',
+        params
+    })
+}
+
+// 删除仓库
+export function deleteDepo(params) {
+    return request({
+        url: '/repo/deleteDepo',
+        method: 'get',
+        params
+    })
+}
+
+// 找回仓库
+export function getBackDepo(params) {
+    return request({
+        url: '/repo/getBackDepo',
         method: 'get',
         params
     })

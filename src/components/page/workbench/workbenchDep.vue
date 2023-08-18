@@ -30,6 +30,7 @@
                 <template slot-scope="scope">
                   <el-button type="primary" @click="viewDetail(scope.row.rId)">查看</el-button>
                   <el-button type="success" @click="mangerMember(scope.row.rId)">成员</el-button>
+                  <el-button v-if="nowUserType==1" type="danger" @click="deleteDepo(scope.row.rId)">删除</el-button>
                 </template>
               </el-table-column>
 
@@ -52,6 +53,7 @@
                 <template slot-scope="scope">
                  <el-button type="primary" @click="viewDetail(scope.row.rId)">查看</el-button>
                  <el-button type="danger" @click="quitDepot(scope.row.rId)">退出</el-button>
+                 <el-button v-if="nowUserType==1" type="danger" @click="deleteDepo(scope.row.rId)">删除</el-button>
                 </template>
               </el-table-column>
             </el-table>
@@ -85,6 +87,8 @@
 
 <script>
 import { findMyDepot, findMemberDepot, searchUnauditedFile,updateFileInfo } from '../../../api/depot';
+import { deleteDepo } from '../../../api/depot';
+
 export default {
   data() {
     return {
@@ -96,7 +100,8 @@ export default {
       auditTotal:0,
       activeName: 'owner',      //owner我拥有的，member我参与的，audit待审核的
       nowUser: '',
-      nowUserType:0
+      nowUserType:0,
+      priKey:''
     }
   },
   mounted() {
@@ -126,6 +131,37 @@ export default {
         });
       }
     },
+    deleteDepo(rId){
+      //删除仓库
+      this.$prompt("您正在执行一个敏感操作，请输入私钥", "提示", {
+          confirmButtonText: "确定",
+          cancelButtonText: "取消",
+      })
+      .then(({ value }) => {
+          if (value.length != 64) {
+              this.$alert("无效的私钥格式！", "提示", {
+                  confirmButtonText: "确定",
+              });
+              return;
+          }
+          this.priKey = value;
+          deleteDepo({     
+              repoId: rId,
+              priKey:this.priKey
+          }).then((res) => {
+              this.$message({
+                type: 'success',
+                message: '删除成功!'
+              });
+              this.selectDepots();
+          });
+      })
+      .catch(() => {
+          this.dialogVisible=false;
+          this.priKey = "";
+          this.selectDepots();
+      }); 
+    },
     viewDetail(rId) {
       this.$router.push({
         path: "./codedetails",
@@ -135,14 +171,6 @@ export default {
             branchId:0,
         },
       });
-        // this.$router.push({
-        //     path:'/codedetails',
-        //     query:{
-        //         rId: rId,
-        //         activeName:this.activeName,
-        //         username:"韩梅梅",warehouseName: "协同课设",introduce:"这是关于我们的课设",
-        //         warehouseKeywords:'C++',isOwner:true,isMember:false,owner:"",
-        //         isManager:false,isCertificator:false},})
     },
     mangerMember(rId) { //管理成员
       this.$router.push({
