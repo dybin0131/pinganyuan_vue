@@ -76,7 +76,7 @@
               </el-table-column>
             </el-table>
           </el-tab-pane>
-          
+
         </el-tabs>
       </div>
     </div>
@@ -135,6 +135,14 @@ export default {
             branchId:0,
         },
       });
+        // this.$router.push({
+        //     path:'/codedetails',
+        //     query:{
+        //         rId: rId,
+        //         activeName:this.activeName,
+        //         username:"韩梅梅",warehouseName: "协同课设",introduce:"这是关于我们的课设",
+        //         warehouseKeywords:'C++',isOwner:true,isMember:false,owner:"",
+        //         isManager:false,isCertificator:false},})
     },
     mangerMember(rId) { //管理成员
       this.$router.push({

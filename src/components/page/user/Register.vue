@@ -123,20 +123,20 @@ export default {
         display: flex;
         align-items: center;
         padding: 20px;
-        .logLeft {
+        .logLeft{
             width: 58%;
             height: 100%;
         }
-        .logRight {
+        .logRight{
             flex: 1;
             .ms-title {
                 width: 100%;
                 text-align: center;
-                color: #353d61;
+                color: #353D61;
                 font-weight: bold;
                 font-size: 28px;
             }
-            .formText {
+            .formText{
                 color: #ccc;
                 font-size: 12px;
                 margin-bottom: 10px;

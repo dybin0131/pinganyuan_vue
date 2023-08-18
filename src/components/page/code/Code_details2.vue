@@ -195,16 +195,21 @@
             <div style='text-align: left;margin-left: 10px;width: 30%;background: rgba(255,255,255,0.8);border: 1px solid;
             border-image: linear-gradient(0deg, #FFFFFF, #FFFFFF) 1 1;box-shadow: 0 5px 20px 0 rgba(183,183,195,0.07);border-radius: 10px;'>
                 <div style='margin-right: 10px;margin-left: 10px;'>
-                    <!--简介-->
-                    <h4 style='margin-top: 27px;margin-left: 10px'>简介</h4>
-                    <div style='margin-top: 15px;font-size: 15px;color: #72767b;margin-left: 10px' >{{this.$route.query.introduce}}</div>
-                    <div style='margin-top: 15px;font-size: 15px;color: #72767b;margin-left: 10px' >{{this.$route.query.warehouseKeywords}}</div>
-
+<!--                    &lt;!&ndash;简介&ndash;&gt;-->
+<!--                    <h4 style='margin-top: 27px;margin-left: 10px'>简介</h4>-->
+<!--                    <div style='margin-top: 15px;font-size: 15px;color: #72767b;margin-left: 10px' >{{this.$route.query.introduce}}</div>-->
+<!--                    <div style='margin-top: 15px;font-size: 15px;color: #72767b;margin-left: 10px' >{{this.$route.query.warehouseKeywords}}</div>-->
+<!--韩梅梅-协同课设-->
+        <div v-if='this.repoData.rUser==="韩梅梅"'>
+            <!--简介-->
+            <h4 style='margin-top: 27px;margin-left: 10px'>简介</h4>
+            <div style='margin-top: 15px;font-size: 15px;color: #72767b;margin-left: 10px' >{{this.introduce_hmm_xtks}}</div>
                     <!--近期动态-->
                     <h4 style='margin-top: 40px;margin-left: 10px'>近期动态</h4>
                     <div style='display: block'>
                         <div style='display: grid;margin-top:25px;margin-left: 10px'>
-                            <div v-for="(item) in recentTrends"  style='display: flex;margin-bottom: 20px'>
+
+                            <div v-for="(item) in recentTrends_hmm_xtks"  style='display: flex;margin-bottom: 20px'>
                                 <div >
                                     <img src='@/assets/img/user-woman.png' style='width: 50px;height: 50px' />
                                 </div>
@@ -213,20 +218,19 @@
                                     <div style='display: flex'>
                                         <div style='margin-top: 1px;margin-left:20px;font-size: 14px;font-family: Source Han Sans CN;font-weight: 500;
                                     color: #353D61;'>{{item.trends}}</div>
-                                        <div style='margin-left: 10px;font-size: 14px;font-family: Source Han Sans CN;font-weight: 500;
-                                    color: #353D61;'> {{item.time}} </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
+
                     </div>
+                   </div>
                     <!--贡献者-->
                     <div style='display: block;position: relative;'>
                         <div style='display: flex;margin-left: 10px'>
                             <div style='display: flex'>
                                 <h4 style='margin-top: 40px;'>管理者</h4>
                                 <div style='margin-top: 30px;width: 24px;height: 17px;background: #E13131;border-radius: 5px 5px 5px 0;'>
-                                    <div style='margin-left: 8px;font-family: Source Han Sans CN;font-weight: bold;color: #FFFFFF;'>{{this.manager.length}} </div>
+                                    <div style='margin-left: 8px;font-family: Source Han Sans CN;font-weight: bold;color: #FFFFFF;'>{{this.manager_hmm_xtks.length}} </div>
                                 </div>
                             </div>
                             <!--el-button type="text" style='margin-top: 34px;margin-left:10px;font-size: 15px;color: #72767b'>({{this.manager.length}})</el-button>-->
@@ -238,7 +242,7 @@
                         </div>
 
                         <div style='display: flex;margin-top: 20px'>
-                            <div v-for="(item) in manager"  style='display: grid'>
+                            <div v-for="(item) in manager_hmm_xtks"  style='display: grid'>
                                 <!--
                                 <img :src="item.src" style='width: 38px;height: 38px;margin-left: 10px'>
                                 -->
@@ -250,10 +254,11 @@
                                     {{item.name}} </div>
                             </div>
                         </div>
+
                         <div style='display: flex'>
                             <h4 style='margin-top: 40px;margin-left: 10px'>贡献者</h4>
                             <div style='margin-top: 30px;width: 24px;height: 17px;background: #E13131;border-radius: 5px 5px 5px 0;'>
-                                <div style='margin-left: 8px;font-family: Source Han Sans CN;font-weight: bold;color: #FFFFFF;'>{{this.contributor.length}} </div>
+                                <div style='margin-left: 8px;font-family: Source Han Sans CN;font-weight: bold;color: #FFFFFF;'>{{this.contributor_hmm_xtks.length}} </div>
                             </div>
 
                             <div style='position:absolute;right: 0;margin-left: 10px'>
@@ -262,13 +267,255 @@
                             font-weight: 400;color: #4192ED;'>全部</el-button>
                             </div>
                         </div>
+
                         <div style='display: flex;margin-top: 20px'>
-                            <div v-for="(item) in contributor"  style='display: grid'>
+                            <div v-for="(item) in contributor_hmm_xtks"  style='display: grid'>
                                 <div style='margin-right: 10px'>
                                     <img src="../../../assets/img/user-woman.png" style='height: 50px;width: 50px;margin-left: 10px'/>
                                     <!--                                <el-avatar :style="`background:${extractColorByName(item.name)}`"> {{item.name}} </el-avatar>-->
                                 </div>
                                 <div style='font-size: 16px;font-family: Source Han Sans CN;font-weight: bold;color: #353D61;margin-left: 17px'> {{item.name}} </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+<!--李华-李华的测试仓库-->
+                    <div v-if='this.repoData.rUser==="李华"'>
+                        <div v-if='this.repoData.rName==="李华的测试仓库"'>
+                            <!--简介-->
+                            <h4 style='margin-top: 27px;margin-left: 10px'>简介</h4>
+                            <div style='margin-top: 15px;font-size: 15px;color: #72767b;margin-left: 10px' >{{this.introduce_lh_lhdcsck}}</div>
+                        <!--近期动态-->
+                        <h4 style='margin-top: 40px;margin-left: 10px'>近期动态</h4>
+                        <div style='display: block'>
+                            <div style='display: grid;margin-top:25px;margin-left: 10px'>
+
+                                <div v-for="(item) in recentTrends_lh_lhdcsck"  style='display: flex;margin-bottom: 20px'>
+                                    <div >
+                                        <img src='@/assets/img/user-woman.png' style='width: 50px;height: 50px' />
+                                    </div>
+                                    <div style='display: grid'>
+                                        <div style='margin-left:20px;font-size: 16px;font-family: Source Han Sans CN;font-weight: bold;color: #353D61;'> {{item.name}} </div>
+                                        <div style='display: flex'>
+                                            <div style='margin-top: 1px;margin-left:20px;font-size: 14px;font-family: Source Han Sans CN;font-weight: 500;
+                                    color: #353D61;'>{{item.trends}}</div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <!--贡献者-->
+                        <div style='display: block;position: relative;'>
+                            <div style='display: flex;margin-left: 10px'>
+                                <div style='display: flex'>
+                                    <h4 style='margin-top: 40px;'>管理者</h4>
+                                    <div style='margin-top: 30px;width: 24px;height: 17px;background: #E13131;border-radius: 5px 5px 5px 0;'>
+                                        <div style='margin-left: 8px;font-family: Source Han Sans CN;font-weight: bold;color: #FFFFFF;'>{{this.manager_lh_lhdcsck.length}} </div>
+                                    </div>
+                                </div>
+                                <!--el-button type="text" style='margin-top: 34px;margin-left:10px;font-size: 15px;color: #72767b'>({{this.manager.length}})</el-button>-->
+                                <div style='position:absolute;right: 0;'>
+                                    <img src='../../../assets/img/all-icon.png'/>
+                                    <el-button type="text" style='margin-top: 30px;font-size: 15px;font-family: Source Han Sans CN;
+                                font-weight: 400;color: #4192ED;'>全部</el-button>
+                                </div>
+                            </div>
+
+                            <div style='display: flex;margin-top: 20px'>
+                                <div v-for="(item) in manager_lh_lhdcsck"  style='display: grid'>
+                                    <!--
+                                    <img :src="item.src" style='width: 38px;height: 38px;margin-left: 10px'>
+                                    -->
+                                    <div style='margin-right: 10px;width: 50px;height: 50px'>
+                                        <img src='@/assets/img/user-woman.png' style='width: 50px;height: 50px;margin-left: 10px'/>
+                                        <!--  <el-avatar :style="`background:${extractColorByName(item.name)}`"> {{item.name}} </el-avatar>-->
+                                    </div>
+                                    <div style='font-size: 16px;font-family: Source Han Sans CN;font-weight: bold;color: #353D61;margin-left: 17px'>
+                                        {{item.name}} </div>
+                                </div>
+                            </div>
+
+                            <div style='display: flex'>
+                                <h4 style='margin-top: 40px;margin-left: 10px'>贡献者</h4>
+                                <div style='margin-top: 30px;width: 24px;height: 17px;background: #E13131;border-radius: 5px 5px 5px 0;'>
+                                    <div style='margin-left: 8px;font-family: Source Han Sans CN;font-weight: bold;color: #FFFFFF;'>{{this.contributor_lh_lhdcsck.length}} </div>
+                                </div>
+
+                                <div style='position:absolute;right: 0;margin-left: 10px'>
+                                    <img src='../../../assets/img/all-icon.png'/>
+                                    <el-button type="text" style='margin-top: 30px;font-size: 15px;font-family: Source Han Sans CN;
+                            font-weight: 400;color: #4192ED;'>全部</el-button>
+                                </div>
+                            </div>
+
+                            <div style='display: flex;margin-top: 20px'>
+                                <div v-for="(item) in contributor_lh_lhdcsck"  style='display: grid'>
+                                    <div style='margin-right: 10px'>
+                                        <img src="../../../assets/img/user-woman.png" style='height: 50px;width: 50px;margin-left: 10px'/>
+                                        <!--                                <el-avatar :style="`background:${extractColorByName(item.name)}`"> {{item.name}} </el-avatar>-->
+                                    </div>
+                                    <div style='font-size: 16px;font-family: Source Han Sans CN;font-weight: bold;color: #353D61;margin-left: 17px'> {{item.name}} </div>
+                                </div>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+  <!--李华-李华的临时仓库-->
+                    <div v-if='this.repoData.rUser==="李华"'>
+                        <div v-if='this.repoData.rName==="李华的临时仓库"'>
+                            <!--简介-->
+                            <h4 style='margin-top: 27px;margin-left: 10px'>简介</h4>
+                            <div style='margin-top: 15px;font-size: 15px;color: #72767b;margin-left: 10px' >{{this.introduce_lh_lhdlsck}}</div>
+                            <!--近期动态-->
+                            <h4 style='margin-top: 40px;margin-left: 10px'>近期动态</h4>
+                            <div style='display: block'>
+                                <div style='display: grid;margin-top:25px;margin-left: 10px'>
+
+                                    <div v-for="(item) in recentTrends_lh_lhdlsck"  style='display: flex;margin-bottom: 20px'>
+                                        <div >
+                                            <img src='@/assets/img/user-woman.png' style='width: 50px;height: 50px' />
+                                        </div>
+                                        <div style='display: grid'>
+                                            <div style='margin-left:20px;font-size: 16px;font-family: Source Han Sans CN;font-weight: bold;color: #353D61;'> {{item.name}} </div>
+                                            <div style='display: flex'>
+                                                <div style='margin-top: 1px;margin-left:20px;font-size: 14px;font-family: Source Han Sans CN;font-weight: 500;
+                                    color: #353D61;'>{{item.trends}}</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--贡献者-->
+                            <div style='display: block;position: relative;'>
+                                <div style='display: flex;margin-left: 10px'>
+                                    <div style='display: flex'>
+                                        <h4 style='margin-top: 40px;'>管理者</h4>
+                                        <div style='margin-top: 30px;width: 24px;height: 17px;background: #E13131;border-radius: 5px 5px 5px 0;'>
+                                            <div style='margin-left: 8px;font-family: Source Han Sans CN;font-weight: bold;color: #FFFFFF;'>{{this.manager_lh_lhdlsck.length}} </div>
+                                        </div>
+                                    </div>
+                                    <!--el-button type="text" style='margin-top: 34px;margin-left:10px;font-size: 15px;color: #72767b'>({{this.manager.length}})</el-button>-->
+                                    <div style='position:absolute;right: 0;'>
+                                        <img src='../../../assets/img/all-icon.png'/>
+                                        <el-button type="text" style='margin-top: 30px;font-size: 15px;font-family: Source Han Sans CN;
+                                font-weight: 400;color: #4192ED;'>全部</el-button>
+                                    </div>
+                                </div>
+
+                                <div style='display: flex;margin-top: 20px'>
+                                    <div v-for="(item) in manager_lh_lhdlsck"  style='display: grid'>
+                                        <!--
+                                        <img :src="item.src" style='width: 38px;height: 38px;margin-left: 10px'>
+                                        -->
+                                        <div style='margin-right: 10px;width: 50px;height: 50px'>
+                                            <img src='@/assets/img/user-woman.png' style='width: 50px;height: 50px;margin-left: 10px'/>
+                                            <!--  <el-avatar :style="`background:${extractColorByName(item.name)}`"> {{item.name}} </el-avatar>-->
+                                        </div>
+                                        <div style='font-size: 16px;font-family: Source Han Sans CN;font-weight: bold;color: #353D61;margin-left: 17px'>
+                                            {{item.name}} </div>
+                                    </div>
+                                </div>
+                                <div style='display: flex'>
+                                    <h4 style='margin-top: 40px;margin-left: 10px'>贡献者</h4>
+                                    <div style='margin-top: 30px;width: 24px;height: 17px;background: #E13131;border-radius: 5px 5px 5px 0;'>
+                                        <div style='margin-left: 8px;font-family: Source Han Sans CN;font-weight: bold;color: #FFFFFF;'>{{this.contributor_lh_lhdlsck.length}} </div>
+                                    </div>
+                                    <div style='position:absolute;right: 0;margin-left: 10px'>
+                                        <img src='../../../assets/img/all-icon.png'/>
+                                        <el-button type="text" style='margin-top: 30px;font-size: 15px;font-family: Source Han Sans CN;
+                            font-weight: 400;color: #4192ED;'>全部</el-button>
+                                    </div>
+                                </div>
+
+                                <div style='display: flex;margin-top: 20px'>
+                                    <div v-for="(item) in contributor_lh_lhdlsck"  style='display: grid'>
+                                        <div style='margin-right: 10px'>
+                                            <img src="../../../assets/img/user-woman.png" style='height: 50px;width: 50px;margin-left: 10px'/>
+                                            <!--                                <el-avatar :style="`background:${extractColorByName(item.name)}`"> {{item.name}} </el-avatar>-->
+                                        </div>
+                                        <div style='font-size: 16px;font-family: Source Han Sans CN;font-weight: bold;color: #353D61;margin-left: 17px'> {{item.name}} </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+<!--李华-地图导航课设-->
+                    <div v-if='this.repoData.rUser==="李华"'>
+                        <div v-if='this.repoData.rName==="地图导航课设"'>
+                            <!--简介-->
+                            <h4 style='margin-top: 27px;margin-left: 10px'>简介</h4>
+                            <div style='margin-top: 15px;font-size: 15px;color: #72767b;margin-left: 10px' >{{this.introduce_lh_dtdhks}}</div>
+                            <!--近期动态-->
+                            <h4 style='margin-top: 40px;margin-left: 10px'>近期动态</h4>
+                            <div style='display: block'>
+                                <div style='display: grid;margin-top:25px;margin-left: 10px'>
+
+                                    <div v-for="(item) in recentTrends_lh_dtdhks"  style='display: flex;margin-bottom: 20px'>
+                                        <div >
+                                            <img src='@/assets/img/user-woman.png' style='width: 50px;height: 50px' />
+                                        </div>
+                                        <div style='display: grid'>
+                                            <div style='margin-left:20px;font-size: 16px;font-family: Source Han Sans CN;font-weight: bold;color: #353D61;'> {{item.name}} </div>
+                                            <div style='display: flex'>
+                                                <div style='margin-top: 1px;margin-left:20px;font-size: 14px;font-family: Source Han Sans CN;font-weight: 500;
+                                    color: #353D61;'>{{item.trends}}</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--贡献者-->
+                            <div style='display: block;position: relative;'>
+                                <div style='display: flex;margin-left: 10px'>
+                                    <div style='display: flex'>
+                                        <h4 style='margin-top: 40px;'>管理者</h4>
+                                        <div style='margin-top: 30px;width: 24px;height: 17px;background: #E13131;border-radius: 5px 5px 5px 0;'>
+                                            <div style='margin-left: 8px;font-family: Source Han Sans CN;font-weight: bold;color: #FFFFFF;'>{{this.manager_lh_dtdhks.length}} </div>
+                                        </div>
+                                    </div>
+                                    <!--el-button type="text" style='margin-top: 34px;margin-left:10px;font-size: 15px;color: #72767b'>({{this.manager.length}})</el-button>-->
+                                    <div style='position:absolute;right: 0;'>
+                                        <img src='../../../assets/img/all-icon.png'/>
+                                        <el-button type="text" style='margin-top: 30px;font-size: 15px;font-family: Source Han Sans CN;
+                                font-weight: 400;color: #4192ED;'>全部</el-button>
+                                    </div>
+                                </div>
+
+                                <div style='display: flex;margin-top: 20px'>
+                                    <div v-for="(item) in manager_lh_dtdhks"  style='display: grid'>
+                                        <!--
+                                        <img :src="item.src" style='width: 38px;height: 38px;margin-left: 10px'>
+                                        -->
+                                        <div style='margin-right: 10px;width: 50px;height: 50px'>
+                                            <img src='@/assets/img/user-woman.png' style='width: 50px;height: 50px;margin-left: 10px'/>
+                                            <!--  <el-avatar :style="`background:${extractColorByName(item.name)}`"> {{item.name}} </el-avatar>-->
+                                        </div>
+                                        <div style='font-size: 16px;font-family: Source Han Sans CN;font-weight: bold;color: #353D61;margin-left: 17px'>
+                                            {{item.name}} </div>
+                                    </div>
+                                </div>
+                                <div style='display: flex'>
+                                    <h4 style='margin-top: 40px;margin-left: 10px'>贡献者</h4>
+                                    <div style='margin-top: 30px;width: 24px;height: 17px;background: #E13131;border-radius: 5px 5px 5px 0;'>
+                                        <div style='margin-left: 8px;font-family: Source Han Sans CN;font-weight: bold;color: #FFFFFF;'>{{this.contributor_lh_dtdhks.length}} </div>
+                                    </div>
+                                    <div style='position:absolute;right: 0;margin-left: 10px'>
+                                        <img src='../../../assets/img/all-icon.png'/>
+                                        <el-button type="text" style='margin-top: 30px;font-size: 15px;font-family: Source Han Sans CN;
+                            font-weight: 400;color: #4192ED;'>全部</el-button>
+                                    </div>
+                                </div>
+
+                                <div style='display: flex;margin-top: 20px'>
+                                    <div v-for="(item) in contributor_lh_dtdhks"  style='display: grid'>
+                                        <div style='margin-right: 10px'>
+                                            <img src="../../../assets/img/user-woman.png" style='height: 50px;width: 50px;margin-left: 10px'/>
+                                            <!--                                <el-avatar :style="`background:${extractColorByName(item.name)}`"> {{item.name}} </el-avatar>-->
+                                        </div>
+                                        <div style='font-size: 16px;font-family: Source Han Sans CN;font-weight: bold;color: #353D61;margin-left: 17px'> {{item.name}} </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -314,6 +561,7 @@ export default {
     },
     data() {
         return {
+            user:this.username,
             repoId:0,
             repoData:[],
             activeName:'',
@@ -338,21 +586,85 @@ export default {
             fork_count: 0,
             watching_count: 3,
             donate_count: 0,
+
+            //韩梅梅-协同课设
             //此仓库的【贡献者】——后端从数据库里传入数组
-            contributor: [
-                { name: '韩梅梅', src: require('../../../assets/img/img.jpg') },
-                { name: '李华', src: require('../../../assets/img/wzy.png') },
+            introduce_hmm_xtks:"这是关于我们的课设",
+            contributor_hmm_xtks: [
+                { name: '韩梅梅'},{ name: '李华'},
                ],
             //因为图片在assets里面，所以src引入的时候需要require一下。（此次未采用此方法引入头像）
             //此仓库的【管理者】——后端从数据库里传入数组
-            manager: [{ name: '韩梅梅', src: require('../../../assets/img/img.jpg') },
+            manager_hmm_xtks: [{ name: '韩梅梅' }, { name: '李华'}],
+            //此仓库的【近期动态】——后端监测动态，传入前端？maybe，暂时写死数据
+            recentTrends_hmm_xtks: [
+                { name: '李华', trends: '提交了文件 :故事一越权更新用户仓库文件.docx',time:'5天前' },
+                { name: '李华', trends: '提交了文件index.js',time:'7天前' },
+                { name: '韩梅梅', trends: 'PPT改_09.png',time:'8天前' },
+            ],
+
+            //李华-李华的测试仓库
+            introduce_lh_lhdcsck:"这是我的测试仓库",
+            //此仓库的【贡献者】——后端从数据库里传入数组
+            contributor_lh_lhdcsck: [
+                { name: '韩梅梅'},
+                { name: '李华'},
+            ],
+            //因为图片在assets里面，所以src引入的时候需要require一下。（此次未采用此方法引入头像）
+            //此仓库的【管理者】——后端从数据库里传入数组
+            manager_lh_lhdcsck: [ { name: '李华'}],
+            //此仓库的【近期动态】——后端监测动态，传入前端？maybe，暂时写死数据
+            recentTrends_lh_lhdcsck: [
+                { name: '韩梅梅', trends: '提交了文件 info.txt',time:'5天前' },
+                { name: '韩梅梅', trends: '提交了文件 test.c',time:'5天前' },
+                { name: '李华', trends: '提交了文件 傍晚村落.jpg',time:'5天前' },
+            ],
+
+            //李华-李华的临时仓库
+            introduce_lh_lhdlsck:"这是我的临时仓库",
+            //此仓库的【贡献者】——后端从数据库里传入数组
+            contributor_lh_lhdlsck: [
+                { name: '韩梅梅', src: require('../../../assets/img/wzy.png') },
+                { name: '李华', src: require('../../../assets/img/wzy.png') },],
+            //因为图片在assets里面，所以src引入的时候需要require一下。（此次未采用此方法引入头像）
+            //此仓库的【管理者】——后端从数据库里传入数组
+            manager_lh_lhdlsck: [{ name: '李华', src: require('../../../assets/img/img.jpg') }],
+            //此仓库的【近期动态】——后端监测动态，传入前端？maybe，暂时写死数据
+            recentTrends_lh_lhdlsck: [
+                { name: '韩梅梅', trends: '提交了文件QueryInfo.txt',time:'11天前' },
+                { name: '李华', trends: '提交了文件QueryData.txt',time:'11天前' },
+                { name: '韩梅梅', trends: '提交了文件info.txt',time:'11天前' },
+
+            ],
+
+            //李华-地图导航课设
+            introduce_lh_dtdhks:"这是我的地图导航课设！",
+            //此仓库的【贡献者】——后端从数据库里传入数组
+            contributor_lh_dtdhks: [
+                { name: '李华', src: require('../../../assets/img/wzy.png') },
+            ],
+            //因为图片在assets里面，所以src引入的时候需要require一下。（此次未采用此方法引入头像）
+            //此仓库的【管理者】——后端从数据库里传入数组
+            manager_lh_dtdhks: [
                 { name: '李华', src: require('../../../assets/img/img.jpg') }],
             //此仓库的【近期动态】——后端监测动态，传入前端？maybe，暂时写死数据
-            recentTrends: [
-                { name: '李华', trends: '提交了文件RSA.c',time:'5天前' },
-                { name: '李华', trends: '提交了文件3DES.c',time:'7天前' },
-                { name: '韩梅梅', trends: '创建了仓库',time:'8天前' },
+            recentTrends_lh_dtdhks: [
+                { name: '李华', trends: '提交了文件main.cpp',time:'7天前' },
+                { name: '李华', trends: '提交了文件Map.txt',time:'9天前' },
+                { name: '李华', trends: '提交了文件MapInfo.db',time:'9天前' },
+                // { name: '李华', trends: '提交了文件Navigation.cpp',time:'10天前' },
+                // { name: '李华', trends: '提交了文件Navigation.h',time:'10天前' },
+                // { name: '李华', trends: '提交了文件QtSGS.cpp',time:'10天前' },
+                // { name: '李华', trends: '提交了文件QtSGS.h',time:'10天前' },
+                // { name: '李华', trends: '提交了文件QtSGS.qrc',time:'10天前' },
+                // { name: '李华', trends: '提交了文件QtSGS.sln',time:'12天前' },
+                // { name: '李华', trends: '提交了文件QtSGS.ui',time:'12天前' },
+                // { name: '李华', trends: '提交了文件QtSGS.vcxproj',time:'12天前' },
+                // { name: '李华', trends: '提交了文件QtSGS.vcxproj.filters',time:'12天前' },
+                // { name: '李华', trends: '创建了仓库',time:'13天前' },
             ],
+
+
             //真实数据
             branchList:[],
             selectBranchId:0,

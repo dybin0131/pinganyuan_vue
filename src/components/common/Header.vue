@@ -8,9 +8,9 @@
         <!---“通信开销”+“吞吐量”+“延迟”--->
         <div class="headerRight">
             <div class="information">
-                <!-- <div class="inText"><i class="el-icon-s-opportunity"></i> 通信开销=23.6</div>
-                <div class="inText"><i class="el-icon-set-up"></i> 吞吐量=233.1</div>
-                <div class="inText"><i class="el-icon-time"></i> 延迟=2-100</div> -->
+<!--                <div class="inText"><i class="el-icon-s-opportunity"></i> 通信开销=23.6</div>-->
+<!--                <div class="inText"><i class="el-icon-set-up"></i> 吞吐量=233.1</div>-->
+<!--                <div class="inText"><i class="el-icon-time"></i> 延迟=2-100</div>-->
             </div>
             <div class="headerUserCon">
                 <!--搜索框-->
@@ -47,8 +47,8 @@
                         <el-dropdown-item divided>
                             <el-button type='text' @click='retrieveDep'>找回仓库</el-button>
                         </el-dropdown-item>
-<!--                        <el-dropdown-item divided>创建组织</el-dropdown-item>-->
-<!--                        <el-dropdown-item divided>开通企业版</el-dropdown-item>-->
+                        <!--                        <el-dropdown-item divided>创建组织</el-dropdown-item>-->
+                        <!--                        <el-dropdown-item divided>开通企业版</el-dropdown-item>-->
                         <el-dropdown-item divided>---</el-dropdown-item>
                     </el-dropdown-menu>
                 </el-dropdown>
@@ -67,7 +67,7 @@
                 </div>
                 <!-- 用户头像 -->
                 <div class="user-avator">
-<!--                    <img src="../../assets/img/img.jpg" />-->
+                    <!--                    <img src="../../assets/img/img.jpg" />-->
                     <img src="../../assets/img/user-woman.png" />
                 </div>
                 <!-- 用户名下拉菜单 -->
@@ -77,10 +77,8 @@
                         <i class="el-icon-caret-bottom"></i>
                     </span>
                     <el-dropdown-menu slot="dropdown">
-                        <a href="/set">
-                            <el-dropdown-item divided>个人主页</el-dropdown-item>
-                        </a>
-                        <a href="/workbenchDep">
+                        <el-dropdown-item divided>个人主页</el-dropdown-item>
+                        <a href="https://github.com/lin-xin/vue-manage-system" target="_blank">
                             <el-dropdown-item divided>项目仓库</el-dropdown-item>
                         </a>
                         <el-dropdown-item divided commond="set">设置</el-dropdown-item>
@@ -116,11 +114,11 @@
             center
         >
             <div class="textBtn" style='display: grid;' >
-                <div>你正在找回仓库 李华的练习仓库 (李华/李华的练习仓库)，该操作需要验证你的用户身份是否有权限。</div>
+                <div>你正在找回仓库 地图导航课设 (李华/地图导航课设)，该操作需要验证你的用户身份是否有权限。</div>
                 <el-tag type='warning' style='margin-top: 10px;margin-bottom: 20px;font-weight: bolder;font-size: 14px;'>
-                    验证通过后，仓库 李华的练习仓库 (李华/李华的练习仓库) 的所有数据将被恢复!</el-tag>
+                    验证通过后，仓库 地图导航课设 (李华/地图导航课设) 的所有数据将被恢复!</el-tag>
                 <el-tag type='warning' style='margin-top:1px;margin-bottom: 20px;font-weight: bolder;font-size: 14px;'>
-                        区块链存储CID:QmXtQmNzGBG1DwF8iHccS9QZxpB6nQ7nLPSfpMCEHzvvzX</el-tag>
+                    区块链存储CID:QmXtQmNzGBG1DwF8iHccS9QZxpB6nQ7nLPSfpMCEHzvvzX</el-tag>
                 <div style='font-weight: bolder;margin-top: 5px;color: #e6a23c'>私钥验证身份</div>
                 <el-input style='margin-top: 10px' v-model="retrievePassword" placeholder="请输入您的私钥"></el-input>
             </div>
@@ -245,6 +243,7 @@ export default {
 
             if(this.isEntitled===true){
                 this.$store.commit('updateSharedData', 0);
+
                 this.$router.push({path: '/workbenchDep'});
                 this.$message({
                     type: 'info',
