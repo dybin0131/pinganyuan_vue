@@ -37,6 +37,14 @@ export function findMemberDepot(params) {
     })
 }
 
+// 搜索所有仓库
+export function searchRepo(data) {
+    return request({
+        url: '/repo/search',
+        method: 'post',
+        data
+    })
+}
 // 搜索仓库详情
 export function searchDetail(data) {
     return request({

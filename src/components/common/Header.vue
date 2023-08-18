@@ -8,9 +8,9 @@
         <!---“通信开销”+“吞吐量”+“延迟”--->
         <div class="headerRight">
             <div class="information">
-                <div class="inText"><i class="el-icon-s-opportunity"></i> 通信开销=23.6</div>
+                <!-- <div class="inText"><i class="el-icon-s-opportunity"></i> 通信开销=23.6</div>
                 <div class="inText"><i class="el-icon-set-up"></i> 吞吐量=233.1</div>
-                <div class="inText"><i class="el-icon-time"></i> 延迟=2-100</div>
+                <div class="inText"><i class="el-icon-time"></i> 延迟=2-100</div> -->
             </div>
             <div class="headerUserCon">
                 <!--搜索框-->

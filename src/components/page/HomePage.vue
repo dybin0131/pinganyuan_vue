@@ -10,6 +10,12 @@
             </div>
         </div>
         <!-- 列表内容 -->
+        <!-- <div class="contentBox">
+            <div class="conBox" v-for="(val,i) in contentList" :key="i">
+                <el-button class="conTitle" type='text' @click="viewDetail(val.rId)"> {{ val.rUser }}/{{val.rName}} </el-button>
+                <div class="conText">{{val.desc}}</div>
+            </div>
+        </div> -->
         <div class="contentBox">
             <div class="conBox" v-for="(val,i) in contentList" :key="i">
                 <template slot-scope="scope">
@@ -27,6 +33,7 @@
 </template>
 
 <script>
+import { searchRepo } from '../../api/depot';
 export default {
     name: 'HomePage',
     data() {
@@ -45,6 +52,11 @@ export default {
                 { label: '开发工具', },
                 { label: '数据库相关', },
             ],
+            // contentList: [{
+            //     rName: '韩梅梅/协同课设',
+            //     desc: '这是关于我们的课设',
+            //     rUser:'韩梅梅'
+            // }],
             contentList: [{
                 title: '韩梅梅/协同课设',
                 text: '这是关于我们的课设',
@@ -99,10 +111,31 @@ export default {
             defaultProps: {
                 children: 'children',
                 label: 'label'
-            }
+            },
+            keyword:''
         };
     },
+    mounted() {
+        //this.search();
+    },
     methods: {
+        search(){
+            searchRepo({
+                keyword: this.keyword
+            }).then((res) => {
+                this.contentList = res.data;
+            });
+        },
+        viewDetail(rId) {
+            this.$router.push({
+                path: "./codedetails",
+                query: { 
+                    repoId: rId,
+                    activeName:this.activeName,
+                    branchId:0,
+                },
+            });
+        },
         handleNodeClick(data,index) {
             this.indexTop = index
         }
@@ -155,9 +188,12 @@ export default {
             margin-bottom: 20px;
             background-color: #fff;
             .conTitle{
-                color: #353D61;
+                color: rgb(0, 0, 238);
                 font-size: 16px;
-                font-weight: bold;
+                font-weight: 700;
+            }
+            .conTitle:hover{
+                color: red;
             }
             .conText{
                 color: #353D61;
