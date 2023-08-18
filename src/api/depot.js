@@ -55,6 +55,25 @@ export function selectBranchList(params) {
     })
 }
 
+// 获取仓库的评分情况
+export function getRepoAuditScore(params) {
+    return request({
+        url: '/workbench/getRepoAuditScore',
+        method: 'get',
+        params
+    })
+}
+
+// 获取仓库的评分情况
+export function applyForAudit(params) {
+    return request({
+        url: '/workbench/applyForAudit',
+        method: 'get',
+        params
+    })
+}
+
+
 // 新增分支
 export function addBranch(data) {
     return request({
@@ -64,10 +83,20 @@ export function addBranch(data) {
     })
 }
 
+
 // 修改文件的备注信息
 export function updateFileInfo(data) {
     return request({
         url: '/file/updateFileInfo',
+        method: 'post',
+        data
+    })
+}
+
+// 查询未审核的文件信息
+export function searchUnauditedFile(data) {
+    return request({
+        url: '/file/searchUnauditedFile',
         method: 'post',
         data
     })

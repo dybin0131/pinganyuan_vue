@@ -6,22 +6,27 @@
             <!--标题路径-->
             <div style='display: flex;position: relative'>
                 <div style='display: flex;margin-top: 15px;margin-left: 10px'>
-                    <el-tag  v-if="isCredible>=60" type='success'
-                             style='width: 55px;height: 24px;background: rgba(0,171,164,0.1);border: 1px solid #00ABA4;padding-left: 14px;
-                             border-radius: 4px;'>可信</el-tag>
-                    <el-tag  v-else-if='isCredible<60' type='danger'
-                             style='width: 55px;height: 24px;background: rgba(237,64,64,0.1);border: 1px solid #ED4040;border-radius: 4px;'
-                    >不可信</el-tag>
 
-                    <!-- style='background-color: #4092ED;opacity: 0.8;border-radius: 4px;
-                                   font-size: 18px;font-family: Source Han Sans CN;font-weight: 400;color: #4092ED;'> -->
+                    <el-tooltip class="item" effect="light" :content="scoreDesc" placement="right-start" v-if="isCredible>=60">
+                        <el-tag type='success'
+                            style='width: 55px;height: 24px;background: rgba(0,171,164,0.1);border: 1px solid #00ABA4;padding-left: 14px;
+                            border-radius: 4px;font-weight:500;color:#00ABA4;'>
+                        可信</el-tag>
+                    </el-tooltip>
+
+                    <el-tooltip class="item" effect="light" :content="scoreDesc" placement="right-start" v-else-if='isCredible<60'>
+                        <el-tag type='danger'
+                            style='width: 55px;height: 24px;background: rgba(237,64,64,0.1);border: 1px solid #ED4040;border-radius: 4px;'
+                        >不可信</el-tag>
+                    </el-tooltip>
 
                     <div style='margin-left: 20px;display: flex'>
-                        <div style='width: 30px;height: 19px;font-size: 14px;font-family: Source Han Sans CN;
+                        <div style='height: 19px;font-size: 14px;font-family: Source Han Sans CN;
                         font-weight: bold;color: #353D61;line-height: 28px;margin-top: 0;'>{{this.repoData.rUser}}</div>
                         <div style='height: 14px;font-size: 14px;font-family: Source Han Sans CN;font-weight: 400;
                         color: #353D61;line-height: 28px;opacity: 0.8;margin-left: 12px'> / {{this.repoData.rName}} </div>
                     </div>
+                    
                 </div>
 
                 <!--审核是否为可信依赖库-->
@@ -62,19 +67,6 @@
                     <el-button type="plain" icon="el-icon-share" style='font-family: San Francisco Display;font-weight: 400;color: #353D61;'>
                         下载  {{fork_count}}</el-button>
                 </div>
-
-                <!---申请成功--->
-                <!---
-                <div style='display: flex;margin-top: 15px;margin-left: 10px'>
-                    <el-tag type="success" style='margin-top: 5px'>可信</el-tag>
-
-                    <el-breadcrumb separator="/" style='margin-top:5px;margin-left: 10px;font-size: 23px'>
-                        <el-breadcrumb-item :to="{ path: '/' }">{{username}}</el-breadcrumb-item>
-                        <el-breadcrumb-item><a href="/">test</a></el-breadcrumb-item>
-                    </el-breadcrumb>
-                </div>
-                <el-button type="info" style='width: auto;height: 40px;margin-top: 10px;margin-left: 10px' @click="application">申请可信依赖库</el-button>
-               --->
             </div>
         </div>
         <!--主体-->
@@ -291,7 +283,7 @@
             <div class="textBtn">
                 <div>1. 你的可信依赖库申请将由平安源nber审核。</div>
                 <div>2. 凡是经过安全检验确保安全的依赖库，平台会为其颁发可信依赖库证明。</div>
-                <div>3.申请提交后，如一个工作日内未得到推荐，则默认表示被拒。</div>
+                <div>3. 申请提交后，如一个工作日内未得到推荐，则默认表示被拒。</div>
             </div>
             <span slot="footer" class="dialog-footer">
                 <el-button  @click="applicationNO">取 消</el-button>
@@ -307,7 +299,7 @@ import axios from 'axios';
 import ManageComponent from '@/components/page/depot/Manage.vue';
 import CounterCom from '@/components/page/CounterCom.vue'
 import { messages } from '../../common/i18n';
-import { selectBranchList,addBranch,searchDetail } from '../../../api/depot';
+import { selectBranchList,addBranch,searchDetail,getRepoAuditScore,applyForAudit } from '../../../api/depot';
 
 
 export default {
@@ -332,7 +324,9 @@ export default {
             owner:this.$route.query.owner,
             warehouse: this.$route.query.warehouseName,
             value:'',
-            isCredible: 60,   //低于60不可信;;; 可以用 this.$route.query.isCredible 传参  or  从数据库读取
+            isCredible: 60,     //低于60不可信;;; 可以用 this.$route.query.isCredible 传参  or  从数据库读取
+            scoreDesc:'',       //分数的描述信息
+            priKey:'',
             //isCredible:this.$store.state.CredibleValue,
             isDisabled: false,  //对于申请按钮的展现
             isAuditCompleted:false, //审核员是否审核完成，已完成则不显示按钮,
@@ -402,6 +396,13 @@ export default {
                 }
                 this.choiceBranch();
             });
+            getRepoAuditScore({
+                repoId: this.repoId
+            }).then((res) => {
+                this.isCredible = res.data.score;
+                this.scoreDesc = "该仓库共包含"+res.data.defaultNum+"个未申请可信的库文件,"+res.data.auditNum+"个可信库文件,"+res.data.failAuditNum+"个危险库文件,"+res.data.unAuditNum+"个待审核文件";
+                //console.log(this.scoreDesc);
+            });
         },
         addBranch(){
             this.$prompt("请输入分支名称", "提示", {
@@ -468,22 +469,36 @@ export default {
         },
         //申请可信依赖库证明
         applicationYes(){
-            // this.dialogVisible=false
-            // this.$message({
-            //     type: 'info',
-            //     iconClass:'../../assets/img/payAttention.png',
-            //     message: '申请已提交，请等待审核！'
-            // });
-            // this.isDisabled= !this.isDisabled;
-            // this.applicationStatus="可信依赖库申请中";
-
-            this.dialogVisible=false;
-            this.isDisabled= !this.isDisabled;
-            this.applicationStatus="已申请可信依赖库";
-
-            // 需要执行的代码
-            setTimeout(this.myMessage, 3000); //3秒后開始运行 √
-            // this. isCredible=60;
+            this.$prompt("请输入私钥", "提示", {
+                confirmButtonText: "确定",
+                cancelButtonText: "取消",
+            })
+            .then(({ value }) => {
+                if (value.length != 64) {
+                    this.$alert("无效的私钥格式！", "提示", {
+                        confirmButtonText: "确定",
+                    });
+                    return;
+                }
+                this.priKey = value;
+                applyForAudit({     //申请可信依赖库，重新将未审核通过的可信库文件提交申请
+                    repoId: this.repoId,
+                    priKey:this.priKey
+                }).then((res) => {
+                    this.dialogVisible=false;
+                    //this.isDisabled= !this.isDisabled;
+                    //this.applicationStatus="已申请可信依赖库";
+                setTimeout(this.myMessage, 3000); //3秒后開始运行 √
+                }).catch((res)=>{
+                    this.dialogVisible=false;
+                    //this.isDisabled= !this.isDisabled;
+                    //this.applicationStatus="申请失败！请稍后重试";
+                });
+            })
+            .catch(() => {
+                this.dialogVisible=false;
+                this.priKey = "";
+            }); 
         },
         myMessage(){
             this.$message({

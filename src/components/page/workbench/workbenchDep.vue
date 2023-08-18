@@ -56,6 +56,27 @@
               </el-table-column>
             </el-table>
           </el-tab-pane>
+
+          <el-tab-pane label="待我审核" name="audit" v-if="nowUserType==1">
+            <el-table :data="tableData_Audit" :header-cell-style="{'text-align':'center'}" :cell-style="{'text-align':'center'}"
+              style="width: 100%;font-size:13px;margin-top: 10px">
+              <el-table-column label="文件名" prop="fileName">
+              </el-table-column>
+              <el-table-column label="文件大小" prop="fileSizeStr" width="200">
+              </el-table-column>
+              <el-table-column label="提交时间" prop="timeDesc">
+              </el-table-column>
+              <el-table-column label="描述" prop="remark" width="500">
+              </el-table-column>
+              <el-table-column label="操作">
+                <template slot-scope="scope">
+                 <el-button type="primary" @click="updateAuditState(scope.row,1)">通过审核</el-button>
+                 <el-button type="danger" @click="updateAuditState(scope.row,2)">拒绝审核</el-button>
+                </template>
+              </el-table-column>
+            </el-table>
+          </el-tab-pane>
+          
         </el-tabs>
       </div>
     </div>
@@ -63,18 +84,24 @@
 </template>
 
 <script>
-import { findMyDepot, findMemberDepot } from '../../../api/depot';
+import { findMyDepot, findMemberDepot, searchUnauditedFile,updateFileInfo } from '../../../api/depot';
 export default {
   data() {
     return {
       tableData_Own: [],
+      ownTotal:0,
       tableData_Member: [],
-      activeName: 'owner',      //owner我拥有的，member我参与的
-      nowUser: ''
+      memberTotal:0,
+      tableData_Audit:[],     //待审核的库文件，注意这个是文件，而不是库
+      auditTotal:0,
+      activeName: 'owner',      //owner我拥有的，member我参与的，audit待审核的
+      nowUser: '',
+      nowUserType:0
     }
   },
   mounted() {
     this.nowUser = localStorage.getItem('ms_username');
+    this.nowUserType = localStorage.getItem('ms_usertype');
     this.selectDepots();
   },
   methods: {
@@ -83,14 +110,21 @@ export default {
         user_name: this.nowUser
       }).then((res) => {
         this.tableData_Own = res.data;
-        this.total = res.count
+        this.ownTotal = res.count
       });
       findMemberDepot({
         member_name: this.nowUser
       }).then((res) => {
         this.tableData_Member = res.data;
-        this.total = res.count
+        this.memberTotal = res.count
       });
+      if(this.nowUserType==1){  //管理员
+        searchUnauditedFile({   //查询未审核的库
+        }).then((res) => {
+          this.tableData_Audit = res.data;
+          this.auditTotal = res.count
+        });
+      }
     },
     viewDetail(rId) {
       this.$router.push({
@@ -122,6 +156,16 @@ export default {
         }).catch(() => {
             
         });
+    },
+    updateAuditState(file,state){
+      updateFileInfo({
+        id: file.id,
+        remark:file.remark,
+        auditState:state
+      }).then((res) => {
+        this.$message({ type: 'success', message: "审核成功！" })
+        this.selectDepots();
+      });
     },
     handleClick(tab, event) {
       console.log(tab, event);

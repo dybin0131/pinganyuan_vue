@@ -49,6 +49,7 @@
 
         <div class="upTitle">扩展信息</div>
         <el-input type="textarea" :rows="6" placeholder="此处可填写为什么修改，做了什么修改，以及开发的思路等更加详细的提交信息（相当于Git commit message的body）" v-model="remark"></el-input>
+        <el-checkbox v-model="auditCheck" class="checkbox">为该文件进行可信验证</el-checkbox>
         <div class="btnBox">
             <el-button type="primary" @click="updateFileRemark()">提交</el-button>
             <el-button type="primary" plain>取消</el-button>
@@ -70,6 +71,7 @@
                 branchId:0,
                 remark:"",
                 repoFileId:0,
+                auditCheck:true,
                 name: localStorage.getItem('ms_username'),
                 fileList: [],
                 input:'',
@@ -119,9 +121,16 @@
                     this.$message({ type: 'error', message: "正在上传文件，请稍后再试！" });
                     return;
                 }
+                var auditState;
+                if(this.auditCheck){
+                    auditState = 0;
+                }else{
+                    auditState = -1;
+                }
                 updateFileInfo({
                     id: this.repoFileId,
-                    remark:this.remark
+                    remark:this.remark,
+                    auditState:auditState
                 }).then((res) => {
                     this.$message({ type: 'success', message: "保存成功！" })
                     this.$router.push({
@@ -180,6 +189,10 @@
             font-size: 14px;
             margin: 20px 0;
             color: #032A55;
+        }
+        .checkbox{
+            font-size: 14px;
+            margin-top: 20px;
         }
         .uplodeFile{
             width: 100%;

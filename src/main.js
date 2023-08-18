@@ -12,6 +12,7 @@ import 'babel-polyfill';
 import store from './store/store.js'
 import CodeEditor from 'bin-code-editor';
 import scroll from 'vue-seamless-scroll'
+import VueClipboard from 'vue-clipboard2'
 Vue.use(scroll)
 
 //import axios from 'axios';
@@ -25,6 +26,7 @@ Vue.use(ElementUI, {
 });
 import less from 'less'
 Vue.use(less)
+Vue.use(VueClipboard)
 const i18n = new VueI18n({
     locale: 'zh',
     messages
